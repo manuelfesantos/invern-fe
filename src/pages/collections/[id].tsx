@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+export const runtime = "experimental-edge";
 
 export default function Collection() {
   const router = useRouter();

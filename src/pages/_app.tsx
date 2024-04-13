@@ -3,6 +3,8 @@ import type { AppProps } from "next/app";
 import Header from "@/components/Header/Header";
 import { CartProvider } from "@/context/cart";
 import { createTheme, ThemeProvider } from "@mui/system";
+export const runtime = "experimental-edge";
+
 
 export default function App({ Component, pageProps }: AppProps) {
   const theme = createTheme({
