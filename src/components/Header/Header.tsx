@@ -8,22 +8,7 @@ import {
 } from "@/components/Header/HeaderOptions";
 import MenuMobile from "@/components/Header/MenuMobile";
 import { sizes } from "@/styles/sizes";
-import { Box } from "@mui/system";
-
-const headerStyle = {
-  width: "100vw",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: "1rem",
-  "& > *": {
-    flex: 1,
-  },
-  "& *": {
-    textAlign: "center",
-    color: "white",
-  },
-};
+import styles from "./Header.module.css";
 
 const desktopMenuStyle = {
   display: "flex",
@@ -37,11 +22,11 @@ function MobileHeader() {
 
   return (
     <>
-      <Box sx={headerStyle}>
+      <div className={styles.headerStyle}>
         <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
         <LogoOption />
         <CartOption />
-      </Box>
+      </div>
       <MenuMobile isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
@@ -52,14 +37,14 @@ function DesktopHeader() {
   const [collectionsIsOpen, setCollectionsIsOpen] = useState(false);
   return (
     <>
-      <Box sx={headerStyle}>
+      <div className={styles.headerStyle}>
         <LogoOption
           closeAll={() => {
             setShopIsOpen(false);
             setCollectionsIsOpen(false);
           }}
         />
-      </Box>
+      </div>
       <div style={desktopMenuStyle}>
         <DesktopMenu
           collectionsIsOpen={collectionsIsOpen}

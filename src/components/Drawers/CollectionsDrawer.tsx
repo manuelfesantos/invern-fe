@@ -4,7 +4,7 @@ import { collectionsMock } from "@/mocks/collections";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import { Box } from "@mui/system";
+import styles from "./Drawer.module.css";
 
 interface Props {
   setIsOpen: (isOpen: boolean) => void;
@@ -106,15 +106,7 @@ export default function CollectionsDrawer({ setIsOpen }: Props) {
       <h1>COLLECTIONS</h1>
       <CollectionDiv collections={collectionsMock} setIsOpen={setIsOpen} />
       <Link href={"/collections"} onClick={() => setIsOpen(false)}>
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "1rem",
-            ":hover": { textDecoration: "underline" },
-          }}
-        >
-          VIEW ALL
-        </Box>
+        <div className={styles.collection}>VIEW ALL</div>
       </Link>
     </Drawer>
   );

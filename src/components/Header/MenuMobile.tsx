@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Box, Theme, useTheme } from "@mui/system";
 import { ReactNode } from "react";
+import { palette } from "@/styles/pallete";
 
 interface Props {
   isOpen: boolean;
@@ -9,15 +9,13 @@ interface Props {
 
 const MenuSideBar = ({
   children,
-  theme,
   isOpen,
 }: {
   children: ReactNode | ReactNode[];
-  theme: Theme;
   isOpen: boolean;
 }) => (
-  <Box
-    sx={{
+  <div
+    style={{
       position: "absolute",
       left: 0,
       top: 0,
@@ -30,21 +28,20 @@ const MenuSideBar = ({
       width: "100vw",
       transition: "transform 0.5s ease-in-out, opacity 0.5s ease-in",
       transform: isOpen ? "translateX(0)" : "translateX(-100%)",
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: palette.primary.main,
       opacity: isOpen ? 0.9 : 0,
       padding: "1rem",
     }}
   >
     {children}
-  </Box>
+  </div>
 );
 export default function MenuMobile({ isOpen, setIsOpen }: Props) {
-  const theme = useTheme();
   return (
-    <MenuSideBar isOpen={isOpen} theme={theme}>
-      <Box
+    <MenuSideBar isOpen={isOpen}>
+      <div
         onClick={() => setIsOpen(!isOpen)}
-        sx={{
+        style={{
           cursor: "pointer",
           position: "absolute",
           top: "1rem",
@@ -52,7 +49,7 @@ export default function MenuMobile({ isOpen, setIsOpen }: Props) {
         }}
       >
         X
-      </Box>
+      </div>
       <Link onClick={() => setIsOpen(!isOpen)} href="/shop">
         SHOP
       </Link>

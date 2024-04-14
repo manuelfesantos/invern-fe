@@ -10,11 +10,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/system": "^5.15.14",
     "next": "14.1.4",
-    "prettier": "^3.2.5",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -25,6 +21,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "husky": "^9.0.11",
+    "prettier": "^3.2.5",
     "typescript": "^5"
   }
 }

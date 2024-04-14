@@ -2,15 +2,16 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import useWindowSize from "@/hooks/use-window-size";
 import { sizes } from "@/styles/sizes";
+import { getR2Image } from "@/utils/r2";
 
 export default function LandingCarousel() {
   const { width } = useWindowSize();
 
-  const images = [
-    "/ceramics-background-1.jpeg",
-    "/ceramics-background-2.jpeg",
-    "/ceramics-background-3.jpeg",
-  ];
+  const [images] = useState([
+    getR2Image("ceramics-background-1.jpeg"),
+    getR2Image("ceramics-background-2.jpeg"),
+    getR2Image("ceramics-background-3.jpeg"),
+  ]);
   const [currentImage, setCurrentImage] = useState(0);
   const [leftImage, setLeftImage] = useState(images.length - 1);
   const [rightImage, setRightImage] = useState(1);
