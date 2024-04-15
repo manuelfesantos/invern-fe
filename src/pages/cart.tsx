@@ -1,6 +1,3 @@
-export const runtime = "experimental-edge";
-
-
 export default function Cart() {
   return (
     <>

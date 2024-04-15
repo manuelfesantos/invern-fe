@@ -3,8 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["blue-heart-93dc.manuelfesantos.workers.dev"],
+    unoptimized: true,
   },
-  output: "standalone"
+  output: 'export',
 };
 
 export default nextConfig;
