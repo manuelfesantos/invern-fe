@@ -24,7 +24,7 @@ body {
     #4C4B48
   );
   background-size: 100%;
-  font-family: var(--font-lora);
+  font-family: var(--font-playfair);
 }
 
 h1, h2 {
@@ -35,4 +35,18 @@ h1, h2 {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.link-underline {
+  padding-bottom: 14px;
+  background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+  background-size: 0 5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size .25s ease-in-out;
+}
+
+.link-underline:hover {
+  background-size: 100% 5px;
+  background-position: 0 100%
 }
