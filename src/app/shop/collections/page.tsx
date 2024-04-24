@@ -1,13 +1,16 @@
+import CollectionsCarousel from '@/components/CollectionsCarousel';
 import Layout from '@/components/Layout';
 import React from 'react'
 
 const Collections = () => {
     return (
-        <Layout>
+      <Layout>
+        <section className='h-full'>
           <div>
-            Collections
+            <CollectionsCarousel />
           </div>
-        </Layout>
+        </section>
+      </Layout>
       );
 }
 

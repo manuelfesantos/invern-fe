@@ -53,20 +53,20 @@ export default function ShopMenu() {
                             animate="animate"
                             exit="exit"
                             onMouseLeave={handleMouseLeave}
-                            className='absolute -ml-12 mt-1 flex flex-col bg-[#4C4B48] p-10 origin-top bg-opacity-75 z-[-1]'>
-                                <Link href='/shop/collections'>Collections</Link>
+                            className='absolute -ml-12 mt-1 flex flex-col bg-[#4C4B48] p-6 origin-top bg-opacity-75 z-[-1]'>
+                                <Link href='/shop/collections'>collections</Link>
                                 <hr />
-                                <div className='flex flex-col pl-5'>
+                                <div className='flex pl-4'>
                                     {
                                         collectionsMock.map((item,index) => (
-                                            <>
-                                                <Link key={index} href='' className='flex'>{item.name}</Link>
-                                                <p>{item.products.map((product,index) => <p key={index}>{product.name}</p>)}</p>
-                                            </>
+                                            <div className="flex flex-col px-6">
+                                                <Link key={index} href=''>{item.name}</Link>
+                                                <div className='pl-4'>{item.products.map((product,index) => <p key={index}>{product.name}</p>)}</div>
+                                            </div>
                                         ))
                                     }
                                 </div>
-                                <Link href='/shop/everything'>Everything</Link>
+                                <Link href='/shop/everything'>everything</Link>
                         </motion.div>
                     )
                 }

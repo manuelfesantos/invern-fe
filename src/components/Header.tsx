@@ -19,13 +19,12 @@ export default function Header() {
                 <ul className="flex space-x-24 items-center justify-center">
                     <li>
                         <ShopMenu />
-                        {/*<Link href='/shop'>shop</Link>*/}
                     </li>
                     <li>
                         <Link href='/about' className="link-underline">about</Link>
                     </li>
                     <li>
-                        <Link href='/'><Image src={Logo} alt='logo' className="w-9 transition-transform duration-500 hover:scale-150"/></Link>
+                        <Link href='/'><Image src={Logo} alt='logo' className="w-9 transition-transform duration-500 hover:scale-125"/></Link>
                     </li>
                     <li>
                         <Link href='/contact' className="link-underline">contact</Link>

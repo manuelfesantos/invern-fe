@@ -19,9 +19,10 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
-    to bottom,
+    180deg,
     #201F1D,
-    #4C4B48
+    #4C4B48,
+    #201F1D
   );
   background-size: 100%;
   font-family: var(--font-playfair);
@@ -40,13 +41,13 @@ h1, h2 {
 .link-underline {
   padding-bottom: 14px;
   background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
-  background-size: 0 5px;
+  background-size: 0 3px;
   background-position: 0 100%;
   background-repeat: no-repeat;
   transition: background-size .25s ease-in-out;
 }
 
 .link-underline:hover {
-  background-size: 100% 5px;
+  background-size: 100% 3px;
   background-position: 0 100%
 }

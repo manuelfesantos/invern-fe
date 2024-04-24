@@ -3,8 +3,8 @@ import { IProduct } from "@/types/store/product";
 export const productsMock: IProduct[] = [
   {
     id: 1,
-    name: "Earth Jar",
-    description: "Earth jar 20 'riven', unglazed stoneware",
+    name: "earth jar",
+    description: "earth jar 20 'riven', unglazed stoneware",
     price: 100,
     images: [
         'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-1-1.jpeg'
@@ -13,7 +13,7 @@ export const productsMock: IProduct[] = [
   },
   {
     id: 2,
-    name: "Raku Fire",
+    name: "raku fire",
     description: "'watershed' hand formed, raku fired ceramic",
     price: 200,
     images: [
@@ -23,8 +23,8 @@ export const productsMock: IProduct[] = [
   },
   {
     id: 3,
-    name: "Saggar Bottles",
-    description: "3 Erosion bottles Saggar fired stoneware",
+    name: "saggar bottles",
+    description: "3 erosion bottles saggar fired stoneware",
     price: 300,
     images: [
         'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-1-3.jpeg'
@@ -33,8 +33,8 @@ export const productsMock: IProduct[] = [
   },
   {
     id: 4,
-    name: "Strata Flask",
-    description: "A small hand made Strata Flask with dark iron tenmoku glazed interior.",
+    name: "strata flask",
+    description: "a small hand made strata flask with dark iron tenmoku glazed interior.",
     price: 300,
     images: [
         'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-2-1.jpeg'
@@ -43,8 +43,8 @@ export const productsMock: IProduct[] = [
   },
   {
     id: 5,
-    name: "Erosion Cup",
-    description: "A hand made Erosion cup (or yunomi) with iron matt glaze interior.",
+    name: "erosion cup",
+    description: "a hand made erosion cup (or yunomi) with iron matt glaze interior.",
     price: 300,
     images: [
         'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-2-2.jpeg'
@@ -53,8 +53,8 @@ export const productsMock: IProduct[] = [
   },
   {
     id: 6,
-    name: "Tanka Fired",
-    description: "Tanka fired Strata Vase. This textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
+    name: "tanka fired",
+    description: "tanka fired strata vase. this textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
     price: 300,
     images: [
         'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-2-3.jpeg'
@@ -63,8 +63,8 @@ export const productsMock: IProduct[] = [
   },
   {
     id: 7,
-    name: "Strata Flask",
-    description: "A small hand made Strata Flask with dark iron tenmoku glazed interior.",
+    name: "strata flask",
+    description: "a small hand made strata flask with dark iron tenmoku glazed interior.",
     price: 300,
     images: [
         'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-3-1.jpeg'
@@ -73,8 +73,8 @@ export const productsMock: IProduct[] = [
   },
   {
     id: 8,
-    name: "Strata Vase",
-    description: "Tanka fired Strata Vase. This textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
+    name: "strata vase",
+    description: "tanka fired strata vase. this textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
     price: 300,
     images: [
         'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-3-2.jpeg'
@@ -83,8 +83,8 @@ export const productsMock: IProduct[] = [
   },
   {
     id: 9,
-    name: "Rolling Erosion",
-    description: "Rolling Erosion Bowl. This textured hand made bowl has been fired in a charcoal saggar in the wood kiln where it takes on the soft greys and blacks from the firing process.",
+    name: "rolling erosion",
+    description: "rolling erosion bowl. this textured hand made bowl has been fired in a charcoal saggar in the wood kiln where it takes on the soft greys and blacks from the firing process.",
     price: 300,
     images: [
         'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-3-3.jpeg'
