@@ -1,4 +1,3 @@
-import CollectionsCarousel from '@/components/CollectionsCarousel';
 import Layout from '@/components/Layout';
 import React from 'react'
 

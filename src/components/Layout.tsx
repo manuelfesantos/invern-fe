@@ -12,7 +12,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({children, showCarousel}) => {
 
     return (
-        <div className='flex flex-col min-h-screen'>
+        <div className='flex flex-col h-screen'>
             {
                 showCarousel && <Carousel />
             }
@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({children, showCarousel}) => {
                 !showCarousel && <Background />
             }
             <Header />
-            <main className="flex flex-col flex-grow">{children}</main>
+            <main className="flex flex-col flex-grow overflow-scroll">{children}</main>
             <Footer />
         </div>
     );

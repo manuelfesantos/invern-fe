@@ -10,7 +10,7 @@ const About = () => {
           <section className="flex flex-col flex-grow justify-center">
             <div className='flex'>
               <div className="flex-1 pl-40 flex flex-col justify-center gap-6">
-                <h3 className='text-4xl'>Hey, I'm Mafalda</h3>
+                <h3 className='text-4xl'>Hey, Im Mafalda</h3>
                 <p>
                   I  have a background in scenography and props & costume design, a  course in high school I took at the first and only circus school in  Lisbon, called Chapitô.
                 </p>

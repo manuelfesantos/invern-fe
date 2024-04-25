@@ -4,7 +4,7 @@ import Logo from '../assets/logo.png';
 
 const Background = () => {
   return (
-    <div className="flex w-screen h-screen absolute z-[-1] opacity-35">
+    <div className="flex w-full h-full absolute z-[-1] opacity-35">
         <Image src={Logo} alt='logo' className="w-full h-full object-cover opacity-15"/>
     </div>
   )

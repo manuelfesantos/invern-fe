@@ -56,6 +56,6 @@ h1, h2 {
   }
 
   .image-scale {
-    @apply hover:scale-95 hover:opacity-65 duration-500
+    @apply hover:scale-95 duration-500
   }
 }
