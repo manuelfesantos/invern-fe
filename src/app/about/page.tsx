@@ -1,7 +1,8 @@
 import Layout from '@/components/Layout';
 import React from 'react'
 import Image from 'next/image';
-import Mafalda from '../../assets/mafalda.jpeg'
+import Mafalda from '../../assets/mafalda.jpeg';
+import Background from '@/components/Background';
 
 const About = () => {
     return (

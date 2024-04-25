@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "./Footer";
 import React, { ReactNode } from 'react'
 import Carousel from "./Carousel";
+import Background from "./Background";
 
 interface LayoutProps {
     children: ReactNode;
@@ -14,6 +15,9 @@ const Layout: React.FC<LayoutProps> = ({children, showCarousel}) => {
         <div className='flex flex-col min-h-screen'>
             {
                 showCarousel && <Carousel />
+            }
+            {
+                !showCarousel && <Background />
             }
             <Header />
             <main className="flex flex-col flex-grow">{children}</main>

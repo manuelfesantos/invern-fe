@@ -7,7 +7,7 @@ export const productsMock: IProduct[] = [
     description: "earth jar 20 'riven', unglazed stoneware",
     price: 100,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-1-1.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-1-1.jpeg'
     ],
     quantity: 1,
   },
@@ -17,7 +17,7 @@ export const productsMock: IProduct[] = [
     description: "'watershed' hand formed, raku fired ceramic",
     price: 200,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-1-2.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-1-2.jpeg'
     ],
     quantity: 1,
   },
@@ -27,7 +27,7 @@ export const productsMock: IProduct[] = [
     description: "3 erosion bottles saggar fired stoneware",
     price: 300,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-1-3.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-1-3.jpeg'
     ],
     quantity: 1,
   },
@@ -37,7 +37,7 @@ export const productsMock: IProduct[] = [
     description: "a small hand made strata flask with dark iron tenmoku glazed interior.",
     price: 300,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-2-1.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-2-1.jpeg'
     ],
     quantity: 1,
   },
@@ -47,7 +47,7 @@ export const productsMock: IProduct[] = [
     description: "a hand made erosion cup (or yunomi) with iron matt glaze interior.",
     price: 300,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-2-2.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-2-2.jpeg'
     ],
     quantity: 1,
   },
@@ -57,7 +57,7 @@ export const productsMock: IProduct[] = [
     description: "tanka fired strata vase. this textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
     price: 300,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-2-3.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-2-3.jpeg'
     ],
     quantity: 1,
   },
@@ -67,7 +67,7 @@ export const productsMock: IProduct[] = [
     description: "a small hand made strata flask with dark iron tenmoku glazed interior.",
     price: 300,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-3-1.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-3-1.jpeg'
     ],
     quantity: 1,
   },
@@ -77,7 +77,7 @@ export const productsMock: IProduct[] = [
     description: "tanka fired strata vase. this textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
     price: 300,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-3-2.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-3-2.jpeg'
     ],
     quantity: 1,
   },
@@ -87,7 +87,7 @@ export const productsMock: IProduct[] = [
     description: "rolling erosion bowl. this textured hand made bowl has been fired in a charcoal saggar in the wood kiln where it takes on the soft greys and blacks from the firing process.",
     price: 300,
     images: [
-        'https://blue-heart-93dc.manuelfesantos.workers.dev/products/ceramics-product-3-3.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-3-3.jpeg'
     ],
     quantity: 1,
   },

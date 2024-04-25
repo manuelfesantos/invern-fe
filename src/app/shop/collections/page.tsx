@@ -7,7 +7,6 @@ const Collections = () => {
       <Layout>
         <section className='h-full'>
           <div>
-            <CollectionsCarousel />
           </div>
         </section>
       </Layout>

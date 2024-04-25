@@ -53,20 +53,28 @@ export default function ShopMenu() {
                             animate="animate"
                             exit="exit"
                             onMouseLeave={handleMouseLeave}
-                            className='absolute -ml-12 mt-1 flex flex-col bg-[#4C4B48] p-6 origin-top bg-opacity-75 z-[-1]'>
-                                <Link href='/shop/collections'>collections</Link>
-                                <hr />
-                                <div className='flex pl-4'>
-                                    {
-                                        collectionsMock.map((item,index) => (
-                                            <div className="flex flex-col px-6">
-                                                <Link key={index} href=''>{item.name}</Link>
-                                                <div className='pl-4'>{item.products.map((product,index) => <p key={index}>{product.name}</p>)}</div>
-                                            </div>
-                                        ))
-                                    }
+                            className='absolute -ml-12 mt-1 flex flex-col bg-[#4C4B48] p-6 origin-top bg-opacity-85 z-[-1]'>
+                                <div className="">
+                                    <Link href='/shop/collections'>collections</Link>
+                                    <hr />
+                                    <div className='flex pl-4'>
+                                        {
+                                            collectionsMock.map((item,index) => (
+                                                <div className="flex flex-col px-6">
+                                                    <Link key={index} href={`/shop/collections/${item.name}`}>{item.name}</Link>
+                                                    <div className='flex flex-col pl-4'>
+                                                        {
+                                                            item.products.map((product,index) => (
+                                                                <Link key={index} href=''>{product.name}</Link>)
+                                                            )
+                                                        }
+                                                    </div>
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                    <Link href='/shop/everything'>everything</Link>
                                 </div>
-                                <Link href='/shop/everything'>everything</Link>
                         </motion.div>
                     )
                 }
