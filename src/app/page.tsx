@@ -6,11 +6,11 @@ export default function Home() {
       <section className="flex flex-col flex-grow justify-center items-center">
         <div className="flex flex-col items-center justify-center">
           <div>
-            <h1 className="text-8xl">Invern</h1>
+            <p className="text-8xl">Invern</p>
           </div>
           <div>
             <hr />
-            <h2 className="text-4xl">Spirit Of The North</h2>
+            <p className="text-4xl">Spirit Of The North</p>
           </div>
         </div>
       </section>

@@ -5,17 +5,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import {AnimatePresence, motion} from 'framer-motion'
 import { collectionsMock } from '../mocks/collections'
+import Image from 'next/image'
 
 export default function ShopMenu() {
-    const [isOpen,setIsOpen] = useState(false);
+    const [menu,setMenu] = useState(false);
+    const [collections, setCollections] = useState(false);
 
-    const handleMouseEnter = () => {
-        setIsOpen(true);
+    const toggleMenu = () => {
+        setMenu(!menu);
+        setCollections(false)
     };
 
-    const handleMouseLeave = () => {
-        setIsOpen(false);
-    };
+    const openCollections = () => {
+        setCollections(true)
+    }
+
+    const closeCollections = () => {
+        setCollections(false)
+    }
 
     const menuAnimation = {
         initial: {
@@ -31,7 +38,7 @@ export default function ShopMenu() {
           exit: {
             scaleY: 0,
             transition: {
-              delay: 0.5,
+              delay: 0.25,
               duration: 0.5,
               ease: [0.22, 1, 0.36, 1],
             },
@@ -53,7 +60,7 @@ export default function ShopMenu() {
     }
     const linksAnimation = {
         initial: {
-            y: "30vh",
+            y: "200vh",
             transition: {
               duration: 0.5,
               ease: [0.37, 0, 0.63, 1],
@@ -71,61 +78,65 @@ export default function ShopMenu() {
     return (
         <>
             <button
-                onMouseEnter={handleMouseEnter}
+                onClick={toggleMenu}
                 className='relative px-4 py-2 text-white'>
                     <Link href='' className='link-underline'>shop <FontAwesomeIcon icon={faChevronDown} size='2xs' /></Link>
             </button>
             <AnimatePresence>
                 {
-                    isOpen && (
+                    menu && (
                         <motion.div
                             variants={menuAnimation}
                             initial="initial"
                             animate="animate"
                             exit="exit"
-                            onMouseLeave={handleMouseLeave}
-                            className='absolute mt-1 bg-[#4C4B48] p-6 origin-top bg-opacity-90'>
+                            className='absolute left-0 w-screen mt-1 bg-[#4C4B48] p-6 origin-top bg-opacity-90'>
                                 <motion.div
                                     variants={stagger}
                                     initial="initial"
                                     animate="open"
                                     exit="initial"
-                                    className='flex flex-col'>
-                                        <div className='overflow-hidden'>
-                                            <motion.div variants={linksAnimation}>
-                                                <Link href='/shop/collections'>collections</Link>
-                                            </motion.div>
-                                        </div>
-                                        <hr />
-                                        <div className='flex pl-4 overflow-hidden'>
+                                    className='flex flex-col items-center justify-center' onMouseLeave={closeCollections}>
+                                        <div className='flex flex-col items-center'>
+                                            <div onMouseEnter={openCollections} >
+                                                <div className='mb-4 overflow-hidden'>
+                                                    <motion.div variants={linksAnimation}>
+                                                        <Link href='shop/collections'><p className='text-2xl'>collections</p></Link>
+                                                    </motion.div>
+                                                </div>
+                                            </div>
                                             {
-                                                collectionsMock.map((item,index) => (
-                                                    <div key={index} className="flex flex-col px-6">
-                                                        <div className='overflow-hidden'>
-                                                            <motion.div variants={linksAnimation}>
-                                                                    <Link href={`/shop/collections/${item.name}`}>{item.name}</Link>
-                                                            </motion.div>
-                                                        </div>
-                                                        <div className='flex flex-col pl-4'>
-                                                            {
-                                                                item.products.map((product,index) => (
-                                                                    <div key={index} className='overflow-hidden'>
-                                                                        <motion.div
-                                                                            variants={linksAnimation}>
-                                                                                <Link href=''>{product.name}</Link>
+                                                collections && (
+                                                    <div className='flex gap-4'>
+                                                        {
+                                                            collectionsMock.map((item,index) => (
+                                                                <div key={index} className="flex flex-col gap-2">
+                                                                    <div className='overflow-hidden'>
+                                                                        <motion.div variants={linksAnimation}>
+                                                                            <Link href={`/shop/collections/${item.name}`}>{item.name}</Link>
                                                                         </motion.div>
                                                                     </div>
-                                                                ))
-                                                            }
-                                                        </div>
+                                                                    <div className='overflow-hidden'>
+                                                                        <motion.div variants={linksAnimation}>
+                                                                        <Link href={`/shop/collections/${item.name}`}><Image src={item.products[0].images[0]} width={100} height={100} alt="..." className='h-36 w-36 object-cover image-scale' /></Link>
+                                                                        </motion.div>
+                                                                    </div>
+                                                                </div>
+                                                            ))
+                                                        }
                                                     </div>
-                                                ))
+                                                )
                                             }
+                                            <div>
+                                                <hr/>
+                                            </div>
                                         </div>
-                                        <div className='overflow-hidden'>
-                                            <motion.div variants={linksAnimation}>
-                                                <Link href='/shop/everything'>everything</Link>
-                                            </motion.div>
+                                        <div>
+                                            <div className='overflow-hidden mt-4'>
+                                                <motion.div variants={linksAnimation}>
+                                                    <Link href='/shop/everything'><p className='text-2xl'>everything</p></Link>
+                                                </motion.div>
+                                            </div>
                                         </div>
                                 </motion.div>
                         </motion.div>

@@ -15,7 +15,7 @@ const lora = Lora({
 const cormorant = Cormorant_SC({
   subsets: ["latin"],
   variable: '--font-cormorant',
-  weight: "300"
+  weight: "400"
 });
 
 const playfair = Playfair_Display({

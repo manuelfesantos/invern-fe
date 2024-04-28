@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <footer className='flex flex-col'>
-        <div className='text-right text-sm pr-2 pb-2 ml-96'>
+        <div className='text-right text-sm pr-2 pb-2'>
             <p>© 2024 Copyright Invern</p>
         </div>
         <form>
