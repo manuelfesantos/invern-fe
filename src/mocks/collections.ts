@@ -5,7 +5,7 @@ export const collectionsMock = [
     id: 1,
     name: "erosion",
     description:
-      "the nature of clay will speak of the continual erosion and weathering of the land we live on, of the traces made by the passage of humans across the surface of our planet and of the tension between a container and its contents. the chaotic texture of the exterior and the expected functionality of the inside, held in balance by the outline of the rim that joins the two.",
+      "the nature of clay will speak of the continual erosion and weathering of the land we live on, of the traces made by the passage of humans across the surface of our planet and of the tension between a container and its contents.",
     products: [productsMock[0],productsMock[1],productsMock[2]],
   },
   {

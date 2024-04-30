@@ -27,7 +27,7 @@ export const productsMock: IProduct[] = [
     description: "3 erosion bottles saggar fired stoneware",
     price: 300,
     images: [
-        'https://images.invernspirit.com/products/ceramics-product-1-3.jpeg'
+        'https://images.invernspirit.com/products/ceramics-product-1-4.jpeg'
     ],
     quantity: 1,
   },

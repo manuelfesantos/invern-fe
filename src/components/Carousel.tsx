@@ -12,7 +12,7 @@ const Carousel = () => {
     const [image,setImage] = useState();
 
   return (
-    <div className="flex w-screen absolute z-[-1] opacity-35">
+    <div className="flex w-screen absolute -z-10 opacity-35">
         <Swiper
             slidesPerView={1}
             effect={'fade'}
@@ -23,7 +23,7 @@ const Carousel = () => {
         {
             collectionsMock[0].products.map((item, index) => (
                     <SwiperSlide key={index}>
-                        <Image src={item.images[0]} width={100} height={100} alt="..." className="w-screen h-screen object-cover" />
+                        <Image src={item.images[0]} width={100} height={100} alt="..." className="w-screen h-screen object-cover mix-blend-overlay" />
                     </SwiperSlide>
             ))
         }
