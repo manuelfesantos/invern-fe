@@ -15,8 +15,8 @@ const Collections = () => {
           </div>
           {
             collectionsMock.map((item, index) => (
-              <div className='bg-[#201F1D] h-24 lg:h-full w-full lg:w-48 image-scale'>
-                <Link key={index} href={`/shop/collections/${item.name}`} className='h-full w-full relative flex items-center justify-center'>
+              <div key={index} className='bg-[#201F1D] h-24 lg:h-full w-full lg:w-48 image-scale'>
+                <Link href={`/shop/collections/${item.name}`} className='h-full w-full relative flex items-center justify-center'>
                     <Image
                       src={item.products[0].images[0]}
                       height={100}
