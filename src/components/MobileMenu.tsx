@@ -100,7 +100,7 @@ const MobileMenu = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="absolute top-0 right-2 flex items-center justify-center h-full w-[5%]">
+                                <div className="absolute top-0 left-0 bg-[#302F2C] flex items-center justify-center h-full w-[8%]">
                                     <div onClick={handleMenu}>
                                         <FontAwesomeIcon icon={faChevronLeft} size='lg' />
                                     </div>

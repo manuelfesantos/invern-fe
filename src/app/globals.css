@@ -70,7 +70,7 @@ li {
   }
 
   .image-scale {
-    @apply hover:scale-95 duration-500
+    @apply hover:scale-95 duration-500 lg:z-10
   }
 
   .p2 {

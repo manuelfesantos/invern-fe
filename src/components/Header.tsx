@@ -9,7 +9,7 @@ import ShopMenu from "./ShopMenu";
 
 export default function Header() {
     return (
-        <nav className="flex flex-col z-20 mt-6 lg:mt-0">
+        <nav className="flex flex-col z-30 mt-6 lg:mt-0">
             <div className="flex justify-between pt-6 pb-2 px-12">
                 <div className="flex gap-4 items-center justify-center ml-2">
                     <Link href='' className="icon-scale"><FontAwesomeIcon icon={faInstagram} /></Link>

@@ -28,10 +28,44 @@ export default function CollectionsDetails({params}: {params:{name:string}}) {
               <p className='text-lg'>{collection?.description}</p>
             </div>
           </div>
-          <div className='h-full w-full flex flex-col gap-12 mt-12 lg:hidden'>
+          <div className='h-full w-full flex flex-col items-center justify-center gap-6 mt-12 lg:hidden'>
               {
                 collection?.products.map((item, index) => (
-                  <div key={index}>
+                  <div key={index} className='w-screen flex flex-col items-center'>
+                    <Image src={item.images[0]} width={100} height={100} alt="..." className='h-48 w-full px-12 object-cover image-scale' />
+                    <div className='w-full flex justify-between px-12'>
+                      <h3>{item.name}</h3>
+                      <p>{item.price}</p>
+                    </div>
+                  </div>
+
+                ))
+              }
+          </div>
+          <div className='hidden min-h-[80vh] w-full lg:grid grid-rows-2 grid-cols-3 gap-4 place-items-center px-48'>
+            {
+              collection?.products.map((item, index) => (
+                <div key={index} className='h-full'>
+                    <Image src={item.images[0]} width={100} height={100} alt="..." className='h-full w-full object-cover image-scale' />
+                </div>
+              ))
+            }
+          </div>
+        </section>
+    </Layout>
+  )
+}
+
+export function generateStaticParams() {
+    const posts = collectionsMock
+
+    return posts.map((post: any) => ({
+      name: post.name,
+    }))
+}
+
+/*
+
                     {
                       index % 2 === 0
                         ? (
@@ -57,28 +91,5 @@ export default function CollectionsDetails({params}: {params:{name:string}}) {
                           </div>
                         )
                     }
-                  </div>
-                ))
-              }
-          </div>
-          <div className='hidden h-[80vh] w-full lg:flex items-center justify-center gap-2 mt-0'>
-            {
-              collection?.products.map((item, index) => (
-                <div key={index} className='h-full'>
-                    <Image src={item.images[0]} width={100} height={100} alt="..." className='h-full w-96 object-cover image-scale' />
-                </div>
-              ))
-            }
-          </div>
-        </section>
-    </Layout>
-  )
-}
 
-export function generateStaticParams() {
-    const posts = collectionsMock
-
-    return posts.map((post: any) => ({
-      name: post.name,
-    }))
-}
+*/
