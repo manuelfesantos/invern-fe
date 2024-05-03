@@ -8,13 +8,12 @@ import { collectionsMock } from '../mocks/collections'
 import Image from 'next/image'
 import MenuAnimation from './MenuAnimation'
 import ItemAnimation from './ItemAnimation'
-import { Anonymous_Pro } from 'next/font/google'
 
 export default function ShopMenu() {
     const [menu,setMenu] = useState(false);
     const [collections, setCollections] = useState(false);
 
-    const style = 'absolute left-0 w-screen mt-3 bg-[#4C4B48] p-8 origin-top bg-opacity-90'
+    const style = 'absolute left-0 w-screen mt-3 bg-[#4C4B48] p-8 origin-top'
 
     const toggleMenu = () => {
         setMenu(!menu);
@@ -71,28 +70,24 @@ export default function ShopMenu() {
                                 animate="open"
                                 exit="initial"
                                 className='flex flex-col justify-center gap-4'>
-                                    <div className='flex flex-col items-center'>
+                                    <div className='flex flex-col items-center w-full'>
                                         <div onMouseEnter={openCollections}>
                                             <ItemAnimation>
-                                                <Link href='/shop/collections'><h3>collections</h3></Link>
+                                                <Link href='/shop/collections'><h4>By Collection</h4></Link>
                                             </ItemAnimation>
                                         </div>
                                         {
                                             collections && (
                                                 <>
-                                                    <div className='flex gap-2 my-6'>
+                                                    <div className='flex gap-2 my-6 w-full'>
                                                         {
                                                             collectionsMock.map((item,index) => (
-                                                                <div key={index} className="flex flex-col items-center justify-center gap-2">
-                                                                    <div className='relative'>
-                                                                        <ItemAnimation>
-                                                                            <Link href={`/shop/collections/${item.name}`}><Image src={item.products[0].images[0]} width={100} height={100} alt="..." className='h-36 w-36 object-cover mix-blend-overlay opacity-75 image-scale' /></Link>
-                                                                        </ItemAnimation>
+                                                                <div key={index} className="flex flex-col items-center justify-center gap-2 bg-[#201F1D] h-24 w-full image-scale shadow-lg drop-shadow-lg shadow-[#201F1D]">
+                                                                    <div className='relative w-full'>
+                                                                        <Link href={`/shop/collections/${item.name}`}><Image src={item.products[0].images[0]} width={100} height={100} alt="..." className='h-24 w-full object-cover mix-blend-overlay grayscale opacity-75 brightness-75 hover:mix-blend-exclusion hover:opacity-50 hover:brightness-150' /></Link>
                                                                     </div>
                                                                     <div className='absolute'>
-                                                                        <ItemAnimation>
-                                                                            <Link href={`/shop/collections/${item.name}`}><p>{item.name}</p></Link>
-                                                                        </ItemAnimation>
+                                                                        <Link href={`/shop/collections/${item.name}`}><h4>{item.name}</h4></Link>
                                                                     </div>
                                                                 </div>
                                                             ))
@@ -103,12 +98,12 @@ export default function ShopMenu() {
                                             )
                                         }
                                     </div>
-                                    <div className='px-[47%]'>
+                                    <div className='px-[46%]'>
                                         <hr />
                                     </div>
                                     <div className='flex flex-col items-center'>
                                         <ItemAnimation>
-                                            <Link href='/shop/everything'><h3>everything</h3></Link>
+                                            <Link href='/shop/products'><h4>By Product</h4></Link>
                                         </ItemAnimation>
                                     </div>
                             </motion.div>

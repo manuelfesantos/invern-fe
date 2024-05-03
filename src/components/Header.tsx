@@ -9,7 +9,7 @@ import ShopMenu from "./ShopMenu";
 
 export default function Header() {
     return (
-        <nav className="flex flex-col z-30 mt-6 lg:mt-0">
+        <nav className="flex flex-col z-30 mt-6 lg:mt-0 relative">
             <div className="flex justify-between pt-6 pb-2 px-12">
                 <div className="flex gap-4 items-center justify-center ml-2">
                     <Link href='' className="icon-scale"><FontAwesomeIcon icon={faInstagram} /></Link>
@@ -24,7 +24,7 @@ export default function Header() {
                         <Link href='/about' className="link-underline">about</Link>
                     </li>
                     <li>
-                        <Link href='/'><Image src={Logo} alt='logo' className="w-10 icon-scale"/></Link>
+                        <Link href='/' className="absolute top-4"><Image src={Logo} alt='logo' className="w-10 icon-scale"/></Link>
                     </li>
                     <li>
                         <Link href='/contact' className="link-underline">contact</Link>
@@ -42,8 +42,8 @@ export default function Header() {
                         <option>dol</option>
                         <option>pnd</option>
                     </select>
-                    <Link href='' className="icon-scale"><FontAwesomeIcon icon={faUserAlt} /></Link>
-                    <Link href='' className="icon-scale"><FontAwesomeIcon icon={faShoppingBag} /></Link>
+                    <Link href='/login' className="icon-scale"><FontAwesomeIcon icon={faUserAlt} /></Link>
+                    <Link href='/cart' className="icon-scale"><FontAwesomeIcon icon={faShoppingBag} /></Link>
                 </div>
             </div>
         </nav>

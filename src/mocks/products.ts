@@ -2,8 +2,8 @@ import { IProduct } from "@/types/store/product";
 
 export const productsMock: IProduct[] = [
   {
-    id: 1,
-    name: "earth jar",
+    id: '1',
+    name: "Earth Jar",
     description: "earth jar 20 'riven', unglazed stoneware",
     price: 100,
     images: [
@@ -12,8 +12,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 2,
-    name: "raku fire",
+    id: '2',
+    name: "Raku Fire",
     description: "'watershed' hand formed, raku fired ceramic",
     price: 200,
     images: [
@@ -22,8 +22,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 3,
-    name: "saggar bottles",
+    id: '3',
+    name: "Saggar Bottles",
     description: "3 erosion bottles saggar fired stoneware",
     price: 300,
     images: [
@@ -32,8 +32,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 4,
-    name: "strata flask",
+    id: '4',
+    name: "Strata Flask",
     description: "a small hand made strata flask with dark iron tenmoku glazed interior.",
     price: 300,
     images: [
@@ -42,8 +42,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 5,
-    name: "erosion cup",
+    id: '5',
+    name: "Erosion Cup",
     description: "a hand made erosion cup (or yunomi) with iron matt glaze interior.",
     price: 300,
     images: [
@@ -52,8 +52,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 6,
-    name: "tanka fired",
+    id: '6',
+    name: "Tanka Fired",
     description: "tanka fired strata vase. this textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
     price: 300,
     images: [
@@ -62,8 +62,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 7,
-    name: "strata flask",
+    id: '7',
+    name: "Strata Flask",
     description: "a small hand made strata flask with dark iron tenmoku glazed interior.",
     price: 300,
     images: [
@@ -72,8 +72,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 8,
-    name: "strata vase",
+    id: '8',
+    name: "Strata Vase",
     description: "tanka fired strata vase. this textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
     price: 300,
     images: [
@@ -82,8 +82,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 9,
-    name: "rolling erosion",
+    id: '9',
+    name: "Rolling Erosion",
     description: "rolling erosion bowl. this textured hand made bowl has been fired in a charcoal saggar in the wood kiln where it takes on the soft greys and blacks from the firing process.",
     price: 300,
     images: [
@@ -92,8 +92,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 10,
-    name: "strata flask",
+    id: '10',
+    name: "Strata Flask",
     description: "a small hand made strata flask with dark iron tenmoku glazed interior.",
     price: 300,
     images: [
@@ -102,8 +102,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 11,
-    name: "strata vase",
+    id: '11',
+    name: "Strata Vase",
     description: "tanka fired strata vase. this textured hand made vase has been fired in a charcoal saggar in the gas kiln.",
     price: 300,
     images: [
@@ -112,8 +112,8 @@ export const productsMock: IProduct[] = [
     quantity: 1,
   },
   {
-    id: 12,
-    name: "rolling erosion",
+    id: '12',
+    name: "Rolling Erosion",
     description: "rolling erosion bowl. this textured hand made bowl has been fired in a charcoal saggar in the wood kiln where it takes on the soft greys and blacks from the firing process.",
     price: 300,
     images: [

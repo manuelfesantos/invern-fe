@@ -21,9 +21,9 @@ const Carousel = () => {
             speed={5000}
             className="mySwiper">
         {
-            collectionsMock[0].products.map((item, index) => (
+            collectionsMock[2].products.map((item, index) => (
                     <SwiperSlide key={index}>
-                        <Image src={item.images[0]} width={100} height={100} alt="..." className="w-screen h-screen object-cover mix-blend-overlay" />
+                        <Image src={item.images[0]} width={100} height={100} alt="..." className="w-screen h-screen object-cover mix-blend-overlay grayscale" />
                     </SwiperSlide>
             ))
         }

@@ -10,7 +10,7 @@ export default function Home() {
           </div>
           <div>
             <hr />
-            <h2>Spirit Of The North</h2>
+            <h3>Spirit Of The North</h3>
           </div>
         </div>
       </section>
