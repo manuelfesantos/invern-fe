@@ -43,13 +43,7 @@ const Cart = () => {
             const cartItem = getCartItemById(productId)
             console.log("cartItem ",cartItem)
             if(cartItem?.quantity === 1) {
-                setCart(prevCart => (
-                    {
-                        ...prevCart,
-                        items:prevCart.items.filter(item => item.id !== cartItem.id)
-                    }
-                )
-                )
+                removeProductFromCart(cartItem.id)
             }
             else {
                 setCart(prevCart => (
@@ -73,9 +67,28 @@ const Cart = () => {
         }
     }
 
+    const removeProductFromCart = (productId: string) => {
+        setCart(prevCart => (
+            {
+                ...prevCart,
+                items:prevCart.items.filter(item => item.id !== productId)
+            }
+        )
+        )
+    }
+
     const getCartItemById = (id: string) => {
         return cart.items.find(item => item.id === id)
     }
+
+    const subTotal =
+        cart.items.reduce((acc,item) => (
+            acc+(item.quantity*item.product.price)
+        ),0)
+
+    const shipping = 0
+
+    const total = subTotal + shipping
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -129,7 +142,7 @@ const Cart = () => {
                                                             </div>
                                                         </div>
                                                         <div className='flex items-center'>
-                                                            <Link href='' className="block py-4 w-full underline text-right text-[#201F1D] hover:text-red-400"><p>Remove</p></Link>
+                                                            <Link href='' className="block py-4 w-full underline text-right text-[#201F1D] hover:text-red-400" onClick={() => removeProductFromCart(item.id)}><p>Remove</p></Link>
                                                         </div>
                                                     </div>
                                                 ))
@@ -146,8 +159,8 @@ const Cart = () => {
                                                 <p>Shipping: </p>
                                             </div>
                                             <div className='flex flex-col gap-2'>
-                                                <p>{cart.totalPrice}</p>
-                                                <p>{cart.totalPrice}</p>
+                                                <p>{subTotal}</p>
+                                                <p>{shipping}</p>
                                             </div>
                                         </div>
                                         <hr />
@@ -156,7 +169,7 @@ const Cart = () => {
                                                 <h3>Total: </h3>
                                             </div>
                                             <div className='flex flex-col gap-2'>
-                                                <h3>{cart.totalPrice}</h3>
+                                                <h3>{total}</h3>
                                             </div>
                                         </div>
                                         <hr />

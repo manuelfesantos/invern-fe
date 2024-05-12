@@ -70,7 +70,7 @@ const ProductCard = ({product}:{product:IProduct}) => {
                   <div className='px-4 py-2'><h4 className='font-extrabold text-red-400'>Sold Out</h4></div>
                 )
                 : (
-                  <Button position="px-4 py-2" onClick={addToCart}>add to cart</Button>
+                  <Button position="px-4 py-2" onClick={addToCart} isDisabled={() => quantity + (cart.items.find(cartItem => cartItem.id === product.id)?.quantity || 0) > product.stock}>add to cart</Button>
                 )
             }
           </div>
