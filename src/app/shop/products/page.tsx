@@ -28,7 +28,7 @@ const Everything = () => {
                   {
                     productsMock.map((item,index) => (
                       <div key={index}>
-                        <ProductCard item={item} />
+                        <ProductCard product={item} />
                       </div>
                     ))
                   }

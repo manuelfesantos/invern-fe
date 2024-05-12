@@ -4,5 +4,5 @@ export interface IProduct {
     description: string;
     price: number;
     images: string[];
-    quantity: number;
+    stock: number;
   }

@@ -33,7 +33,7 @@ export default function CollectionsDetails({params}: {params:{name:string}}) {
               {
                 collection?.products.map((item, index) => (
                   <div key={index}>
-                    <ProductCard item={item} />
+                    <ProductCard product={item} />
                   </div>
                 ))
               }
@@ -42,7 +42,7 @@ export default function CollectionsDetails({params}: {params:{name:string}}) {
             {
               collection?.products.map((item, index) => (
                 <div key={index} className='h-full'>
-                  <ProductCard item={item} />
+                  <ProductCard product={item} />
                 </div>
               ))
             }
