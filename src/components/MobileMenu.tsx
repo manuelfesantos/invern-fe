@@ -43,7 +43,7 @@ const MobileMenu = () => {
         {
             !menu && (
                 <div className="absolute top-0 left-2 flex items-center justify-center h-full w-[5%] z-10">
-                    <div onClick={handleMenu}>
+                    <div onClick={handleMenu} onDrag={handleMenu}>
                         <FontAwesomeIcon icon={faChevronRight} size='lg' />
                     </div>
                 </div>
@@ -65,18 +65,18 @@ const MobileMenu = () => {
                                                 !collections
                                                     ? (
                                                         <ItemAnimation>
-                                                            <Link href='' onClick={handleCollectionsMenu} className='mobile-menu'>shop <FontAwesomeIcon icon={faChevronDown} className='text-3xl' /></Link>
+                                                            <Link href='' onClick={handleCollectionsMenu} className='mobile-menu'>Shop <FontAwesomeIcon icon={faChevronDown} className='text-xl' /></Link>
                                                         </ItemAnimation>
                                                     )
                                                     : (
                                                         <>
                                                             <ItemAnimation>
-                                                                <Link href='' onClick={handleCollectionsMenu} className='mobile-menu'>shop <FontAwesomeIcon icon={faChevronUp} className='text-3xl' /></Link>
+                                                                <Link href='' onClick={handleCollectionsMenu} className='mobile-menu'>Shop <FontAwesomeIcon icon={faChevronUp} className='text-xl' /></Link>
                                                             </ItemAnimation>
                                                             <ItemAnimation>
-                                                                <div className='flex flex-col ml-6 my-2 text-4xl'>
-                                                                    <Link href='/shop/collections' onClick={handleMenu} className='mobile-menu'>collections</Link>
-                                                                    <Link href='/shop/everything' onClick={handleMenu} className='mobile-menu'>everything</Link>
+                                                                <div className='flex flex-col ml-6 my-2 text-xl'>
+                                                                    <Link href='/shop/collections' onClick={handleMenu} className='mobile-menu'>By Collection</Link>
+                                                                    <Link href='/shop/products' onClick={handleMenu} className='mobile-menu'>By Product</Link>
                                                                 </div>
                                                             </ItemAnimation>
                                                         </>
@@ -85,17 +85,17 @@ const MobileMenu = () => {
                                         </li>
                                         <li>
                                             <ItemAnimation>
-                                                <Link href='/about' onClick={handleMenu} className='mobile-menu'>about</Link>
+                                                <Link href='/about' onClick={handleMenu} className='mobile-menu'>About</Link>
                                             </ItemAnimation>
                                         </li>
                                         <li>
                                             <ItemAnimation>
-                                                <Link href='/contact' onClick={handleMenu} className='mobile-menu'>contact</Link>
+                                                <Link href='/contact' onClick={handleMenu} className='mobile-menu'>Contact</Link>
                                             </ItemAnimation>
                                         </li>
                                         <li>
                                             <ItemAnimation>
-                                                <Link href='/faq' onClick={handleMenu} className='mobile-menu'>faq</Link>
+                                                <Link href='/faq' onClick={handleMenu} className='mobile-menu'>Faq</Link>
                                             </ItemAnimation>
                                         </li>
                                     </ul>

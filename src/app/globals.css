@@ -55,7 +55,7 @@ p, select, option, input, button, label {
 
 li {
   font-family: var(--font-playfair);
-  @apply text-6xl lg:text-base
+  @apply text-4xl lg:text-base
 }
 
 .mobile-menu {
@@ -77,6 +77,10 @@ li {
 
   .image-scale {
     @apply hover:scale-95 duration-500 lg:z-10
+  }
+
+  .card-shadow {
+    @apply shadow-lg drop-shadow-lg shadow-[#201F1D]
   }
 
   .p2 {

@@ -7,9 +7,9 @@ import { useContext } from 'react';
 import { CartContext } from '@/context/cart';
 import { cartContext } from '@/context/cart';
 import Image from 'next/image';
-import { CartItem } from '@/types/store/cart';
 
 const Cart = () => {
+
     const {cart,setCart} = useContext<CartContext>(cartContext as Context<CartContext>);
     const [activeTab,setActiveTab] = useState('cart')
 
@@ -41,7 +41,6 @@ const Cart = () => {
         }
         else {
             const cartItem = getCartItemById(productId)
-            console.log("cartItem ",cartItem)
             if(cartItem?.quantity === 1) {
                 removeProductFromCart(cartItem.id)
             }
@@ -91,9 +90,9 @@ const Cart = () => {
     const total = subTotal + shipping
 
   return (
-    <div className="flex flex-col items-center justify-center">
-        <div className="w-full flex flex-col items-center justify-center mt-6 p-6 bg-[#4C4B48] shadow-lg drop-shadow-lg shadow-[#201F1D]">
-            <div className='px-6'>
+    <div className="flex items-center justify-center flex-grow">
+        <div className="h-[80%] flex-grow mx-24 flex flex-col items-center p-6 bg-[#4C4B48] card-shadow">
+            <div className=''>
                 <ul className="flex mb-6">
                     <li>
                         <h4 className={activeTab === 'cart' ? "p-4 border-b-2" : "p-4 text-[#201F1D]"}>
@@ -112,70 +111,41 @@ const Cart = () => {
                     </li>
                 </ul>
             </div>
-            <div className='px-6 w-full'>
+            <div className='flex flex-col flex-grow gap-2 items-center justify-center'>
                 {
                     activeTab === 'cart'
                         ? (
-                            <div className='w-full flex'>
-                                <div className='flex flex-col flex-grow gap-2 items-center justify-center'>
-                                    {
-                                        cart.items.length === 0
-                                            ? (
-                                                <p>{`There's no items in the shopping cart.`}</p>
-                                            )
-                                            : (
-                                                cart.items.map((item,index) => (
-                                                    <div key={index} className='flex gap-2'>
-                                                        <div>
-                                                            <Image src={item.product.images[0]} height={100} width={100} alt="..." className='h-24 w-24 object-cover aspect-square' />
+                            <div className=''>
+                                {
+                                    cart.items.length === 0
+                                        ? (
+                                            <p>{`There's no items in the shopping cart.`}</p>
+                                        )
+                                        : (
+                                            cart.items.map((item,index) => (
+                                                <div key={index} className='flex gap-2'>
+                                                    <div>
+                                                        <Image src={item.product.images[0]} height={100} width={100} alt="..." className='h-24 w-24 object-cover aspect-square' />
+                                                    </div>
+                                                    <div className="px-4 pb-4 pt-2">
+                                                        <h5>{item.product.name}</h5>
+                                                        <div className="flex items-center justify-between">
+                                                            <p>Price: {item.product.price}€</p>
                                                         </div>
-                                                        <div className="px-4 pb-4 pt-2">
-                                                            <h5>{item.product.name}</h5>
-                                                            <div className="flex items-center justify-between">
-                                                                <p>Price: {item.product.price}€</p>
-                                                            </div>
-                                                            <div className='flex gap-2'>
-                                                                <p>Quantity:</p>
-                                                                <Button position='h-6 w-6' onClick={() => changeQuantity(false,item.id)}>-</Button>
-                                                                <p>{item.quantity}</p>
-                                                                <Button position='h-6 w-6' onClick={() => changeQuantity(true,item.id)} isDisabled={() => item.quantity >= item.product.stock}>+</Button>
-                                                            </div>
-                                                        </div>
-                                                        <div className='flex items-center'>
-                                                            <Link href='' className="block py-4 w-full underline text-right text-[#201F1D] hover:text-red-400" onClick={() => removeProductFromCart(item.id)}><p>Remove</p></Link>
+                                                        <div className='flex gap-2'>
+                                                            <p>Quantity:</p>
+                                                            <Button position='h-6 w-6' onClick={() => changeQuantity(false,item.id)}>-</Button>
+                                                            <p>{item.quantity}</p>
+                                                            <Button position='h-6 w-6' onClick={() => changeQuantity(true,item.id)} isDisabled={() => item.quantity >= item.product.stock}>+</Button>
                                                         </div>
                                                     </div>
-                                                ))
-                                            )
-                                    }
-                                </div>
-                                <form className='w-96'>
-                                    <div className='flex flex-col gap-6'>
-                                        <h3>Summary:</h3>
-                                        <hr />
-                                        <div className='flex w-full flex-grow justify-between'>
-                                            <div className='flex flex-col gap-2'>
-                                                <p>Subtotal: </p>
-                                                <p>Shipping: </p>
-                                            </div>
-                                            <div className='flex flex-col gap-2'>
-                                                <p>{subTotal}</p>
-                                                <p>{shipping}</p>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div className='flex w-full flex-grow justify-between'>
-                                            <div className='flex flex-col gap-2'>
-                                                <h3>Total: </h3>
-                                            </div>
-                                            <div className='flex flex-col gap-2'>
-                                                <h3>{total}</h3>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <Button position='w-full py-2' onClick={handleRequest}>Checkout</Button>
-                                    </div>
-                                </form>
+                                                    <div className='flex items-center'>
+                                                        <Link href='' className="block py-4 w-full underline text-right text-[#201F1D] hover:text-red-400" onClick={() => removeProductFromCart(item.id)}><p>Remove</p></Link>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        )
+                                }
                             </div>
                         ) :
                     activeTab === 'shipping'
@@ -224,6 +194,37 @@ const Cart = () => {
                         )
                 }
             </div>
+        </div>
+        <div className="h-[80%] w-96 mr-12 flex flex-col items-center justify-center py-12 bg-[#4C4B48] shadow-lg drop-shadow-lg shadow-[#201F1D]">
+            <form className='w-[80%]'>
+                <div className='flex flex-col gap-6'>
+                    <h3>Summary:</h3>
+                    <hr />
+                    <div className='flex w-full flex-grow justify-between'>
+                        <div className='flex flex-col gap-2'>
+                            <p>Subtotal: </p>
+                            <p>Shipping: </p>
+                        </div>
+                        <div className='flex flex-col gap-2'>
+                            <p>{subTotal}</p>
+                            <p>{shipping}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className='flex w-full flex-grow justify-between'>
+                        <div className='flex flex-col gap-2'>
+                            <h3>Total: </h3>
+                        </div>
+                        <div className='flex flex-col gap-2'>
+                            <h3>{total}</h3>
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <Button position='w-full py-2' onClick={handleRequest}>Checkout</Button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
   )

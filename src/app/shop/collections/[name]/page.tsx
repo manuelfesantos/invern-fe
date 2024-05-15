@@ -7,26 +7,31 @@ import { faArrowTurnUp } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 
-export default function CollectionsDetails({params}: {params:{name:string}}) {
+export default function CollectionsPage({params}: {params:{name:string}}) {
   const collection = collectionsMock.find((c) => c.name === params.name);
 
   return (
     <Layout>
         <section className='flex flex-col items-center justify-center'>
-          <div className='lg:h-[85vh] w-full flex flex-col lg:flex-row items-center justify-center px-12 lg:px-24'>
-            <div className='flex gap-5 mt-12 lg:hidden'>
-              <Link href='/shop/collections'><FontAwesomeIcon icon={faArrowTurnUp} size='lg' className='icon-scale mt-6 -rotate-90 ml-2'/></Link>
-              <h1>{collection?.name}</h1>
-            </div>
-            <div className='hidden flex-1 lg:block'>
-              <h1 className='text-6xl'>{collection?.name}</h1>
-              <Link href='/shop/collections'><FontAwesomeIcon icon={faArrowTurnUp} size='xl' className='icon-scale -rotate-90 ml-2'/></Link>
-            </div>
-            <div className='mt-12 lg:hidden'>
-              <p className='p2'>{collection?.description}</p>
-            </div>
-            <div className='hidden flex-1 lg:block'>
-              <p className='text-lg'>{collection?.description}</p>
+          <div className='lg:h-[85vh] w-full flex items-center'>
+            <div className='flex flex-col lg:flex-row justify-center'>
+              <div className='flex gap-4 mt-6 px-12 lg:hidden'>
+                <Link href='/shop/collections'><FontAwesomeIcon icon={faArrowTurnUp} size='lg' className='icon-scale mt-3 -rotate-90'/></Link>
+                <h2>{collection?.name}</h2>
+              </div>
+              <div className='lg:hidden px-12 mt-4'>
+                <hr />
+              </div>
+              <div className='hidden flex-1 lg:pl-36 lg:-mr-12 lg:block'>
+                <h2>{collection?.name}</h2>
+                <Link href='/shop/collections'><FontAwesomeIcon icon={faArrowTurnUp} size='xl' className='icon-scale -rotate-90 ml-2'/></Link>
+              </div>
+              <div className='mt-6 px-12 lg:hidden'>
+                <p>{collection?.description}</p>
+              </div>
+              <div className='hidden flex-1 lg:pr-24 lg:block'>
+                <p className='text-lg'>{collection?.description}</p>
+              </div>
             </div>
           </div>
           <div className='mt-12 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-12 place-items-center px-12 lg:hidden'>
@@ -38,7 +43,7 @@ export default function CollectionsDetails({params}: {params:{name:string}}) {
                 ))
               }
           </div>
-          <div className='hidden min-h-[80vh] w-full lg:grid grid-rows-2 grid-cols-3 gap-4 place-items-center px-48'>
+          <div className='hidden min-h-[80vh] w-full lg:grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-12 place-items-center px-12 lg:px-24'>
             {
               collection?.products.map((item, index) => (
                 <div key={index} className='h-full'>

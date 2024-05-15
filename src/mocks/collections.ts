@@ -12,7 +12,7 @@ export const collectionsMock = [
     id: 2,
     name: "Midden",
     description:
-      "skye’s landscape undergoes fundamental natural changes as a result of climatic and geological processes. changes made by human activities such as settlement and agriculture are scratched on its surface.",
+      "skye’s landscape undergoes fundamental natural changes as a result of climatic and geological processes. changes made by human activities such as settlement and agriculture are scratched on its surface. skye’s landscape undergoes fundamental natural changes as a result of climatic and geological processes. changes made by human activities such as settlement and agriculture are scratched on its surface.",
     products: [productsMock[4],productsMock[5],productsMock[6],productsMock[7]],
   },
   {

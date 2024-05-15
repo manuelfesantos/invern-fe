@@ -38,7 +38,7 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${cormorant.variable}`}>
       <body>
         <CartProvider>
-          {children}
+            {children}
         </CartProvider>
       </body>
     </html>

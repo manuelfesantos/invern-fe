@@ -13,7 +13,7 @@ export default function ShopMenu() {
     const [menu,setMenu] = useState(false);
     const [collections, setCollections] = useState(false);
 
-    const style = 'absolute left-0 w-screen mt-3 bg-[#4C4B48] p-8 origin-top'
+    const style = 'absolute left-0 w-screen mt-[11px] bg-[#7D7C7C] bg-opacity-95 p-8 origin-top'
 
     const toggleMenu = () => {
         setMenu(!menu);
@@ -70,6 +70,36 @@ export default function ShopMenu() {
                                 animate="open"
                                 exit="initial"
                                 className='flex flex-col justify-center gap-4'>
+                                    <div className='flex flex-col items-center'>
+                                        <ItemAnimation>
+                                            <Link href='/shop/collections'><h4>By Collection</h4></Link>
+                                        </ItemAnimation>
+                                    </div>
+                                    <div className='px-[46%]'>
+                                        <hr />
+                                    </div>
+                                    <div className='flex flex-col items-center'>
+                                        <ItemAnimation>
+                                            <Link href='/shop/products'><h4>By Product</h4></Link>
+                                        </ItemAnimation>
+                                    </div>
+                            </motion.div>
+                        </MenuAnimation>
+                    )
+                }
+            </AnimatePresence>
+        </>
+    )
+}
+
+/*
+                        <MenuAnimation scale={'scaleY'} style={style} closeCollections={closeCollections}>
+                            <motion.div
+                                variants={stagger}
+                                initial="initial"
+                                animate="open"
+                                exit="initial"
+                                className='flex flex-col justify-center gap-4'>
                                     <div className='flex flex-col items-center w-full'>
                                         <div onMouseEnter={openCollections}>
                                             <ItemAnimation>
@@ -79,7 +109,7 @@ export default function ShopMenu() {
                                         {
                                             collections && (
                                                 <>
-                                                    <div className='flex gap-2 my-6 w-full'>
+                                                    <div className='flex flex-col gap-2 my-6 w-full'>
                                                         {
                                                             collectionsMock.map((item,index) => (
                                                                 <div key={index} className="flex flex-col items-center justify-center gap-2 bg-[#201F1D] h-24 w-full image-scale shadow-lg drop-shadow-lg shadow-[#201F1D]">
@@ -108,9 +138,4 @@ export default function ShopMenu() {
                                     </div>
                             </motion.div>
                         </MenuAnimation>
-                    )
-                }
-            </AnimatePresence>
-        </>
-    )
-}
+*/

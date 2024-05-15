@@ -1,24 +1,23 @@
 import React from 'react'
 import { productsMock } from '@/mocks/products'
 import Layout from '@/components/Layout';
-import Image from 'next/image';
 import ProductCarousel from '@/components/ProductCarousel';
+import ProductsDetails from '@/components/ProductsDetails';
 
-export default function ProductsDetails({params}: {params:{id:string}}) {
+export default function ProductsPage({params}: {params:{id:string}}) {
     const product = productsMock.find((p) => p.id === params.id);
 
   return (
     <Layout>
-      <div className='flex'>
+      <div className='flex flex-grow h-[80%] w-full mt-6'>
           {
             product !== undefined && (
               <>
-                <div>
+                <div className='h-full w-[50%] pl-12'>
                   <ProductCarousel product={product} />
                 </div>
-                <div>
-                  <h2>{product.name}</h2>
-                  <h2>{product.price}€</h2>
+                <div className='h-full w-[50%] pr-12'>
+                  <ProductsDetails product={product} />
                 </div>
               </>
             )
