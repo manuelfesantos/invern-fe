@@ -1,11 +1,13 @@
 import React from 'react'
-import { productsMock } from '@/mocks/products'
 import Layout from '@/components/Layout';
 import ProductCarousel from '@/components/ProductCarousel';
 import ProductsDetails from '@/components/ProductsDetails';
+import axios from 'axios';
+import { IProduct, IProductDetails } from '@/types/store/product';
 
-export default function ProductsPage({params}: {params:{id:string}}) {
-    const product = productsMock.find((p) => p.id === params.id);
+export default async function Product({params}: {params:{id:string}}) {
+
+  const product = await getProductById(params.id)
 
   return (
     <Layout>
@@ -27,9 +29,14 @@ export default function ProductsPage({params}: {params:{id:string}}) {
   )
 }
 
-export function generateStaticParams() {
-    const posts = productsMock
-    return posts.map((post: any) => ({
-      id: post.id,
+export async function generateStaticParams() {
+    const posts = await axios.get('https://api-local.invernspirit.com/products')
+
+    return posts.data.data.map((post: any) => ({
+      id: post.productId,
     }))
+}
+
+export const getProductById = async (id:string):Promise<IProductDetails> => {
+  return (await axios.get(`https://api-local.invernspirit.com/products/${id}`)).data.data
 }

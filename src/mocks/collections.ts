@@ -5,7 +5,7 @@ export const collectionsMock = [
     id: 1,
     name: "Erosion",
     description:
-      "the nature of clay will speak of the continual erosion and weathering of the land we live on, of the traces made by the passage of humans across the surface of our planet and of the tension between a container and its contents.",
+      "the nature of clay will speak of the continual erosion and weathering of the land we live on, of the traces made by the passage of humans across the surface of our planet and of the tension between a container and its contents. the nature of clay will speak of the continual erosion and weathering of the land we live on, of the traces made by the passage of humans across the surface of our planet and of the tension between a container and its contents.",
     products: [productsMock[0],productsMock[1],productsMock[2],productsMock[3]],
   },
   {
@@ -19,7 +19,7 @@ export const collectionsMock = [
     id: 3,
     name: "Contour",
     description:
-      "my contour collection grows from a feeling of connection to the land and the effect of people upon its surface. the forms of the land are bounded by fencing and dykes, crossed by paths and water courses, which can delineate, separate and unify.",
+      "my contour collection grows from a feeling of connection to the land and the effect of people upon its surface. the forms of the land are bounded by fencing and dykes, crossed by paths and water courses, which can delineate, separate and unify. my contour collection grows from a feeling of connection to the land and the effect of people upon its surface. the forms of the land are bounded by fencing and dykes, crossed by paths and water courses, which can delineate, separate and unify.",
     products: [productsMock[8],productsMock[9],productsMock[10],productsMock[11]],
   },
 ];

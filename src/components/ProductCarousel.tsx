@@ -1,13 +1,13 @@
 'use client'
-import { IProduct } from '@/types/store/product';
+import { IProductDetails } from '@/types/store/product';
 import React, { useState } from 'react';
 import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react'
-import {Navigation, Thumbs} from 'swiper/modules'
+import {FreeMode, Navigation, Thumbs} from 'swiper/modules'
 
 function ProductImage(
   { product, thumbsSwiper }:
-  { product: IProduct, thumbsSwiper: any }
+  { product: IProductDetails, thumbsSwiper: any }
 ) {
 
   return (
@@ -18,13 +18,13 @@ function ProductImage(
         navigation
         className='w-full'>
           {
-            product?.images.map((item,index) => (
+            product?.productImages.map((item,index) => (
               <SwiperSlide
                 key={index}
                 className="flex justify-center items-center w-full">
                   <Image
-                    src={item}
-                    alt=''
+                    src={item.imageUrl}
+                    alt={item.imageAlt}
                     width={100}
                     height={100}
                     className='object-cover w-full' />
@@ -38,23 +38,28 @@ function ProductImage(
 
 function CarouselThumbs(
   { product, setThumbsSwiper }:
-  { product: IProduct, setThumbsSwiper: any }
+  { product: IProductDetails, setThumbsSwiper: any }
 ) {
   return (
     <div className="h-full">
       <Swiper
+            onSwiper={setThumbsSwiper}
+            freeMode={true}
+            watchSlidesProgress={true}
+            modules={[FreeMode, Navigation, Thumbs]}
             direction="vertical"
             spaceBetween={6}
             slidesPerView={8}
+            navigation
             className="h-full w-24">
           {
-            product?.images.map((item,index) => (
+            product?.productImages.map((item,index) => (
               <SwiperSlide
                 key={index}
                 className="h-24 w-full flex items-center justify-center cursor-pointer overflow-hidden">
                   <Image
-                    src={item}
-                    alt=""
+                    src={item.imageUrl}
+                    alt={item.imageAlt}
                     width={100}
                     height={100} />
               </SwiperSlide>
@@ -65,7 +70,7 @@ function CarouselThumbs(
   );
 }
 
-const ProductCarousel = ({product}:{product:IProduct}) => {
+const ProductCarousel = ({product}:{product:IProductDetails}) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (

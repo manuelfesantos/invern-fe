@@ -1,8 +1,20 @@
+import { Image } from "./image";
+
 export interface IProduct {
-    id: string;
-    name: string;
-    description: string;
+    productId: string;
+    productName: string;
     price: number;
-    images: string[];
     stock: number;
-  }
+    productImage: Image
+}
+
+export interface IProductDetails {
+    productId: string;
+    productName: string;
+    price: number;
+    stock: number;
+    description: string;
+    collectionName: string;
+    productImages: Image[]
+}
+//size missing

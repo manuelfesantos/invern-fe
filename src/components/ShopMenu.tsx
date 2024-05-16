@@ -13,7 +13,7 @@ export default function ShopMenu() {
     const [menu,setMenu] = useState(false);
     const [collections, setCollections] = useState(false);
 
-    const style = 'absolute left-0 w-screen mt-[11px] bg-[#7D7C7C] bg-opacity-95 p-8 origin-top'
+    const style = 'absolute left-0 w-screen mt-[11px] bg-[#4C4B48] bg-opacity-95 p-8 origin-top'
 
     const toggleMenu = () => {
         setMenu(!menu);

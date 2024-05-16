@@ -1,4 +1,4 @@
-import { IProduct } from "@/types/store/product";
+import { IProduct, IProductDetails } from "@/types/store/product";
 
 export interface Cart {
   id: number;

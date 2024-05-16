@@ -125,10 +125,10 @@ const Cart = () => {
                                             cart.items.map((item,index) => (
                                                 <div key={index} className='flex gap-2'>
                                                     <div>
-                                                        <Image src={item.product.images[0]} height={100} width={100} alt="..." className='h-24 w-24 object-cover aspect-square' />
+                                                        <Image src={item.product.productImage.imageUrl} height={100} width={100} alt={item.product.productImage.imageAlt} className='h-24 w-24 object-cover aspect-square' />
                                                     </div>
                                                     <div className="px-4 pb-4 pt-2">
-                                                        <h5>{item.product.name}</h5>
+                                                        <h5>{item.product.productName}</h5>
                                                         <div className="flex items-center justify-between">
                                                             <p>Price: {item.product.price}€</p>
                                                         </div>
