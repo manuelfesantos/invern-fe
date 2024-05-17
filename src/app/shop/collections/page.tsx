@@ -2,8 +2,7 @@ import React from 'react'
 import Layout from '@/components/Layout';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ICollection } from '@/types/store/collection';
-import axios from 'axios';
+import { getCollections } from '@/utils/getFromDb';
 
 const Collections = async () => {
   const collections = await getCollections()
@@ -36,10 +35,6 @@ const Collections = async () => {
         </section>
       </Layout>
       );
-}
-
-const getCollections = async ():Promise<ICollection[]> => {
-  return (await axios.get('https://api-local.invernspirit.com/collections')).data.data
 }
 
 export default Collections

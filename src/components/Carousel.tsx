@@ -1,15 +1,13 @@
 'use client'
 import React from 'react';
 import Image from 'next/image';
-import { useState } from 'react';
-import { collectionsMock } from '@/mocks/collections';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
+import { ICollectionDetails } from '@/types/store/collection';
 
-const Carousel = () => {
-    const [image,setImage] = useState();
+const Carousel = ({collection}: {collection:ICollectionDetails}) => {
 
   return (
     <div className="flex w-screen absolute -z-10 opacity-35">
@@ -21,9 +19,9 @@ const Carousel = () => {
             speed={5000}
             className="mySwiper">
         {
-            collectionsMock[2].products.map((item, index) => (
+            collection.products.map((item, index) => (
                     <SwiperSlide key={index}>
-                        <Image src={item.images[0]} width={100} height={100} alt="..." className="w-screen h-screen object-cover mix-blend-overlay grayscale" />
+                        <Image src={item.productImage.imageUrl} width={100} height={100} alt={item.productImage.imageAlt} className="w-screen h-screen object-cover mix-blend-overlay grayscale" />
                     </SwiperSlide>
             ))
         }

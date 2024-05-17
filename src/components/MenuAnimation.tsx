@@ -1,7 +1,7 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 
-const MenuAnimation = ({children, scale, style, closeCollections}:{children:any,scale:string,style:string,closeCollections?:any}) => {
+const MenuAnimation = ({children, scale, style}:{children:any,scale:string,style:string}) => {
     const menuAnimation = {
         initial: {
             [scale]: 0,
@@ -29,8 +29,7 @@ const MenuAnimation = ({children, scale, style, closeCollections}:{children:any,
           initial="initial"
           animate="animate"
           exit="exit"
-          className={style}
-          onMouseLeave={closeCollections}>
+          className={style}>
               {children}
       </motion.div>
   )

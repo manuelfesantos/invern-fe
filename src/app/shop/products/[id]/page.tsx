@@ -3,9 +3,9 @@ import Layout from '@/components/Layout';
 import ProductCarousel from '@/components/ProductCarousel';
 import ProductsDetails from '@/components/ProductsDetails';
 import axios from 'axios';
-import { IProduct, IProductDetails } from '@/types/store/product';
+import { getProductById } from '@/utils/getFromDb';
 
-export default async function Product({params}: {params:{id:string}}) {
+export default async function ProductPage({params}: {params:{id:string}}) {
 
   const product = await getProductById(params.id)
 
@@ -37,6 +37,3 @@ export async function generateStaticParams() {
     }))
 }
 
-export const getProductById = async (id:string):Promise<IProductDetails> => {
-  return (await axios.get(`https://api-local.invernspirit.com/products/${id}`)).data.data
-}

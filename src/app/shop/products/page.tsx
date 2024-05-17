@@ -1,8 +1,7 @@
 import React from 'react'
 import Layout from '@/components/Layout';
 import ProductCard from '@/components/ProductCard';
-import axios from 'axios';
-import { IProduct } from '@/types/store/product';
+import { getProducts } from '@/utils/getFromDb';
 
 const Products = async () => {
   const products = await getProducts()
@@ -26,9 +25,4 @@ const Products = async () => {
         </Layout>
       );
 }
-
-const getProducts = async ():Promise<IProduct[]> => {
-  return (await axios.get('https://api-local.invernspirit.com/products')).data.data
-}
-
 export default Products
