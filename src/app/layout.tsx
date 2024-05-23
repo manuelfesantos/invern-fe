@@ -7,6 +7,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 import { CartProvider } from "@/context/cart";
+import { WishListProvider } from "@/context/wishList";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -38,7 +39,9 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${cormorant.variable}`}>
       <body>
         <CartProvider>
+          <WishListProvider>
             {children}
+          </WishListProvider>
         </CartProvider>
       </body>
     </html>

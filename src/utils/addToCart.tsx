@@ -27,14 +27,14 @@ export const addToCart = (
               )
           )
         }
-      ))
+      ));
     }
     else {
       setCart((prevCart:Cart) => ({
         ...prevCart,
         items: [...prevCart.items,cartItem]
       }
-      ))
+      ));
     }
     setQuantity(1)
 }

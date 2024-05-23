@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from './Button'
+import { CustomButton } from './CustomComponents'
 
 const Footer = () => {
   return (
@@ -15,7 +15,7 @@ const Footer = () => {
                     </svg>
                 </div>
                 <input type="search" id="search" className="h-full w-screen pl-14 bg-opacity-70 bg-[#4C4B48] focus:outline-none" placeholder="search..." required autoComplete="off"/>
-                <Button position="absolute h-full end-0 px-6">search</Button>
+                <CustomButton position="absolute h-full end-0 px-6">search</CustomButton>
             </div>
         </form>
     </footer>

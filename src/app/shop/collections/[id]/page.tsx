@@ -1,11 +1,10 @@
 import React from 'react'
 import Layout from '@/components/Layout'
+import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnUp } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
-import ProductCard from '@/components/ProductCard';
-import axios from 'axios';
-import { getCollectionById } from '@/utils/getFromDb';
+import { getCollectionById, getCollections } from '@/utils/getFromDb';
+import ProductCardGrid from '@/components/ProductCardGrid'
 
 export default async function CollectionPage({params}: {params:{id:string}}) {
 
@@ -13,11 +12,16 @@ export default async function CollectionPage({params}: {params:{id:string}}) {
 
   return (
     <Layout>
+      <section className='flex flex-col items-center justify-center'>
         {
-          collection !== undefined && (
-            <section className='flex flex-col items-center justify-center'>
-              <div className='lg:h-[85vh] w-full flex items-center'>
-                <div className='flex flex-col lg:flex-row justify-center'>
+          collection === undefined
+            ? (
+              <p>{`This collection is not available at the moment.`}</p>
+          )
+          : (
+            <>
+              <div className='lg:h-[75vh] w-full flex items-center'>
+                <div className='w-full flex flex-col lg:flex-row justify-center'>
                   <div className='flex gap-4 mt-6 px-12 lg:hidden'>
                     <Link href='/shop/collections'><FontAwesomeIcon icon={faArrowTurnUp} size='lg' className='icon-scale mt-3 -rotate-90'/></Link>
                     <h2>{collection?.collectionName}</h2>
@@ -37,36 +41,20 @@ export default async function CollectionPage({params}: {params:{id:string}}) {
                   </div>
                 </div>
               </div>
-              <div className='mt-12 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-12 place-items-center px-12 lg:hidden'>
-                  {
-                    collection?.products.map((item, index) => (
-                      <div key={index}>
-                        <ProductCard product={item} />
-                      </div>
-                    ))
-                  }
-              </div>
-              <div className='hidden min-h-[80vh] w-full lg:grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-12 place-items-center px-12 lg:px-24'>
-                {
-                  collection?.products.map((item, index) => (
-                    <div key={index} className='h-full'>
-                      <ProductCard product={item} />
-                    </div>
-                  ))
-                }
-              </div>
-            </section>
+              <ProductCardGrid products={collection?.products} />
+            </>
           )
         }
+      </section>
     </Layout>
   )
 }
 
 export async function generateStaticParams() {
-  const response = await axios.get('https://api-local.invernspirit.com/collections');
-  const posts = response.data.data;
+  const posts = await getCollections()
 
-  return posts.map((post: { collectionId: string }) => ({
+  return posts.map((post: any) => ({
     id: post.collectionId,
-  }));
+  }))
 }
+

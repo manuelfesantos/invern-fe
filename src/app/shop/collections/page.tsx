@@ -5,36 +5,45 @@ import Image from 'next/image';
 import { getCollections } from '@/utils/getFromDb';
 
 const Collections = async () => {
+
   const collections = await getCollections()
 
-    return (
-      <Layout>
-        <section className='h-full w-full flex flex-col lg:flex-row items-center lg:justify-center gap-2 lg:relative'>
-          <div className='lg:absolute lg:top-0 h-12 lg:h-36 w-full mt-12 mb-12 lg:mt-0 lg:mb-6 flex flex-col items-center justify-center'>
-              <div className='lg:z-20'>
-                <h2>Collections</h2>
+  return (
+    <Layout>
+      <section className='relative h-full w-full flex flex-col lg:flex-row items-center lg:justify-center gap-2'>
+        <div className='lg:absolute lg:top-0 h-12 lg:h-36 w-full my-6 lg:my-0 flex flex-col items-center justify-center'>
+            <div className='lg:z-20'>
+              <h2>Collections</h2>
+            </div>
+        </div>
+        {
+          collections.length === 0
+            ? (
+              <div className='absolute h-full w-full flex items-center justify-center px-24'>
+                <p>{`There are no collections available at the moment.`}</p>
               </div>
-          </div>
-          {
-            collections.map((item, index) => (
-              <div key={index} className='bg-[#201F1D] h-24 lg:h-full w-full lg:w-48 image-scale shadow-lg drop-shadow-lg shadow-[#201F1D] mt-2'>
-                <Link href={`/shop/collections/${item.collectionId}`} className='h-full w-full relative flex items-center justify-center'>
-                    <Image
-                      src={item.collectionImage.imageUrl}
-                      height={100}
-                      width={100}
-                      alt={item.collectionImage.imageAlt}
-                      className='h-full w-full object-cover mix-blend-overlay grayscale opacity-75 brightness-100 hover:mix-blend-exclusion hover:opacity-50 hover:brightness-150' />
-                    <div className='absolute'>
-                      <h3>{item.collectionName}</h3>
-                    </div>
-                </Link>
-              </div>
-            ))
+            )
+            : (
+              collections.map((item, index) => (
+                <div key={index} className='bg-[#201F1D] h-24 lg:h-full w-full lg:w-48 my-2 image-scale card-shadow'>
+                  <Link href={`/shop/collections/${item.collectionId}`} className='h-full w-full relative flex items-center justify-center'>
+                      <Image
+                        src={item.collectionImage.imageUrl}
+                        height={100}
+                        width={100}
+                        alt={item.collectionImage.imageAlt}
+                        className='h-full w-full object-cover mix-blend-overlay grayscale opacity-75 brightness-100 hover:mix-blend-exclusion hover:opacity-50 hover:brightness-150' />
+                      <div className='absolute'>
+                        <h3>{item.collectionName}</h3>
+                      </div>
+                  </Link>
+                </div>
+              ))
+            )
           }
-        </section>
-      </Layout>
-      );
+      </section>
+    </Layout>
+  );
 }
 
 export default Collections
