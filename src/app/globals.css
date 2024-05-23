@@ -95,6 +95,10 @@ li {
     @apply text-xs lg:text-sm
   }
 
+  .error {
+    @apply absolute w-full text-right text-xs lg:text-sm text-[#F2613F]
+  }
+
 }
 
 @layer utilities {

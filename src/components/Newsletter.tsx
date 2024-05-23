@@ -54,7 +54,7 @@ export default function Newsletter() {
                                         <input type="email" name="email" id="email" className="block p-1 w-full focus:outline-none text-black" placeholder="email" required />
                                     </ItemAnimation>
                                     <ItemAnimation>
-                                        <CustomButton position='h-full w-full p-2'>subscribe</CustomButton>
+                                        <CustomButton position='h-full w-full p-2' type='button'>subscribe</CustomButton>
                                     </ItemAnimation>
                             </motion.div>
                         </MenuAnimation>

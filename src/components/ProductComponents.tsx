@@ -70,13 +70,13 @@ const ProductComponents = ({children,product,component}:{children:ReactNode,prod
               <div className="flex items-center justify-between mb-2">
                 <h5>{product.productName}</h5>
                 <div className='flex gap-2'>
-                    <CustomButton position='h-6 w-6'
+                    <CustomButton position='h-6 w-6' type='button'
                       onClick={reduce}
                       isDisabled={() => quantity <= 1}>
                         -
                     </CustomButton>
                     <p>{quantity}</p>
-                    <CustomButton position='h-6 w-6'
+                    <CustomButton position='h-6 w-6' type='button'
                       onClick={add}
                       isDisabled={() => quantity + (cart.items.find(cartItem => cartItem.id === product.productId)?.quantity || 0) >= product.stock}>
                         +
@@ -92,7 +92,7 @@ const ProductComponents = ({children,product,component}:{children:ReactNode,prod
                     )
                     : (
                       <CustomButton
-                        position="px-4 py-2"
+                        position="px-4 py-2" type='button'
                         onClick={() => {
                           addToCart({product,cart,setCart,quantity,setQuantity})
                           handleToast(true,'Product added to cart!',true);
@@ -138,13 +138,13 @@ const ProductComponents = ({children,product,component}:{children:ReactNode,prod
         {children}
         <div className='flex gap-4 px-2'>
           <div className='flex gap-4'>
-              <CustomButton position='h-8 w-8'
+              <CustomButton position='h-8 w-8' type='button'
                 onClick={reduce}
                 isDisabled={() => quantity <= 1}>
                   -
               </CustomButton>
               <h4>{quantity}</h4>
-              <CustomButton position='h-8 w-8'
+              <CustomButton position='h-8 w-8' type='button'
                 onClick={add}
                 isDisabled={() => quantity + (cart.items.find(cartItem => cartItem.id === product.productId)?.quantity || 0) >= product.stock}>
                   +
@@ -159,7 +159,7 @@ const ProductComponents = ({children,product,component}:{children:ReactNode,prod
             )
             : (
               <CustomButton
-                position="py-4"
+                position="py-4" type='button'
                 onClick={() => {
                    addToCart({product,cart,setCart,quantity,setQuantity})
                    handleToast(true,'Product added to cart!',true);

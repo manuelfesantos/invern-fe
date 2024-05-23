@@ -21,7 +21,7 @@ const ProductDetails = async ({product}:{product:IProductDetails}) => {
         <div className='my-2'>
           <hr />
         </div>
-        <h4>This product belongs to the <CustomLink position='' href={`/shop/collections/${collection?.collectionId}`} state={true}>{product.collectionName}</CustomLink> collection.</h4>
+        <h4>This product belongs to the <CustomLink position='' href={`/shop/collections/${collection?.collectionId}`}>{product.collectionName}</CustomLink> collection.</h4>
         <div className='flex items-center justify-between'>
           <div className='flex gap-4 px-2'>
             <Link href='' className="icon-scale"><FontAwesomeIcon icon={faInstagram} size='lg' /></Link>
@@ -30,9 +30,9 @@ const ProductDetails = async ({product}:{product:IProductDetails}) => {
             <Link href='' className="icon-scale"><FontAwesomeIcon icon={faTumblr} size='lg' /></Link>
           </div>
           <div className='flex flex-col text-right'>
-            <CustomLink position='' href='/faq/#payment' state={true}>About payments</CustomLink>
-            <CustomLink position='' href='/faq/#returns' state={true}>Returns policy</CustomLink>
-            <CustomLink position='' href='/faq/#shipping' state={true}>Shipping policy</CustomLink>
+            <CustomLink position='' href='/faq/#payment'>About payments</CustomLink>
+            <CustomLink position='' href='/faq/#returns'>Returns policy</CustomLink>
+            <CustomLink position='' href='/faq/#shipping'>Shipping policy</CustomLink>
           </div>
         </div>
       </ProductComponents>

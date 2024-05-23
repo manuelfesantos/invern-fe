@@ -7,7 +7,6 @@ import { CartContext } from '@/context/cart';
 import { cartContext } from '@/context/cart';
 import Image from 'next/image';
 import Loading from './Loading';
-import axios from 'axios';
 
 const Cart = () => {
 
@@ -136,13 +135,13 @@ const Cart = () => {
                                         </div>
                                         <div className='flex gap-2'>
                                             <p>Quantity:</p>
-                                            <CustomButton position='h-6 w-6' onClick={() => changeQuantity(false,item.id)}>-</CustomButton>
+                                            <CustomButton position='h-6 w-6' type='button' onClick={() => changeQuantity(false,item.id)}>-</CustomButton>
                                             <p>{item.quantity}</p>
-                                            <CustomButton position='h-6 w-6' onClick={() => changeQuantity(true,item.id)} isDisabled={() => item.quantity >= item.product.stock}>+</CustomButton>
+                                            <CustomButton position='h-6 w-6' type='button' onClick={() => changeQuantity(true,item.id)} isDisabled={() => item.quantity >= item.product.stock}>+</CustomButton>
                                         </div>
                                     </div>
                                     <div className='flex items-center'>
-                                        <CustomLink position="block py-4 w-full text-right" onClick={() => removeProductFromCart(item.id)} href='' state={false}>Remove</CustomLink>
+                                        <CustomLink position="block py-4 w-full text-right" onClick={() => removeProductFromCart(item.id)} href=''>Remove</CustomLink>
                                     </div>
                                 </div>
                             ))
@@ -175,7 +174,7 @@ const Cart = () => {
                 </div>
                 <hr />
                 <div>
-                    <CustomButton position='w-full py-2' onClick={redirectCheckout}>checkout</CustomButton>
+                    <CustomButton position='w-full py-2' type='button' onClick={redirectCheckout}>checkout</CustomButton>
                 </div>
             </div>
         </div>
