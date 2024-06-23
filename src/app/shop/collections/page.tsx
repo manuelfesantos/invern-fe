@@ -28,10 +28,10 @@ const Collections = async () => {
                 <div key={index} className='bg-[#201F1D] h-24 lg:h-full w-full lg:w-48 my-2 image-scale card-shadow'>
                   <Link href={`/shop/collections/${item.collectionId}`} className='h-full w-full relative flex items-center justify-center'>
                       <Image
-                        src={item.collectionImage.imageUrl}
+                        src={item.images.url}
                         height={100}
                         width={100}
-                        alt={item.collectionImage.imageAlt}
+                        alt={item.images.alt}
                         className='h-full w-full object-cover mix-blend-overlay grayscale opacity-75 brightness-100 hover:mix-blend-exclusion hover:opacity-50 hover:brightness-150' />
                       <div className='absolute'>
                         <h3>{item.collectionName}</h3>

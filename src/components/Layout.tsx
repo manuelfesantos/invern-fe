@@ -14,7 +14,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = async ({children, showCarousel}) => {
 
     const collections = await getCollections()
-    const collection = await getCollectionById(collections[collections.length-1].collectionId.toString())
+    const collection = await getCollectionById(collections[0].collectionId.toString())
 
     return (
         <div className='flex flex-col h-screen'>
@@ -24,7 +24,6 @@ const Layout: React.FC<LayoutProps> = async ({children, showCarousel}) => {
                     : <Background />
             }
             <Header />
-            <MobileMenu />
             <main className="flex flex-col flex-grow overflow-scroll">{children}</main>
             <Footer />
         </div>

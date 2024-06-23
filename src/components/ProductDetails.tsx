@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 const ProductDetails = async ({product}:{product:IProductDetails}) => {
   const collections = await getCollections()
-  const collection = collections.find(item => item.collectionName === product.collectionName)
+  const collection = collections.find(item => item.collectionId === product.collectionId)
 
   return (
     <div className='h-full w-full flex flex-col justify-between'>
@@ -21,7 +21,7 @@ const ProductDetails = async ({product}:{product:IProductDetails}) => {
         <div className='my-2'>
           <hr />
         </div>
-        <h4>This product belongs to the <CustomLink position='' href={`/shop/collections/${collection?.collectionId}`}>{product.collectionName}</CustomLink> collection.</h4>
+        <h4>This product belongs to the <CustomLink position='' href={`/shop/collections/${collection?.collectionId}`}>{collection?.collectionName}</CustomLink> collection.</h4>
         <div className='flex items-center justify-between'>
           <div className='flex gap-4 px-2'>
             <Link href='' className="icon-scale"><FontAwesomeIcon icon={faInstagram} size='lg' /></Link>

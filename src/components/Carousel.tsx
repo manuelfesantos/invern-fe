@@ -21,7 +21,7 @@ const Carousel = ({collection}: {collection:ICollectionDetails}) => {
         {
             collection.products.map((item, index) => (
                     <SwiperSlide key={index}>
-                        <Image src={item.productImage.imageUrl} width={100} height={100} alt={item.productImage.imageAlt} className="w-screen h-screen object-cover mix-blend-overlay grayscale" />
+                        <Image src={item.images[0].url} width={100} height={100} alt={item.images[0].alt} className="w-screen h-screen object-cover mix-blend-overlay grayscale" />
                     </SwiperSlide>
             ))
         }

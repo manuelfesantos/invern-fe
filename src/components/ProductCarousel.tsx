@@ -18,13 +18,13 @@ function ProductImage(
         navigation
         className='w-full'>
           {
-            product?.productImages.map((item,index) => (
+            product?.images.map((item,index) => (
               <SwiperSlide
                 key={index}
                 className="flex justify-center items-center w-full">
                   <Image
-                    src={item.imageUrl}
-                    alt={item.imageAlt}
+                    src={item.url}
+                    alt={item.alt}
                     width={100}
                     height={100}
                     className='object-cover w-full' />
@@ -41,32 +41,61 @@ function CarouselThumbs(
   { product: IProductDetails, setThumbsSwiper: any }
 ) {
   return (
-    <div className="h-full">
-      <Swiper
-            onSwiper={setThumbsSwiper}
-            freeMode={true}
-            watchSlidesProgress={true}
-            modules={[FreeMode, Navigation, Thumbs]}
-            direction="vertical"
-            spaceBetween={6}
-            slidesPerView={8}
-            navigation
-            className="h-full w-24">
-          {
-            product?.productImages.map((item,index) => (
-              <SwiperSlide
-                key={index}
-                className="h-24 w-full flex items-center justify-center cursor-pointer overflow-hidden">
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.imageAlt}
-                    width={100}
-                    height={100} />
-              </SwiperSlide>
-            ))
-          }
-      </Swiper>
-    </div>
+    <>
+      <div className="hidden lg:block h-full">
+        <Swiper
+              onSwiper={setThumbsSwiper}
+              freeMode={true}
+              watchSlidesProgress={true}
+              modules={[FreeMode, Navigation, Thumbs]}
+              direction="vertical"
+              spaceBetween={6}
+              slidesPerView={8}
+              navigation
+              className="h-full w-24">
+            {
+              product?.images.map((item,index) => (
+                <SwiperSlide
+                  key={index}
+                  className="h-24 w-full flex items-center justify-center cursor-pointer overflow-hidden">
+                    <Image
+                      src={item.url}
+                      alt={item.alt}
+                      width={100}
+                      height={100} />
+                </SwiperSlide>
+              ))
+            }
+        </Swiper>
+      </div>
+      <div className="block lg:hidden h-full">
+        <Swiper
+              onSwiper={setThumbsSwiper}
+              freeMode={true}
+              watchSlidesProgress={true}
+              modules={[FreeMode, Navigation, Thumbs]}
+              direction="horizontal"
+              spaceBetween={6}
+              slidesPerView={8}
+              navigation
+              className="h-full w-24">
+            {
+              product?.images.map((item,index) => (
+                <SwiperSlide
+                  key={index}
+                  className="h-24 w-full flex items-center justify-center cursor-pointer overflow-hidden">
+                    <Image
+                      src={item.url}
+                      alt={item.alt}
+                      width={100}
+                      height={100} />
+                </SwiperSlide>
+              ))
+            }
+        </Swiper>
+      </div>
+    </>
+
   );
 }
 
@@ -74,14 +103,25 @@ const ProductCarousel = ({product}:{product:IProductDetails}) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <div className='w-full h-full flex'>
-      <div>
-        <CarouselThumbs product={product} setThumbsSwiper={setThumbsSwiper} />
+    <>
+      <div className='hidden w-full h-full lg:flex'>
+        <div>
+          <CarouselThumbs product={product} setThumbsSwiper={setThumbsSwiper} />
+        </div>
+        <div className='w-full h-full ml-2'>
+          <ProductImage product={product} thumbsSwiper={thumbsSwiper} />
+        </div>
       </div>
-      <div className='w-[75%] h-full ml-2'>
-        <ProductImage product={product} thumbsSwiper={thumbsSwiper} />
+      <div className='flex flex-col w-full h-full mt-48 lg:hidden'>
+        <div className=''>
+          <ProductImage product={product} thumbsSwiper={thumbsSwiper} />
+        </div>
+        <div>
+          <CarouselThumbs product={product} setThumbsSwiper={setThumbsSwiper} />
+        </div>
       </div>
-    </div>
+    </>
+
   )
 }
 

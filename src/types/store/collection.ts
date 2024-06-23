@@ -2,9 +2,9 @@ import { IProduct } from "@/types/store/product";
 import { Image } from "./image";
 
 export interface ICollection {
-  collectionId: number;
+  collectionId: string;
   collectionName: string;
-  collectionImage: Image
+  images: Image
 }
 
 export interface ICollectionDetails {

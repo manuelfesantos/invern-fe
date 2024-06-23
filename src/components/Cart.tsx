@@ -73,7 +73,7 @@ const Cart = () => {
 
     const checkout = async () => {
         setLoading(true)
-        const response = await (await fetch('https://api-local.invernspirit.com/checkout', {
+        const response = await (await fetch('https://preview.invern-be.pages.dev/checkout', {
             body:
                 JSON.stringify({
                     products: cart.items.map(item => ({
@@ -81,8 +81,12 @@ const Cart = () => {
                         quantity:item.quantity
                     }))
                 }),
-            method: 'POST'
+            method: 'POST',
+            headers: {
+                'CF-Access-Client-Id': '9a316892e7496497c4d7ac97e20a05c0.access',
+                'CF-Access-Client-Secret': 'a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9'
             }
+            },
         )).json()
         setLoading(false)
         return response.data.url
@@ -94,7 +98,7 @@ const Cart = () => {
 
     const subTotal =
         cart.items.reduce((acc,item) => (
-            acc+(item.quantity*item.product.price)
+            acc+(item.quantity*item.product.priceInCents)
         ),0)
 
     const shipping = 0
@@ -126,12 +130,12 @@ const Cart = () => {
                             cart.items.map((item,index) => (
                                 <div key={index} className='flex gap-2'>
                                     <div>
-                                        <Image src={item.product.productImage.imageUrl} height={100} width={100} alt={item.product.productImage.imageAlt} className='h-24 w-24 object-cover aspect-square' />
+                                        <Image src={item.product.images[0].url} height={100} width={100} alt={item.product.images[0].alt} className='h-24 w-24 object-cover aspect-square' />
                                     </div>
                                     <div className="px-4 pb-4 pt-2">
                                         <h5>{item.product.productName}</h5>
                                         <div className="flex items-center justify-between">
-                                            <p>Price: {item.product.price}€</p>
+                                            <p>Price: {item.product.priceInCents}€</p>
                                         </div>
                                         <div className='flex gap-2'>
                                             <p>Quantity:</p>

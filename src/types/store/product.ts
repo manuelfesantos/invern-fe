@@ -3,18 +3,17 @@ import { Image } from "./image";
 export interface IProduct {
     productId: string;
     productName: string;
-    price: number;
+    priceInCents: number;
     stock: number;
-    productImage: Image
+    images: Image[]
 }
 
 export interface IProductDetails {
     productId: string;
     productName: string;
-    price: number;
+    priceInCents: number;
     stock: number;
     description: string;
-    collectionName: string;
-    productImages: Image[]
+    collectionId: string;
+    images: Image[]
 }
-//size missing

@@ -15,7 +15,23 @@ const SignIn = ({setActiveTab}:{setActiveTab:Dispatch<SetStateAction<string>>}) 
             email:'',
             password:'',
         },
-        onSubmit: () => {
+        onSubmit: async (values) => {
+            const {email,password} = values
+            const response = await fetch('https://preview.invern-be.pages.dev/users',
+                {
+                    method: 'POST',
+                    headers: {
+                        action: 'login',
+                        'CF-Access-Client-Id': '9a316892e7496497c4d7ac97e20a05c0.access',
+                        'CF-Access-Client-Secret': 'a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9',
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                }
+            )
+            console.log("response:" + await response.json())
             formik.resetForm()
         },
         validationSchema: Yup.object({

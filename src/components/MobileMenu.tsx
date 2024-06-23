@@ -2,6 +2,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight,faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { AnimatePresence, motion} from 'framer-motion'
 import Link from 'next/link'
@@ -42,9 +43,9 @@ const MobileMenu = () => {
     <nav className='lg:hidden mobile-menu'>
         {
             !menu && (
-                <div className="absolute top-0 left-2 flex items-center justify-center h-full w-[5%] z-10">
+                <div className="">
                     <div onClick={handleMenu} onDrag={handleMenu}>
-                        <FontAwesomeIcon icon={faChevronRight} size='lg' />
+                        <FontAwesomeIcon icon={faBars} size='lg' />
                     </div>
                 </div>
             )

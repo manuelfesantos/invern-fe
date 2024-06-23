@@ -10,7 +10,7 @@ export default async function ProductPage({params}: {params:{id:string}}) {
 
   return (
     <Layout>
-      <section className='h-full w-full flex items-center justify-center'>
+      <section className='h-full w-full flex flex-col lg:flex-row items-center justify-center'>
           {
             product === undefined
               ? (
@@ -18,10 +18,10 @@ export default async function ProductPage({params}: {params:{id:string}}) {
               )
               : (
                 <>
-                  <div className='h-full w-[50%] pl-12 py-2'>
+                  <div className='h-full w-full lg:w-[50%] px-12 py-2'>
                     <ProductCarousel product={product} />
                   </div>
-                  <div className='h-full w-[50%] pr-12 py-2'>
+                  <div className='h-full w-full lg:w-[50%] px-12 py-2'>
                     <ProductDetails product={product} />
                   </div>
                 </>

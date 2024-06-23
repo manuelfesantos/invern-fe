@@ -6,18 +6,21 @@ import {faInstagram, faYoutube, faPinterestP} from "@fortawesome/free-brands-svg
 import { faUserAlt, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import ShopMenu from "./ShopMenu";
 import Newsletter from "./Newsletter";
-
+import MobileMenu from "./MobileMenu";
 
 export default function Header() {
 
     return (
         <nav className="flex flex-col z-30 mt-6 lg:mt-0 relative select-none">
             <div className="flex justify-between pt-6 pb-2 px-12">
-                <div className="flex gap-4 items-center justify-center -ml-8 lg:ml-2">
+                <div className="hidden lg:flex gap-4 items-center justify-center -ml-8 lg:ml-2">
                     <div className="hidden lg:flex lg:gap-4"><Newsletter /> |</div>
                     <Link href='' className="icon-scale"><FontAwesomeIcon icon={faInstagram} /></Link>
                     <Link href='' className="icon-scale"><FontAwesomeIcon icon={faPinterestP} /></Link>
                     <Link href='' className="icon-scale"><FontAwesomeIcon icon={faYoutube} /></Link>
+                </div>
+                <div className="lg:hidden flex items-center justify-center gap-4 lg:mr-4">
+                    <MobileMenu />
                 </div>
                 <ul className="hidden lg:flex space-x-32 items-center justify-center">
                     <li>

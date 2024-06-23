@@ -10,7 +10,7 @@ export const addToCart = (
     const cartItem: CartItem = {
       id: product.productId,
       quantity,
-      price: product.price,
+      price: product.priceInCents,
       product: product
     }
     if(cart.items.find(cartItem => cartItem.id === product.productId)) {

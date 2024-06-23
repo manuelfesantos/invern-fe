@@ -52,7 +52,7 @@ const ProductComponents = ({children,product,component}:{children:ReactNode,prod
           <div className='relative'>
             <div>
               <Link href={`/shop/products/${product.productId}`}>
-                <Image src={product.productImage.imageUrl} height={100} width={100} alt={product.productImage.imageAlt} className='h-72 w-72 object-cover aspect-square' />
+                <Image src={product.images[0].url} height={100} width={100} alt={product.images[0].alt} className='h-72 w-72 object-cover aspect-square' />
               </Link>
             </div>
             <div className='absolute top-2 right-4 cursor-pointer icon-scale' onClick={toggleLike}>
@@ -84,7 +84,7 @@ const ProductComponents = ({children,product,component}:{children:ReactNode,prod
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <h3 className='font-extrabold justify-self-center'>{product.price}€</h3>
+                <h3 className='font-extrabold justify-self-center'>{product.priceInCents}€</h3>
                 {
                   product.stock === 0
                     ? (
@@ -118,7 +118,7 @@ const ProductComponents = ({children,product,component}:{children:ReactNode,prod
         <div className='flex flex-col'>
           <h1>{product.productName}</h1>
           <div className='flex justify-between'>
-            <h2 className='px-2'>{product.price}€</h2>
+            <h2 className='px-2'>{product.priceInCents}€</h2>
             <div className='cursor-pointer icon-scale' onClick={toggleLike}>
               {
                 wishList.products.find(item => item.productId === product.productId)
