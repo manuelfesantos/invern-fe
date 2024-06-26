@@ -11,7 +11,7 @@ import MobileMenu from "./MobileMenu";
 export default function Header() {
 
     return (
-        <nav className="flex flex-col z-30 mt-6 lg:mt-0 relative select-none">
+        <nav className="flex flex-col z-30 relative select-none">
             <div className="flex justify-between pt-6 pb-2 px-12">
                 <div className="hidden lg:flex gap-4 items-center justify-center -ml-8 lg:ml-2">
                     <div className="hidden lg:flex lg:gap-4"><Newsletter /> |</div>

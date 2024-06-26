@@ -31,7 +31,6 @@ const SignIn = ({setActiveTab}:{setActiveTab:Dispatch<SetStateAction<string>>}) 
                     })
                 }
             )
-            console.log("response:" + await response.json())
             formik.resetForm()
         },
         validationSchema: Yup.object({

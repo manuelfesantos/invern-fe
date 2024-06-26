@@ -27,7 +27,7 @@ function ProductImage(
                     alt={item.alt}
                     width={100}
                     height={100}
-                    className='object-cover w-full' />
+                    className='object-cover w-[95%]' />
               </SwiperSlide>
             ))
           }
@@ -121,7 +121,6 @@ const ProductCarousel = ({product}:{product:IProductDetails}) => {
         </div>
       </div>
     </>
-
   )
 }
 
