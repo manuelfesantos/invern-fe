@@ -47,23 +47,23 @@ const SignUp = ({setActiveTab}:{setActiveTab:Dispatch<SetStateAction<string>>}) 
                     <div className="w-full relative">
                         <input
                             type="text"
-                            name="firstname"
-                            id="firstname"
+                            name="firstName"
+                            id="firstName"
                             onChange={formik.handleChange}
                             value={formik.values.firstName}
                             className="block py-3 w-full bg-transparent border-0 border-b-2 border-white focus:outline-none focus:border-white peer" placeholder=" " />
-                        <label htmlFor="firstname" className="peer-focus:font-medium absolute text-[#AAAAAA] duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#AAAAAA] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">first name</label>
+                        <label htmlFor="firstName" className="peer-focus:font-medium absolute text-[#AAAAAA] duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#AAAAAA] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">first name</label>
                         { formik.touched.firstName && formik.errors.firstName && <div className='error'>{formik.errors.firstName}</div> }
                     </div>
-                    <div className="w-full relative">
+                    <div className="relative w-full">
                         <input
                             type="text"
-                            name="lastname"
-                            id="lastname"
+                            name="lastName"
+                            id="lastName"
                             onChange={formik.handleChange}
                             value={formik.values.lastName}
                             className="block py-3 w-full bg-transparent border-0 border-b-2 border-white focus:outline-none focus:border-white peer" placeholder=" " />
-                        <label htmlFor="lastname" className="peer-focus:font-medium absolute text-[#AAAAAA] duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#AAAAAA] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">last name</label>
+                        <label htmlFor="lastName" className="peer-focus:font-medium absolute text-[#AAAAAA] duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-[#AAAAAA] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">last name</label>
                         { formik.touched.lastName && formik.errors.lastName && <div className='error'>{formik.errors.lastName}</div> }
                     </div>
                 </div>
