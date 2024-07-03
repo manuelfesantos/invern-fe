@@ -3,10 +3,13 @@ import React from 'react'
 import { useState } from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import { useSearchParams } from 'next/navigation';
 
 const Login = () => {
 
-    const [activeTab,setActiveTab] = useState('signin')
+
+    const signup = useSearchParams().get('signup')
+    const [activeTab,setActiveTab] = useState(signup ? 'signup' : 'signin')
 
     return (
         <div className="h-full w-full flex flex-col items-center justify-center">

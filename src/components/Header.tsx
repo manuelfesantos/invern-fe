@@ -7,6 +7,7 @@ import { faUserAlt, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import ShopMenu from "./ShopMenu";
 import Newsletter from "./Newsletter";
 import MobileMenu from "./MobileMenu";
+import LoginWindow from "./LoginWindow";
 
 export default function Header() {
 
@@ -48,7 +49,7 @@ export default function Header() {
                         <option>dol</option>
                         <option>pnd</option>
                     </select>
-                    <Link href='/login' className="icon-scale"><FontAwesomeIcon icon={faUserAlt} /></Link>
+                    <LoginWindow />
                     <Link href='/cart' className="icon-scale"><FontAwesomeIcon icon={faShoppingBag} /></Link>
                 </div>
             </div>

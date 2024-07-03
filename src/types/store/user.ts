@@ -7,6 +7,6 @@ export interface User {
     lastName: string;
     email: string;
     version: number;
-    cart: Cart;
+    cart?: Cart;
     orders: Order[]
 }

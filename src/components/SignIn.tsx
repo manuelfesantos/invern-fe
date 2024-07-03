@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
 import { CustomButton,CustomLink } from './CustomComponents'
 import { useFormik } from 'formik'
@@ -7,8 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Dispatch } from 'react';
 import { SetStateAction } from 'react';
+import { UserContext, userContext } from '@/context/user';
 
 const SignIn = ({setActiveTab}:{setActiveTab:Dispatch<SetStateAction<string>>}) => {
+
+    const {user, setUser} = useContext<UserContext | null>(userContext) as UserContext
 
     const formik = useFormik({
         initialValues: {
@@ -17,7 +20,7 @@ const SignIn = ({setActiveTab}:{setActiveTab:Dispatch<SetStateAction<string>>}) 
         },
         onSubmit: async (values) => {
             const {email,password} = values
-            const response = await fetch('https://preview.invern-be.pages.dev/users',
+            const responsePromise = await fetch('https://preview.invern-be.pages.dev/users',
                 {
                     method: 'POST',
                     headers: {
@@ -31,6 +34,10 @@ const SignIn = ({setActiveTab}:{setActiveTab:Dispatch<SetStateAction<string>>}) 
                     })
                 }
             )
+            if(responsePromise.status === 200) {
+                const response = await responsePromise.json();
+                setUser(response.data);
+            }
             formik.resetForm()
         },
         validationSchema: Yup.object({
