@@ -1,12 +1,21 @@
 'use client'
-import React from 'react'
+import React, {useCallback, useEffect} from 'react'
 import { useState } from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import {useSearchParams} from "next/navigation";
 
 const Login = () => {
+    const params = useSearchParams()
+    const signup = params.get('signup')
 
-    const [activeTab,setActiveTab] = useState('signin')
+    const isSignup = useCallback(() => signup && signup === 'true', [signup])
+
+    useEffect(() => {
+        setActiveTab(isSignup() ? 'signup' : 'signin')
+    }, [params, isSignup])
+
+    const [activeTab,setActiveTab] = useState( isSignup() ? 'signup' : 'signin')
 
     return (
         <div className="h-full w-full flex flex-col items-center justify-center">

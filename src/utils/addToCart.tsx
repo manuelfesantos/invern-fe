@@ -1,6 +1,7 @@
 import { IProduct, IProductDetails } from '@/types/store/product'
 import { CartItem } from '@/types/store/cart'
 import { Cart } from '@/types/store/cart'
+import {syncCart} from "@/utils/syncCart";
 
 export const addToCart = (
     {product,cart,setCart,quantity,setQuantity}:
@@ -30,11 +31,12 @@ export const addToCart = (
       ));
     }
     else {
-      setCart((prevCart:Cart) => ({
-        ...prevCart,
-        items: [...prevCart.items,cartItem]
-      }
-      ));
+        const newCart = {
+            ...cart,
+            items: [...cart.items,cartItem]
+        }
+        setCart(newCart);
+        syncCart(newCart)
     }
     setQuantity(1)
 }

@@ -3,11 +3,12 @@ import Image from 'next/image';
 import Logo from '../assets/logo.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faInstagram, faYoutube, faPinterestP} from "@fortawesome/free-brands-svg-icons"
-import { faUserAlt, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 import ShopMenu from "./ShopMenu";
 import Newsletter from "./Newsletter";
 import MobileMenu from "./MobileMenu";
 import LoginWindow from "./LoginWindow";
+import CartItemsCounter from "@/components/CartItemsCounter";
 
 export default function Header() {
 
@@ -50,7 +51,10 @@ export default function Header() {
                         <option>pnd</option>
                     </select>
                     <LoginWindow />
-                    <Link href='/cart' className="icon-scale"><FontAwesomeIcon icon={faShoppingBag} /></Link>
+                    <Link href='/cart' className="icon-scale relative">
+                        <CartItemsCounter />
+                        <FontAwesomeIcon icon={faShoppingBag} />
+                    </Link>
                 </div>
             </div>
         </nav>

@@ -7,6 +7,7 @@ import { CartContext } from '@/context/cart';
 import { cartContext } from '@/context/cart';
 import Image from 'next/image';
 import Loading from './Loading';
+import {syncCart} from "@/utils/syncCart";
 
 const Cart = () => {
 
@@ -15,20 +16,18 @@ const Cart = () => {
 
     const changeQuantity = (adding: boolean, productId: string) => {
         if(adding) {
-            setCart(prevCart => (
-                {
-                  ...prevCart,
-                  items:prevCart.items.map(cartItem =>
+            const newCart = {
+                ...cart,
+                items:cart.items.map(cartItem =>
                     cartItem.id === productId
-                      ? (
-                        {...cartItem,quantity:cartItem.quantity+1}
-                      )
-                      : (
-                        cartItem
-                      )
-                  )
-                }
-            ))
+                        ? (
+                            {...cartItem,quantity:cartItem.quantity+1}
+                        )
+                        : (cartItem)
+                )
+            }
+            setCart(newCart);
+            syncCart(newCart)
         }
         else {
             const cartItem = getCartItemById(productId)
@@ -36,35 +35,34 @@ const Cart = () => {
                 removeProductFromCart(cartItem.id)
             }
             else {
-                setCart(prevCart => (
-                    {
-                        ...prevCart,
-                        items:prevCart.items.map(item => (
-                            item.id === productId
-                                ? (
-                                    {
-                                        ...item,
-                                        quantity:item.quantity-1
-                                    }
-                                )
-                                : (
-                                    item
-                                )
-                        ))
-                    }
-                ))
+                const newCart = {
+                    ...cart,
+                    items:cart.items.map(item => (
+                        item.id === productId
+                            ? (
+                                {
+                                    ...item,
+                                    quantity:item.quantity-1
+                                }
+                            )
+                            : (
+                                item
+                            )
+                    ))
+                }
+                setCart(newCart)
+                syncCart(newCart)
             }
         }
     }
 
     const removeProductFromCart = (productId: string) => {
-        setCart(prevCart => (
-            {
-                ...prevCart,
-                items:prevCart.items.filter(item => item.id !== productId)
-            }
-        )
-        )
+        const newCart = {
+            ...cart,
+            items:cart.items.filter(item => item.id !== productId)
+        }
+        setCart(newCart);
+        syncCart(newCart);
     }
 
     const getCartItemById = (id: string) => {
@@ -129,7 +127,7 @@ const Cart = () => {
                         : (
                             cart.items.map((item,index) => (
                                 <div key={index} className='flex gap-2'>
-                                    <div>
+                                    <div onClick={() => location.replace(`/shop/products/${item.id}`)} className='cursor-pointer'>
                                         <Image src={item.product.images[0].url} height={100} width={100} alt={item.product.images[0].alt} className='h-24 w-24 object-cover aspect-square' />
                                     </div>
                                     <div className="px-4 pb-4 pt-2">

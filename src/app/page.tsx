@@ -1,4 +1,4 @@
-import { CustomButton } from "@/components/CustomComponents";
+import {CustomButton, CustomLinkButton} from "@/components/CustomComponents";
 import Layout from "@/components/Layout";
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
             <h3>Each Piece, Uniquely Yours.</h3>
           </div>
           <div>
-            <CustomButton type="button" position="h-10 w-60">Explore Our Collection</CustomButton>
+            <CustomLinkButton type="button" position="h-10 w-60" href={"/shop/products"}>Explore Our Collection</CustomLinkButton>
           </div>
         </div>
         <div className="flex lg:hidden flex-col mt-12 gap-2 w-full px-12">
