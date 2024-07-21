@@ -3,10 +3,11 @@ import {
     createContext,
     Dispatch,
     ReactNode,
-    SetStateAction,
+    SetStateAction, useEffect,
     useState,
-  } from "react";
+} from "react";
   import { User } from "@/types/store/user";
+import {loadUser} from "@/utils/syncUser";
 
 export interface UserContext {
   user: User | null;
@@ -17,7 +18,9 @@ export const userContext = createContext<UserContext | null>(null);
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-
+    useEffect(() => {
+        setUser(loadUser());
+    }, []);
   return (
   <userContext.Provider value={{ user, setUser }}>
     {children}
