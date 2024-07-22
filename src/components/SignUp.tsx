@@ -52,14 +52,14 @@ const SignUp = ({
           const cartMerged = await mergeCart(userResponse.cart.cartId, cart);
           if (cartMerged) {
             userResponse.cart.products = cart.items;
-            const newCart: Cart = {
-              ...cart,
-              id: userResponse.cart.cartId,
-            };
-            setCart(newCart);
-            syncCart(newCart);
           }
         }
+        const newCart = {
+          ...cart,
+          id: userResponse.cart.cartId,
+        };
+        setCart(newCart);
+        syncCart(newCart);
         setUser(userResponse);
         syncUser(userResponse);
         formik.resetForm();

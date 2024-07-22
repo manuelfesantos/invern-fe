@@ -56,8 +56,9 @@ const SignIn = ({
       if (responsePromise.status === 200) {
         const response = await responsePromise.json();
         const user = response.data;
+        let newCart;
         if (user.cart.products.length > 0) {
-          const newCart = {
+          newCart = {
             id: user.cart.cartId,
             items: user.cart.products.map(
               (product: IProduct & { quantity: number }) => ({
@@ -68,18 +69,21 @@ const SignIn = ({
               }),
             ),
           };
-          setCart(newCart);
-          syncCart(newCart);
         } else if (cart.items.length > 0) {
           await mergeCart(user.cart.cartId, cart);
-          const newCart = {
+          newCart = {
             ...cart,
             id: user.cart.cartId,
           };
-          setCart(newCart);
-          syncCart(newCart);
           user.cart.products = cart.items;
+        } else {
+          newCart = {
+            ...cart,
+            id: user.cart.cartId,
+          };
         }
+        setCart(newCart);
+        syncCart(newCart);
         setUser(user);
         syncUser(user);
         location.replace("/");
