@@ -7,10 +7,9 @@ import { CartContext } from "@/context/cart";
 import { cartContext } from "@/context/cart";
 import Image from "next/image";
 import Loading from "./Loading";
-import { syncCart } from "@/utils/syncCart";
-import { addToDbCart } from "@/utils/addToCart";
-import { removeFromDbCart } from "@/utils/removeFromCart";
 import { CartItem } from "@/types/store/cart";
+import { checkoutService } from "@/service/checkout";
+import { ActionType, updateCart } from "@/utils/cart";
 
 const Cart = () => {
   const { cart, setCart } = useContext<CartContext>(
@@ -18,93 +17,58 @@ const Cart = () => {
   );
   const [loading, setLoading] = useState(false);
 
-  const changeQuantity = async (adding: boolean, productId: string) => {
+  const changeQuantity = async (adding: boolean, product: CartItem) => {
+    const productToChange = { ...product, quantity: 1 };
     if (adding) {
-      const newCart = {
-        ...cart,
-        items: cart.items.map((cartItem) =>
-          cartItem.id === productId
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem,
-        ),
-      };
-      setCart(newCart);
-      syncCart(newCart);
-      if (cart.id !== "0") {
-        await addToDbCart(cart.id, productId, 1);
-      }
+      await updateCart({
+        products: [productToChange],
+        cart,
+        cartId: cart.cartId,
+        setCart,
+        action: ActionType.ADD,
+      });
     } else {
-      const cartItem = getCartItemById(productId);
-      if (cartItem?.quantity === 1) {
-        await removeProductFromCart(cartItem);
-      } else {
-        const newCart = {
-          ...cart,
-          items: cart.items.map((item) =>
-            item.id === productId
-              ? {
-                  ...item,
-                  quantity: item.quantity - 1,
-                }
-              : item,
-          ),
-        };
-        setCart(newCart);
-        syncCart(newCart);
-        if (cart.id !== "0") {
-          await removeFromDbCart(cart.id, productId, 1);
-        }
-      }
+      await updateCart({
+        products: [productToChange],
+        cart,
+        cartId: cart.cartId,
+        setCart,
+        action: ActionType.REMOVE,
+      });
     }
   };
 
   const removeProductFromCart = async (product: CartItem) => {
-    const newCart = {
-      ...cart,
-      items: cart.items.filter((item) => item.id !== product.id),
-    };
-    setCart(newCart);
-    syncCart(newCart);
-    if (cart.id !== "0") {
-      await removeFromDbCart(cart.id, product.id, product.quantity);
-    }
-  };
-
-  const getCartItemById = (id: string) => {
-    return cart.items.find((item) => item.id === id);
+    await updateCart({
+      products: [product],
+      cart,
+      cartId: cart.cartId,
+      setCart,
+      action: ActionType.REMOVE,
+    });
   };
 
   const checkout = async () => {
     setLoading(true);
-    const response = await (
-      await fetch("https://preview.invern-be.pages.dev/checkout", {
-        body: JSON.stringify({
-          products: cart.items.map((item) => ({
-            productId: item.id,
-            quantity: item.quantity,
-          })),
-        }),
-        method: "POST",
-        headers: {
-          ...(cart.id !== "0" && { cartId: cart.id }),
-          "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0.access",
-          "CF-Access-Client-Secret":
-            "a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9",
-        },
-      })
-    ).json();
+    const response = await checkoutService(
+      cart.products.map(({ productId, quantity }) => ({
+        productId,
+        quantity,
+      })),
+      cart.cartId,
+    );
     setLoading(false);
     return response.data.url;
   };
 
   const redirectCheckout = () => {
     checkout().then((url) => {
-      window.location.replace(url);
+      window.location.assign(url);
     });
   };
 
-  const subTotal = cart.items.reduce(
-    (acc, item) => acc + item.quantity * item.product.priceInCents,
+  const subTotal = cart.products.reduce(
+    (acc, item) => acc + item.quantity * item.priceInCents,
     0,
   );
 
@@ -124,43 +88,45 @@ const Cart = () => {
           </ul>
         </div>
         <div className="flex flex-col flex-grow gap-2 items-center justify-center">
-          {cart.items.length === 0 ? (
+          {cart.products.length === 0 ? (
             <p>{`There's no items in the shopping cart.`}</p>
           ) : (
-            cart.items.map((item, index) => (
+            cart.products.map((product, index) => (
               <div key={index} className="flex gap-2">
                 <div
-                  onClick={() => location.replace(`/shop/products/${item.id}`)}
+                  onClick={() =>
+                    location.replace(`/shop/products/${product.productId}`)
+                  }
                   className="cursor-pointer"
                 >
                   <Image
-                    src={item.product.images[0].url}
+                    src={product.images[0].url}
                     height={100}
                     width={100}
-                    alt={item.product.images[0].alt}
+                    alt={product.images[0].alt}
                     className="h-24 w-24 object-cover aspect-square"
                   />
                 </div>
                 <div className="px-4 pb-4 pt-2">
-                  <h5>{item.product.productName}</h5>
+                  <h5>{product.productName}</h5>
                   <div className="flex items-center justify-between">
-                    <p>Price: {item.product.priceInCents}€</p>
+                    <p>Price: {product.priceInCents}€</p>
                   </div>
                   <div className="flex gap-2">
                     <p>Quantity:</p>
                     <CustomButton
                       position="h-6 w-6"
                       type="button"
-                      onClick={async () => await changeQuantity(false, item.id)}
+                      onClick={async () => await changeQuantity(false, product)}
                     >
                       -
                     </CustomButton>
-                    <p>{item.quantity}</p>
+                    <p>{product.quantity}</p>
                     <CustomButton
                       position="h-6 w-6"
                       type="button"
-                      onClick={async () => await changeQuantity(true, item.id)}
-                      isDisabled={() => item.quantity >= item.product.stock}
+                      onClick={async () => await changeQuantity(true, product)}
+                      isDisabled={() => product.quantity >= product.stock}
                     >
                       +
                     </CustomButton>
@@ -169,7 +135,7 @@ const Cart = () => {
                 <div className="flex items-center">
                   <CustomLink
                     position="block py-4 w-full text-right"
-                    onClick={async () => await removeProductFromCart(item)}
+                    onClick={async () => await removeProductFromCart(product)}
                     href=""
                   >
                     Remove

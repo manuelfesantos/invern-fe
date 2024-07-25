@@ -19,8 +19,8 @@ export const cartContext = createContext<CartContext | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<Cart>({
-    id: "0",
-    items: [],
+    cartId: "0",
+    products: [],
   });
   useEffect(() => {
     setCart(loadCart());

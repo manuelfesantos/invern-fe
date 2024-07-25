@@ -7,9 +7,9 @@ import { SetStateAction } from "react";
 import { userContext, UserContext } from "@/context/user";
 import { syncUser } from "@/utils/syncUser";
 import { cartContext, CartContext } from "@/context/cart";
-import { mergeCart } from "@/utils/mergeCart";
-import { Cart } from "@/types/store/cart";
-import { syncCart } from "@/utils/syncCart";
+import { ActionType, updateCart } from "@/utils/cart";
+import { signup } from "@/service/user";
+import { changeCartFunction } from "@/utils/cart/change-cart-function";
 
 const SignUp = ({
   setActiveTab,
@@ -31,42 +31,25 @@ const SignUp = ({
       cpassword: "",
     },
     onSubmit: async (values) => {
-      const response = await fetch(
-        "https://preview.invern-be.pages.dev/users",
-        {
-          method: "POST",
-          headers: {
-            action: "signup",
-            "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0.access",
-            "CF-Access-Client-Secret":
-              "a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9",
-          },
-          body: JSON.stringify({
-            ...values,
-          }),
-        },
-      );
-      if (response.status === 201) {
-        const userResponse = (await response.json()).data;
-        if (cart.items.length > 0) {
-          const cartMerged = await mergeCart(userResponse.cart.cartId, cart);
-          if (cartMerged) {
-            userResponse.cart.products = cart.items;
-          }
+      const response = await signup({
+        ...values,
+      });
+      if (response) {
+        const changeCart = changeCartFunction(setCart);
+        const { data: user } = response;
+        if (cart.products.length > 0) {
+          await updateCart({
+            products: cart.products,
+            cart,
+            setCart,
+            action: ActionType.MERGE,
+            cartId: user.cart.cartId,
+          });
+        } else {
+          changeCart({ ...cart, cartId: user.cart.cartId });
         }
-        const newCart = {
-          ...cart,
-          id: userResponse.cart.cartId,
-        };
-        setCart(newCart);
-        syncCart(newCart);
-        setUser(userResponse);
-        syncUser(userResponse);
-        formik.resetForm();
-        location.replace("/");
-      } else {
-        const json = await response.json();
-        console.log(json.error.message);
+        setUser(user);
+        syncUser(user);
       }
     },
     validationSchema: Yup.object({

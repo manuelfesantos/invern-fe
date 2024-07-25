@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CartContext, cartContext } from "@/context/cart";
 import { WishListContext, wishListContext } from "@/context/wishList";
 import { IProduct } from "@/types/store/product";
-import { addToCart } from "@/utils/addToCart";
+import { addToCart } from "@/utils/cart/add-to-cart";
 import { CustomButton } from "./CustomComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +14,8 @@ import { WishList } from "@/types/store/wishList";
 import { ReactNode } from "react";
 import useToast from "@/hooks/useToast";
 import { Toast } from "./Toast";
+import { ActionType, updateCart } from "@/utils/cart";
+import { getCartItemFromProduct } from "@/utils/product/utils";
 
 const ProductComponents = ({
   children,
@@ -106,8 +108,8 @@ const ProductComponents = ({
                     onClick={add}
                     isDisabled={() =>
                       quantity +
-                        (cart.items.find(
-                          (cartItem) => cartItem.id === product.productId,
+                        (cart.products.find(
+                          (item) => item.productId === product.productId,
                         )?.quantity || 0) >=
                       product.stock
                     }
@@ -129,19 +131,21 @@ const ProductComponents = ({
                     position="px-4 py-2"
                     type="button"
                     onClick={async () => {
-                      await addToCart({
-                        product,
+                      await updateCart({
+                        products: [getCartItemFromProduct(product, quantity)],
                         cart,
+                        cartId: cart.cartId,
                         setCart,
-                        quantity,
                         setQuantity,
+                        action: ActionType.ADD,
                       });
                       handleToast(true, "Product added to cart!", true);
                     }}
                     isDisabled={() =>
                       quantity +
-                        (cart.items.find(
-                          (cartItem) => cartItem.id === product.productId,
+                        (cart.products.find(
+                          (cartItem) =>
+                            cartItem.productId === product.productId,
                         )?.quantity || 0) >
                       product.stock
                     }
@@ -195,8 +199,8 @@ const ProductComponents = ({
               onClick={add}
               isDisabled={() =>
                 quantity +
-                  (cart.items.find(
-                    (cartItem) => cartItem.id === product.productId,
+                  (cart.products.find(
+                    (cartItem) => cartItem.productId === product.productId,
                   )?.quantity || 0) >=
                 product.stock
               }
@@ -215,19 +219,20 @@ const ProductComponents = ({
             position="py-4"
             type="button"
             onClick={async () => {
-              await addToCart({
-                product,
+              await updateCart({
+                products: [getCartItemFromProduct(product, quantity)],
                 cart,
                 setCart,
-                quantity,
+                action: ActionType.ADD,
+                cartId: cart.cartId,
                 setQuantity,
               });
               handleToast(true, "Product added to cart!", true);
             }}
             isDisabled={() =>
               quantity +
-                (cart.items.find(
-                  (cartItem) => cartItem.id === product.productId,
+                (cart.products.find(
+                  (cartItem) => cartItem.productId === product.productId,
                 )?.quantity || 0) >
               product.stock
             }

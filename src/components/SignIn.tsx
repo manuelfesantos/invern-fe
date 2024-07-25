@@ -14,9 +14,9 @@ import { SetStateAction } from "react";
 import { UserContext, userContext } from "@/context/user";
 import { syncUser } from "@/utils/syncUser";
 import { cartContext, CartContext } from "@/context/cart";
-import { mergeCart } from "@/utils/mergeCart";
-import { syncCart } from "@/utils/syncCart";
-import { IProduct } from "@/types/store/product";
+import { login } from "@/service/user";
+import { changeCartFunction } from "@/utils/cart/change-cart-function";
+import { ActionType, updateCart } from "@/utils/cart";
 
 const SignIn = ({
   setActiveTab,
@@ -36,54 +36,23 @@ const SignIn = ({
       password: "",
     },
     onSubmit: async (values) => {
-      const { email, password } = values;
-      const responsePromise = await fetch(
-        "https://preview.invern-be.pages.dev/users",
-        {
-          method: "POST",
-          headers: {
-            action: "login",
-            "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0.access",
-            "CF-Access-Client-Secret":
-              "a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        },
-      );
-      if (responsePromise.status === 200) {
-        const response = await responsePromise.json();
-        const user = response.data;
-        let newCart;
+      const response = await login(values);
+      if (response) {
+        const changeCart = changeCartFunction(setCart);
+        const { data: user } = response;
         if (user.cart.products.length > 0) {
-          newCart = {
-            id: user.cart.cartId,
-            items: user.cart.products.map(
-              (product: IProduct & { quantity: number }) => ({
-                id: product.productId,
-                quantity: product.quantity,
-                price: product.priceInCents,
-                product: product,
-              }),
-            ),
-          };
-        } else if (cart.items.length > 0) {
-          await mergeCart(user.cart.cartId, cart);
-          newCart = {
-            ...cart,
-            id: user.cart.cartId,
-          };
-          user.cart.products = cart.items;
+          changeCart(user.cart);
+        } else if (cart.products.length > 0) {
+          await updateCart({
+            cartId: user.cart.cartId,
+            products: cart.products,
+            action: ActionType.MERGE,
+            setCart,
+            cart,
+          });
         } else {
-          newCart = {
-            ...cart,
-            id: user.cart.cartId,
-          };
+          changeCart({ ...cart, cartId: user.cart.cartId });
         }
-        setCart(newCart);
-        syncCart(newCart);
         setUser(user);
         syncUser(user);
         location.replace("/");

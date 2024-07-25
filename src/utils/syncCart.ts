@@ -9,13 +9,13 @@ export const loadCart = () => {
     }
     console.log("no cart found on local storage. Initializing an empty cart");
     return {
-      id: "0",
-      items: [],
+      cartId: "0",
+      products: [],
     };
   }
   return {
-    id: "0",
-    items: [],
+    cartId: "0",
+    products: [],
   };
 };
 

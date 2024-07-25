@@ -1,13 +1,10 @@
 import { IProduct, IProductDetails } from "@/types/store/product";
 
 export interface Cart {
-  id: string;
-  items: CartItem[];
+  cartId: string;
+  products: CartItem[];
 }
 
-export interface CartItem {
-  id: string;
+export type CartItem = IProduct & {
   quantity: number;
-  price: number;
-  product: IProduct;
-}
+};

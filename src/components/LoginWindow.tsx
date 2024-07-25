@@ -1,16 +1,16 @@
 "use client";
-import React, { Context, useContext, useEffect, useState } from "react";
+import React, { Context, useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import MenuAnimation from "./MenuAnimation";
 import ItemAnimation from "./ItemAnimation";
-import { CustomButton, CustomLink } from "./CustomComponents";
+import { CustomLink } from "./CustomComponents";
 import { UserContext, userContext } from "@/context/user";
 import { syncUser } from "@/utils/syncUser";
-import { syncCart } from "@/utils/syncCart";
 import { cartContext, CartContext } from "@/context/cart";
+import { changeCartFunction } from "@/utils/cart/change-cart-function";
 
 export default function LoginWindow() {
   const [menu, setMenu] = useState(false);
@@ -24,12 +24,13 @@ export default function LoginWindow() {
   const logout = () => {
     setUser(null);
     syncUser(null);
+    const changeCart = changeCartFunction(setCart);
     const emptyCart = {
-      id: "0",
-      items: [],
+      cartId: "0",
+      products: [],
     };
-    setCart(emptyCart);
-    syncCart(emptyCart);
+
+    changeCart(emptyCart);
   };
 
   const style =
