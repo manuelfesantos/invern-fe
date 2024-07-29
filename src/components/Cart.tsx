@@ -10,6 +10,8 @@ import Loading from "./Loading";
 import { CartItem } from "@/types/store/cart";
 import { checkoutService } from "@/service/checkout";
 import { ActionType, updateCart } from "@/utils/cart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Cart = () => {
   const { cart, setCart } = useContext<CartContext>(
@@ -87,7 +89,7 @@ const Cart = () => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col flex-grow gap-2 items-center justify-center">
+        <div className="flex flex-col flex-grow gap-2 w-full items-center flex-start overflow-auto">
           {cart.products.length === 0 ? (
             <p>{`There's no items in the shopping cart.`}</p>
           ) : (
@@ -138,7 +140,7 @@ const Cart = () => {
                     onClick={async () => await removeProductFromCart(product)}
                     href=""
                   >
-                    Remove
+                    <FontAwesomeIcon icon={faXmark} size='lg' />
                   </CustomLink>
                 </div>
               </div>
