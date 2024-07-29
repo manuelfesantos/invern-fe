@@ -93,3 +93,13 @@ export const signup = async (signupBody: {
     handleError(error);
   }
 };
+
+export const getUserVersion = async (userId: string) => {
+  const client = userClient.get({ userId });
+  const headers = { getVersion: "true" };
+  try {
+    return await client(headers);
+  } catch (error) {
+    handleError(error);
+  }
+};

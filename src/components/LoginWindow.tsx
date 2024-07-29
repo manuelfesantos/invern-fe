@@ -26,7 +26,7 @@ export default function LoginWindow() {
     syncUser(null);
     const changeCart = changeCartFunction(setCart);
     const emptyCart = {
-      cartId: "0",
+      cartId: "",
       products: [],
     };
 

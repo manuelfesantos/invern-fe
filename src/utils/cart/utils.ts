@@ -50,4 +50,4 @@ export const addProductToCart = (cart: Cart, product: CartItem) => ({
   products: [...cart.products, product],
 });
 
-export const cartExistsInBackend = (cart: Cart) => cart.cartId !== "0";
+export const cartExistsInBackend = (cart: Cart) => cart.cartId !== "";

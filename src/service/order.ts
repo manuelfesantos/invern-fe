@@ -17,8 +17,8 @@ export const getOrderById = async (orderId: string) => {
 };
 
 export const getOrdersByUserId = async (userId: string) => {
-  const client = ordersClient.get(undefined, { userId });
-  const headers = {};
+  const client = ordersClient.get();
+  const headers = { userId };
   try {
     return await client(headers);
   } catch (error) {
