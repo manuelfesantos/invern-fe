@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Logo from '../assets/logo.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faInstagram, faYoutube, faPinterestP} from "@fortawesome/free-brands-svg-icons"
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons"
 import ShopMenu from "./ShopMenu";
 import Newsletter from "./Newsletter";
 import MobileMenu from "./MobileMenu";
@@ -46,9 +46,8 @@ export default function Header() {
                 </div>
                 <div className="flex items-center justify-center gap-4 lg:mr-4">
                     <select id='select' className="hidden lg:block bg-[#4C4B48] text-white px-2">
-                        <option>eur</option>
-                        <option>dol</option>
-                        <option>pnd</option>
+                        <option>pt</option>
+                        <option>es</option>
                     </select>
                     <LoginWindow />
                     <Link href='/cart' className="icon-scale relative">

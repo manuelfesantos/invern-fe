@@ -112,7 +112,7 @@ const ProductCarousel = ({product}:{product:IProductDetails}) => {
           <ProductImage product={product} thumbsSwiper={thumbsSwiper} />
         </div>
       </div>
-      <div className='flex flex-col w-full h-full mt-48 lg:hidden'>
+      <div className='flex flex-col w-full h-full mt-12 lg:mt-48 lg:hidden'>
         <div className=''>
           <ProductImage product={product} thumbsSwiper={thumbsSwiper} />
         </div>

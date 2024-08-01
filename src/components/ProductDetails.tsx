@@ -23,13 +23,24 @@ const ProductDetails = async ({product}:{product:IProductDetails}) => {
         </div>
         <h4>This product belongs to the <CustomLink position='' href={`/shop/collections/${collection?.collectionId}`}>{collection?.collectionName}</CustomLink> collection.</h4>
         <div className='flex items-center justify-between'>
-          <div className='flex gap-4 px-2'>
+          <div className='hidden lg:flex gap-4 px-2'>
             <Link href='' className="icon-scale"><FontAwesomeIcon icon={faInstagram} size='lg' /></Link>
             <Link href='' className="icon-scale"><FontAwesomeIcon icon={faTwitter} size='lg' /></Link>
             <Link href='' className="icon-scale"><FontAwesomeIcon icon={faPinterestP} size='lg' /></Link>
             <Link href='' className="icon-scale"><FontAwesomeIcon icon={faTumblr} size='lg' /></Link>
           </div>
-          <div className='flex flex-col text-right'>
+          <div className='lg:hidden flex gap-4 px-2'>
+            <Link href='' className="icon-scale"><FontAwesomeIcon icon={faInstagram} size='1x' /></Link>
+            <Link href='' className="icon-scale"><FontAwesomeIcon icon={faTwitter} size='1x' /></Link>
+            <Link href='' className="icon-scale"><FontAwesomeIcon icon={faPinterestP} size='1x' /></Link>
+            <Link href='' className="icon-scale"><FontAwesomeIcon icon={faTumblr} size='1x' /></Link>
+          </div>
+          <div className='hidden lg:flex flex-col text-right'>
+            <CustomLink position='' href='/faq/#payment'>About payments</CustomLink>
+            <CustomLink position='' href='/faq/#returns'>Returns policy</CustomLink>
+            <CustomLink position='' href='/faq/#shipping'>Shipping policy</CustomLink>
+          </div>
+          <div className='lg:hidden flex flex-col text-right text-sm'>
             <CustomLink position='' href='/faq/#payment'>About payments</CustomLink>
             <CustomLink position='' href='/faq/#returns'>Returns policy</CustomLink>
             <CustomLink position='' href='/faq/#shipping'>Shipping policy</CustomLink>

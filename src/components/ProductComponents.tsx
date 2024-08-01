@@ -164,16 +164,26 @@ const ProductComponents = ({
     return (
       <>
         <div className="flex flex-col">
-          <h1>{product.productName}</h1>
+          <h1 className="hidden lg:block">{product.productName}</h1>
+          <h2 className="lg:hidden">{product.productName}</h2>
           <div className="flex justify-between">
-            <h2 className="px-2">{product.priceInCents}€</h2>
-            <div className="cursor-pointer icon-scale" onClick={toggleLike}>
+            <h2 className="lg:px-2">{product.priceInCents}€</h2>
+            <div className="hidden lg:block cursor-pointer icon-scale" onClick={toggleLike}>
               {wishList.products.find(
                 (item) => item.productId === product.productId,
               ) ? (
                 <FontAwesomeIcon icon={solidHeart} size="3x" />
               ) : (
                 <FontAwesomeIcon icon={regularHeart} size="3x" />
+              )}
+            </div>
+            <div className="lg:hidden cursor-pointer icon-scale" onClick={toggleLike}>
+              {wishList.products.find(
+                (item) => item.productId === product.productId,
+              ) ? (
+                <FontAwesomeIcon icon={solidHeart} size="2x" />
+              ) : (
+                <FontAwesomeIcon icon={regularHeart} size="2x" />
               )}
             </div>
           </div>
@@ -216,7 +226,7 @@ const ProductComponents = ({
           </div>
         ) : (
           <CustomButton
-            position="py-4"
+            position="py-4 mt-4"
             type="button"
             onClick={async () => {
               await updateCart({
