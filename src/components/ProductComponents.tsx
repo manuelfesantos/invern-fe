@@ -16,6 +16,7 @@ import useToast from "@/hooks/useToast";
 import { Toast } from "./Toast";
 import { ActionType, updateCart } from "@/utils/cart";
 import { getCartItemFromProduct } from "@/utils/product/utils";
+import { convertPrice } from "@/utils/convertToCents";
 
 const ProductComponents = ({
   children,
@@ -120,7 +121,7 @@ const ProductComponents = ({
               </div>
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold justify-self-center">
-                  {product.priceInCents}€
+                  {convertPrice(product.priceInCents)}€
                 </h3>
                 {product.stock === 0 ? (
                   <div className="px-4 py-2">
@@ -167,7 +168,7 @@ const ProductComponents = ({
           <h1 className="hidden lg:block">{product.productName}</h1>
           <h2 className="lg:hidden">{product.productName}</h2>
           <div className="flex justify-between">
-            <h2 className="lg:px-2">{product.priceInCents}€</h2>
+            <h2 className="lg:px-2">{convertPrice(product.priceInCents)}€</h2>
             <div className="hidden lg:block cursor-pointer icon-scale" onClick={toggleLike}>
               {wishList.products.find(
                 (item) => item.productId === product.productId,
@@ -195,7 +196,7 @@ const ProductComponents = ({
         <div className="flex gap-4 px-2">
           <div className="flex gap-4">
             <CustomButton
-              position="h-8 w-8"
+              position="h-6 w-6 lg:h-8 lg:w-8"
               type="button"
               onClick={reduce}
               isDisabled={() => quantity <= 1}
@@ -204,7 +205,7 @@ const ProductComponents = ({
             </CustomButton>
             <h4>{quantity}</h4>
             <CustomButton
-              position="h-8 w-8"
+              position="h-6 w-6 lg:h-8 lg:w-8"
               type="button"
               onClick={add}
               isDisabled={() =>
@@ -218,7 +219,7 @@ const ProductComponents = ({
               +
             </CustomButton>
           </div>
-          <p className="text-lg">Available: {product.stock}</p>
+          <p className="text-base lg:text-lg">Available: {product.stock}</p>
         </div>
         {product.stock === 0 ? (
           <div className="py-4">

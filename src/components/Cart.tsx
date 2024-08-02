@@ -12,6 +12,7 @@ import { checkoutService } from "@/service/checkout";
 import { ActionType, updateCart } from "@/utils/cart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { convertPrice } from "@/utils/convertToCents";
 
 const Cart = () => {
   const { cart, setCart } = useContext<CartContext>(
@@ -69,10 +70,10 @@ const Cart = () => {
     });
   };
 
-  const total = cart.products.reduce(
+  const total = convertPrice(cart.products.reduce(
     (acc, item) => acc + item.quantity * item.priceInCents,
     0,
-  );
+  ))
 
   const gridClasses = cart.products.length > 3 ? 'grid-cols-2 max-h-[50vh] overflow-scroll' : 'grid-cols-1';
 
@@ -110,7 +111,7 @@ const Cart = () => {
                     <div className="px-4 pb-4 pt-2">
                       <h5>{product.productName}</h5>
                       <div className="flex items-center justify-between">
-                        <p>Price: {product.priceInCents}€</p>
+                        <p>Price: {convertPrice(product.priceInCents)}€</p>
                       </div>
                       <div className="flex gap-2">
                         <p>Quantity:</p>
