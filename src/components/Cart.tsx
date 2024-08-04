@@ -167,6 +167,7 @@ const Cart = () => {
               position="w-full py-2"
               type="button"
               onClick={redirectCheckout}
+              isDisabled={() => !cart.products.length}
             >
               checkout
             </CustomButton>
