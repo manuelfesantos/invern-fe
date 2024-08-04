@@ -33,7 +33,7 @@ const Footer = () => {
   return (
     <>
       {show && (
-        <div className="absolute top-0 left-0 z-30 h-screen w-screen flex flex-col items-center justify-start overflow-scroll bg-black bg-opacity-85">
+        <div className="absolute top-0 left-0 z-30 px-12 h-screen w-screen flex flex-col items-center justify-start overflow-scroll bg-black bg-opacity-85">
           <div
             className="absolute top-0 left-0 h-screen w-screen"
             onClick={() => setShow(false)}

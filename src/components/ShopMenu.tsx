@@ -54,9 +54,12 @@ export default function ShopMenu() {
               exit="initial"
               className="flex flex-col justify-center gap-4"
             >
-              <div className="flex flex-col items-center hover:text-[#ECB365]">
+              <div className="flex flex-col items-center">
                 <ItemAnimation>
-                  <Link href="/shop/collections">
+                  <Link
+                    className={"hover:text-[#ECB365]"}
+                    href="/shop/collections"
+                  >
                     <h4>By Collection</h4>
                   </Link>
                 </ItemAnimation>
@@ -64,9 +67,12 @@ export default function ShopMenu() {
               <div className="px-[46%]">
                 <hr />
               </div>
-              <div className="flex flex-col items-center hover:text-[#ECB365]">
+              <div className="flex flex-col items-center">
                 <ItemAnimation>
-                  <Link href="/shop/products">
+                  <Link
+                    className={"hover:text-[#ECB365]"}
+                    href="/shop/products"
+                  >
                     <h4>By Product</h4>
                   </Link>
                 </ItemAnimation>
