@@ -36,10 +36,10 @@ const SignIn = ({
       password: "",
     },
     onSubmit: async (values) => {
-      const response = await login(values);
-      if (response) {
+      const user = await login(values);
+      if (user) {
+        console.log("user", user);
         const changeCart = changeCartFunction(setCart);
-        const { data: user } = response;
         if (user.cart.products.length > 0) {
           changeCart(user.cart);
         } else if (cart.products.length > 0) {

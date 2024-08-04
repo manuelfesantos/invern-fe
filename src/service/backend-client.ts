@@ -21,7 +21,7 @@ const get =
     );
     const response = await responsePromise.json();
     if (responsePromise.status === 200) {
-      return response;
+      return response.data;
     }
     throw new Error(response.error.message);
   };
@@ -44,7 +44,7 @@ const post =
     );
     const response = await responsePromise.json();
     if (responsePromise.status === 200 || responsePromise.status === 201) {
-      return response;
+      return response.data;
     }
     throw new Error(response.error.message);
   };
@@ -67,7 +67,7 @@ const put =
     );
     const response = await responsePromise.json();
     if (responsePromise.status === 200 || responsePromise.status === 201) {
-      return response;
+      return response.data;
     }
     throw new Error(response.error.message);
   };
@@ -89,7 +89,7 @@ const delete_ =
     );
     const response = await responsePromise.json();
     if (responsePromise.status === 200 || responsePromise.status === 201) {
-      return response;
+      return response.data;
     }
     throw new Error(response.error.message);
   };

@@ -31,12 +31,11 @@ const SignUp = ({
       cpassword: "",
     },
     onSubmit: async (values) => {
-      const response = await signup({
+      const user = await signup({
         ...values,
       });
-      if (response) {
+      if (user) {
         const changeCart = changeCartFunction(setCart);
-        const { data: user } = response;
         if (cart.products.length > 0) {
           await updateCart({
             products: cart.products,

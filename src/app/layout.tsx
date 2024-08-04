@@ -12,18 +12,18 @@ import { UserProvider } from "@/context/user";
 
 const lora = Lora({
   subsets: ["latin"],
-  variable: '--font-lora',
+  variable: "--font-lora",
 });
 
 const cormorant = Cormorant_SC({
   subsets: ["latin"],
-  variable: '--font-cormorant',
-  weight: "400"
+  variable: "--font-cormorant",
+  weight: "400",
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: '--font-playfair',
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -39,13 +39,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${cormorant.variable}`}>
       <body>
-        <UserProvider>
-          <CartProvider>
-            <WishListProvider>
-              {children}
-            </WishListProvider>
-          </CartProvider>
-        </UserProvider>
+        <CartProvider>
+          <UserProvider>
+            <WishListProvider>{children}</WishListProvider>
+          </UserProvider>
+        </CartProvider>
       </body>
     </html>
   );

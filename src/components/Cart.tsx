@@ -61,7 +61,7 @@ const Cart = () => {
       cart.cartId,
     );
     setLoading(false);
-    return response.data.url;
+    return response.url;
   };
 
   const redirectCheckout = () => {
