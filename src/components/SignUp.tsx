@@ -176,7 +176,7 @@ const SignUp = ({
         </CustomLink>
         .
       </div>
-      <CustomButton position="w-full py-3" type="submit">
+      <CustomButton position="w-full py-3 mb-6" type="submit">
         sign up
       </CustomButton>
     </form>

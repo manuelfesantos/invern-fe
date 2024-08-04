@@ -23,7 +23,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     products: [],
   });
   useEffect(() => {
-    setCart(loadCart());
+    try {
+      setCart(loadCart());
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
   return (
     <cartContext.Provider value={{ cart, setCart }}>
