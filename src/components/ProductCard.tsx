@@ -1,13 +1,26 @@
-import React from 'react'
-import ProductComponents from './ProductComponents'
-import { IProduct } from '@/types/store/product'
+import React from "react";
+import ProductComponents from "./ProductComponents";
+import { IProduct } from "@/types/store/product";
 
-const ProductCard = ({product}:{product:IProduct}) => {
+const ProductCard = ({
+  product,
+  disableButtons,
+  amountOrdered,
+}: {
+  product: IProduct;
+  disableButtons?: boolean;
+  amountOrdered?: number;
+}) => {
   return (
-    <ProductComponents product={product} component='productCard'>
+    <ProductComponents
+      disableButtons={disableButtons}
+      product={product}
+      component="productCard"
+      amountOrdered={amountOrdered}
+    >
       <></>
     </ProductComponents>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

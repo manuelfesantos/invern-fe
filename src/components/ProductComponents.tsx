@@ -5,7 +5,6 @@ import Image from "next/image";
 import { CartContext, cartContext } from "@/context/cart";
 import { WishListContext, wishListContext } from "@/context/wishList";
 import { IProduct } from "@/types/store/product";
-import { addToCart } from "@/utils/cart/add-to-cart";
 import { CustomButton } from "./CustomComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
@@ -22,10 +21,14 @@ const ProductComponents = ({
   children,
   product,
   component,
+  disableButtons,
+  amountOrdered,
 }: {
   children: ReactNode;
   product: IProduct;
   component: string;
+  disableButtons?: boolean;
+  amountOrdered?: number;
 }) => {
   const { cart, setCart } = useContext<CartContext>(
     cartContext as Context<CartContext>,
@@ -65,7 +68,7 @@ const ProductComponents = ({
   if (component === "productCard") {
     return (
       <>
-        <div className="w-full bg-[#4C4B48] card-shadow">
+        <div className="w-full bg-[#4C4B48] card-shadow hover:scale-105 transition-all duration-300">
           <div className="relative">
             <div>
               <Link href={`/shop/products/${product.productId}`}>
@@ -74,86 +77,100 @@ const ProductComponents = ({
                   height={100}
                   width={100}
                   alt={product.images[0].alt}
-                  className="h-72 w-72 object-cover aspect-square"
+                  className="h-72 w-full object-cover aspect-square"
                 />
               </Link>
             </div>
-            <div
-              className="absolute top-2 right-4 cursor-pointer icon-scale"
-              onClick={toggleLike}
-            >
-              {wishList.products.find(
-                (item) => item.productId === product.productId,
-              ) ? (
-                <FontAwesomeIcon icon={solidHeart} size="xl" />
-              ) : (
-                <FontAwesomeIcon icon={regularHeart} size="xl" />
-              )}
-            </div>
+            {!disableButtons && (
+              <div
+                className="absolute top-2 right-4 cursor-pointer icon-scale"
+                onClick={toggleLike}
+              >
+                {wishList.products.find(
+                  (item) => item.productId === product.productId,
+                ) ? (
+                  <FontAwesomeIcon icon={solidHeart} size="xl" />
+                ) : (
+                  <FontAwesomeIcon icon={regularHeart} size="xl" />
+                )}
+              </div>
+            )}
             <div className="px-4 pb-4 pt-2">
-              <div className="flex items-center justify-between mb-2">
-                <h5>{product.productName}</h5>
-                <div className="flex gap-2">
-                  <CustomButton
-                    position="h-6 w-6"
-                    type="button"
-                    onClick={reduce}
-                    isDisabled={() => quantity <= 1}
-                  >
-                    -
-                  </CustomButton>
-                  <p>{quantity}</p>
-                  <CustomButton
-                    position="h-6 w-6"
-                    type="button"
-                    onClick={add}
-                    isDisabled={() =>
-                      quantity +
-                        (cart.products.find(
-                          (item) => item.productId === product.productId,
-                        )?.quantity || 0) >=
-                      product.stock
-                    }
-                  >
-                    +
-                  </CustomButton>
-                </div>
+              <div
+                className={`flex items-center ${disableButtons ? "justify-center" : "justify-between"} mb-2`}
+              >
+                {disableButtons ? (
+                  <h3>{product.productName}</h3>
+                ) : (
+                  <h5>{product.productName}</h5>
+                )}
+                {!disableButtons && (
+                  <div className="flex gap-2">
+                    <CustomButton
+                      position="h-6 w-6"
+                      type="button"
+                      onClick={reduce}
+                      isDisabled={() => quantity <= 1}
+                    >
+                      -
+                    </CustomButton>
+                    <p>{quantity}</p>
+                    <CustomButton
+                      position="h-6 w-6"
+                      type="button"
+                      onClick={add}
+                      isDisabled={() =>
+                        quantity +
+                          (cart.products.find(
+                            (item) => item.productId === product.productId,
+                          )?.quantity || 0) >=
+                        product.stock
+                      }
+                    >
+                      +
+                    </CustomButton>
+                  </div>
+                )}
               </div>
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold justify-self-center">
                   {convertPrice(product.priceInCents)}€
                 </h3>
-                {product.stock === 0 ? (
-                  <div className="px-4 py-2">
-                    <h4 className="font-extrabold text-red-400">Sold Out</h4>
-                  </div>
-                ) : (
-                  <CustomButton
-                    position="px-4 py-2"
-                    type="button"
-                    onClick={async () => {
-                      await updateCart({
-                        products: [getCartItemFromProduct(product, quantity)],
-                        cart,
-                        cartId: cart.cartId,
-                        setCart,
-                        setQuantity,
-                        action: ActionType.ADD,
-                      });
-                      handleToast(true, "Product added to cart!", true);
-                    }}
-                    isDisabled={() =>
-                      quantity +
-                        (cart.products.find(
-                          (cartItem) =>
-                            cartItem.productId === product.productId,
-                        )?.quantity || 0) >
-                      product.stock
-                    }
-                  >
-                    add to cart
-                  </CustomButton>
+                {amountOrdered && (
+                  <h3 className="text-gray-400">x{amountOrdered}</h3>
                 )}
+                {!disableButtons &&
+                  (product.stock === 0 ? (
+                    <div className="px-4 py-2">
+                      <h4 className="font-extrabold text-red-400">Sold Out</h4>
+                    </div>
+                  ) : (
+                    <CustomButton
+                      position="px-4 py-2"
+                      type="button"
+                      onClick={async () => {
+                        await updateCart({
+                          products: [getCartItemFromProduct(product, quantity)],
+                          cart,
+                          cartId: cart.cartId,
+                          setCart,
+                          setQuantity,
+                          action: ActionType.ADD,
+                        });
+                        handleToast(true, "Product added to cart!", true);
+                      }}
+                      isDisabled={() =>
+                        quantity +
+                          (cart.products.find(
+                            (cartItem) =>
+                              cartItem.productId === product.productId,
+                          )?.quantity || 0) >
+                        product.stock
+                      }
+                    >
+                      add to cart
+                    </CustomButton>
+                  ))}
               </div>
             </div>
           </div>
@@ -169,7 +186,10 @@ const ProductComponents = ({
           <h2 className="lg:hidden">{product.productName}</h2>
           <div className="flex justify-between">
             <h2 className="lg:px-2">{convertPrice(product.priceInCents)}€</h2>
-            <div className="hidden lg:block cursor-pointer icon-scale" onClick={toggleLike}>
+            <div
+              className="hidden lg:block cursor-pointer icon-scale"
+              onClick={toggleLike}
+            >
               {wishList.products.find(
                 (item) => item.productId === product.productId,
               ) ? (
@@ -178,7 +198,10 @@ const ProductComponents = ({
                 <FontAwesomeIcon icon={regularHeart} size="3x" />
               )}
             </div>
-            <div className="lg:hidden cursor-pointer icon-scale" onClick={toggleLike}>
+            <div
+              className="lg:hidden cursor-pointer icon-scale"
+              onClick={toggleLike}
+            >
               {wishList.products.find(
                 (item) => item.productId === product.productId,
               ) ? (
