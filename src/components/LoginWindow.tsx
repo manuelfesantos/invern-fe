@@ -34,7 +34,7 @@ export default function LoginWindow() {
   };
 
   const style =
-    "absolute top-16 right-12 mt-[3px] bg-[#4C4B48] bg-opacity-95 p-8 origin-top card-shadow";
+    "absolute top-16 right-12 mt-[18px] lg:mt-[3px] bg-[#4C4B48] bg-opacity-95 p-8 origin-top card-shadow";
 
   const toggleMenu = () => {
     setMenu(!menu);
@@ -57,7 +57,7 @@ export default function LoginWindow() {
 
   return (
     <>
-      <div onClick={toggleMenu}>
+      <div className="icon-scale" onClick={toggleMenu}>
         <Link href="" className="icon-scale">
           <FontAwesomeIcon icon={faUserAlt} />
         </Link>
