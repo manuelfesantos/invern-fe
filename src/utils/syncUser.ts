@@ -12,7 +12,9 @@ export const loadUser = async (setCart: (cart: Cart) => void) => {
         localStorage.removeItem("user");
         return null;
       }
-      const newVersion = await getUserVersion(userId);
+      const { version: newVersion } = await getUserVersion(userId);
+      console.log("old version", version);
+      console.log("new version", newVersion);
       if (newVersion !== version) {
         const updatedUser = await getUserById(userId);
         localStorage.setItem("user", JSON.stringify(updatedUser));
