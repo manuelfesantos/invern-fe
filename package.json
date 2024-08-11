@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve": "npm run build && npx serve@latest out"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",

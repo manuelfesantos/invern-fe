@@ -14,10 +14,8 @@ export const loadCart = () => {
         localStorage.setItem("cart", JSON.stringify(emptyCart));
         return emptyCart;
       }
-      console.log("loading cart from local storage:", cart);
       return JSON.parse(cart);
     }
-    console.log("no cart found on local storage. Initializing an empty cart");
     localStorage.setItem("cart", JSON.stringify(emptyCart));
     return emptyCart;
   }

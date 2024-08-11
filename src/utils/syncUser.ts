@@ -13,8 +13,6 @@ export const loadUser = async (setCart: (cart: Cart) => void) => {
         return null;
       }
       const { version: newVersion } = await getUserVersion(userId);
-      console.log("old version", version);
-      console.log("new version", newVersion);
       if (newVersion !== version) {
         const updatedUser = await getUserById(userId);
         localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -22,10 +20,8 @@ export const loadUser = async (setCart: (cart: Cart) => void) => {
         setCart(updatedUser.cart);
         return updatedUser;
       }
-      console.log("loading user from local storage:", user);
       return JSON.parse(user);
     }
-    console.log("no user found on local storage. Initializing an empty user");
     return null;
   }
   return null;
