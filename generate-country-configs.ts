@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 const getCountryConfigs = () => {
-  fetch("https://api-local.invernspirit.com/country/all")
+  fetch("https://preview.invern-be.pages.dev/country/all")
     .then((response) =>
       response.json().then((data) => {
         fs.writeFileSync("public/data.json", JSON.stringify(data.data));
