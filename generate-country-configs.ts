@@ -8,6 +8,7 @@ const getCountryConfigs = () => {
         response.status,
       );
       response.json().then((data) => {
+        console.log("data:", data.data);
         fs.writeFileSync("public/data.json", JSON.stringify(data.data));
       });
     })
