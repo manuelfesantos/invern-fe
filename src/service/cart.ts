@@ -1,51 +1,47 @@
 import { backendClient } from "@/service/backend-client";
 import { ProductIdAndQuantity } from "@/types/store/product";
-import { handleError } from "@/utils/error";
+import { Cart } from "@/types/store/cart";
 
-const cartsEndpoint = "carts";
+const cartsEndpoint = "cart";
 
 const cartsClient = {
-  put: (params: { cartId?: string }, queryParams?: Record<string, string>) =>
-    backendClient.put(cartsEndpoint, params, queryParams),
-  get: (params: { cartId?: string }, queryParams?: Record<string, string>) =>
-    backendClient.get(cartsEndpoint, params, queryParams),
+  post: () => backendClient.post(cartsEndpoint),
 };
 
-export const mergeCart = async (
-  cartId: string,
-  products: ProductIdAndQuantity[],
+type CartClientFunction<T, K> = (
+  data: T,
+) => Promise<[string | undefined, K | undefined]>;
+
+export const mergeCart: CartClientFunction<ProductIdAndQuantity[], {}> = async (
+  data,
 ) => {
-  const client = cartsClient.put({ cartId });
+  const client = cartsClient.post();
   const headers = { action: "merge" };
-  try {
-    return await client({ products }, headers);
-  } catch (error) {
-    handleError(error);
-  }
+  return await client({ products: data }, headers);
 };
 
-export const addToCart = async (
-  cartId: string,
-  product: ProductIdAndQuantity,
+export const addToCart: CartClientFunction<ProductIdAndQuantity, {}> = async (
+  data,
 ) => {
-  const client = cartsClient.put({ cartId });
+  const client = cartsClient.post();
   const headers = { action: "add" };
-  try {
-    return await client(product, headers);
-  } catch (error) {
-    handleError(error);
-  }
+  return await client(data, headers);
 };
 
-export const removeFromCart = async (
-  cartId: string,
-  product: ProductIdAndQuantity,
-) => {
-  const client = cartsClient.put({ cartId });
+export const removeFromCart: CartClientFunction<
+  ProductIdAndQuantity,
+  {}
+> = async (data) => {
+  const client = cartsClient.post();
   const headers = { action: "remove" };
-  try {
-    return await client(product, headers);
-  } catch (error) {
-    handleError(error);
-  }
+  return await client(data, headers);
+};
+
+export const getCart: CartClientFunction<
+  ProductIdAndQuantity[],
+  { cart: Cart }
+> = async (data) => {
+  const client = cartsClient.post();
+  const headers = { action: "get" };
+  return await client(data, headers);
 };

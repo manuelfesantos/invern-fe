@@ -9,6 +9,9 @@ config.autoAddCss = false;
 import { CartProvider } from "@/context/cart";
 import { WishListProvider } from "@/context/wishList";
 import { UserProvider } from "@/context/user";
+import { CountryProvider } from "@/context/country";
+import { ConfigProvider } from "@/context/config";
+import ToastProvider from "@/context/toast";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -41,7 +44,13 @@ export default function RootLayout({
       <body>
         <CartProvider>
           <UserProvider>
-            <WishListProvider>{children}</WishListProvider>
+            <CountryProvider>
+              <WishListProvider>
+                <ConfigProvider>
+                  <ToastProvider>{children}</ToastProvider>
+                </ConfigProvider>
+              </WishListProvider>
+            </CountryProvider>
           </UserProvider>
         </CartProvider>
       </body>

@@ -1,5 +1,4 @@
 import { backendClient } from "@/service/backend-client";
-import { handleError } from "@/utils/error";
 
 const productsEndpoint = "products";
 
@@ -13,9 +12,5 @@ const productsClient = {
 export const getProductsBySearch = async (search: string) => {
   const client = productsClient.get(undefined, { search });
   const headers = {};
-  try {
-    return await client(headers);
-  } catch (error) {
-    handleError(error);
-  }
+  return await client(headers);
 };

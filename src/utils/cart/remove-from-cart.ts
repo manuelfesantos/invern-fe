@@ -4,7 +4,6 @@ import {
   decreaseProductQuantity,
   removeProductFromCart,
   getProductFromCart,
-  cartExistsInBackend,
 } from "@/utils/cart/utils";
 import { removeFromCart as removeFromCartService } from "@/service/cart";
 
@@ -12,15 +11,17 @@ export const removeFromCart = async (
   cart: Cart,
   product: ProductIdAndQuantity,
   changeCart: (cart: Cart) => void,
+  loggedIn?: boolean,
 ) => {
   const { productId, quantity } = product;
   removeFromCartContext(cart, productId, quantity, changeCart);
-  if (cartExistsInBackend(cart)) {
-    await removeFromCartService(cart.cartId, {
+  if (loggedIn) {
+    return await removeFromCartService({
       productId,
       quantity,
     });
   }
+  return [undefined, undefined];
 };
 
 const removeFromCartContext = (

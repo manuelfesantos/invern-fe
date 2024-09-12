@@ -1,5 +1,5 @@
 import { backendClient } from "@/service/backend-client";
-import { handleError } from "@/utils/error";
+
 const ordersEndpoint = "orders";
 const ordersClient = {
   get: (params?: { orderId?: string }, queryParams?: Record<string, string>) =>
@@ -9,19 +9,11 @@ const ordersClient = {
 export const getOrderById = async (orderId: string) => {
   const client = ordersClient.get({ orderId });
   const headers = {};
-  try {
-    return await client(headers);
-  } catch (error) {
-    handleError(error);
-  }
+  return await client(headers);
 };
 
 export const getOrdersByUserId = async (userId: string) => {
   const client = ordersClient.get();
   const headers = { userId };
-  try {
-    return await client(headers);
-  } catch (error) {
-    handleError(error);
-  }
+  return await client(headers);
 };

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { Context } from "react";
 import { CustomButton, CustomLink } from "./CustomComponents";
 import { useState, useContext } from "react";
@@ -8,79 +8,157 @@ import { cartContext } from "@/context/cart";
 import Image from "next/image";
 import Loading from "./Loading";
 import { CartItem } from "@/types/store/cart";
-import { checkoutService } from "@/service/checkout";
+import { checkout } from "@/service/checkout";
 import { ActionType, updateCart } from "@/utils/cart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { convertPrice } from "@/utils/convertToCents";
+import { countryContext, CountryContext } from "@/context/country";
+import { getCart } from "@/service/cart";
+import { ConfigContext, configContext } from "@/context/config";
+import { userContext, UserContext } from "@/context/user";
+import { ToastContext, toastContext } from "@/context/toast";
+import {
+  getCheckoutUrl,
+  removeCheckoutUrl,
+  saveCheckoutUrl,
+} from "@/utils/checkout-url";
 
 const Cart = () => {
   const { cart, setCart } = useContext<CartContext>(
     cartContext as Context<CartContext>,
   );
+  const { country } = useContext<CountryContext>(
+    countryContext as Context<CountryContext>,
+  );
+  const { user } = useContext<UserContext>(userContext as Context<UserContext>);
+  const { configIsLoaded } = useContext<ConfigContext>(configContext);
   const [loading, setLoading] = useState(false);
+  const [cartIsLoaded, setCartIsLoaded] = useState(false);
+  const { handleToast } = useContext(toastContext as Context<ToastContext>);
 
   const changeQuantity = async (adding: boolean, product: CartItem) => {
     const productToChange = { ...product, quantity: 1 };
     if (adding) {
-      await updateCart({
+      const [error] = await updateCart({
         products: [productToChange],
         cart,
-        cartId: cart.cartId,
         setCart,
         action: ActionType.ADD,
+        loggedIn: user !== null,
       });
+      if (error) {
+        handleToast(false, error);
+        return;
+      }
+
+      handleToast(true, "Product added to cart!");
     } else {
-      await updateCart({
+      const [error] = await updateCart({
         products: [productToChange],
         cart,
-        cartId: cart.cartId,
         setCart,
         action: ActionType.REMOVE,
+        loggedIn: user !== null,
       });
+      if (error) {
+        handleToast(false, error);
+        return;
+      }
+
+      handleToast(true, "Product removed from cart!");
     }
   };
 
   const removeProductFromCart = async (product: CartItem) => {
-    await updateCart({
+    const [error] = await updateCart({
       products: [product],
       cart,
-      cartId: cart.cartId,
       setCart,
       action: ActionType.REMOVE,
+      loggedIn: user !== null,
     });
+    if (error) {
+      handleToast(false, error);
+      return;
+    }
+
+    handleToast(true, "Product removed from cart!");
   };
 
-  const checkout = async () => {
+  const handleCheckout = async () => {
     setLoading(true);
-    const response = await checkoutService(
+
+    const { url, expires } = getCheckoutUrl();
+    if (url && expires && new Date() > expires) {
+      removeCheckoutUrl();
+    } else if (url) {
+      setLoading(false);
+      return url;
+    }
+
+    const [error, response] = await checkout(
       cart.products.map(({ productId, quantity }) => ({
         productId,
         quantity,
       })),
-      cart.cartId,
     );
-    setLoading(false);
-    return response.url;
+    if (error) {
+      handleToast(false, error);
+      setLoading(false);
+      return;
+    }
+    if (response?.url) {
+      saveCheckoutUrl(response.url);
+      setLoading(false);
+      return response?.url;
+    }
   };
 
   const redirectCheckout = () => {
-    checkout().then((url) => {
-      window.location.assign(url);
+    handleCheckout().then((url) => {
+      if (url) {
+        window.location.href = url;
+      }
     });
   };
 
-  const total = convertPrice(
-    cart.products.reduce(
-      (acc, item) => acc + item.quantity * item.priceInCents,
-      0,
-    ),
-  );
+  const total = country
+    ? convertPrice(
+        cart.products?.reduce(
+          (acc, item) => acc + item.quantity * item.priceInCents,
+          0,
+        ),
+        country.taxes,
+      )
+    : "loading...";
 
-  const gridClasses =
-    cart.products.length > 3
-      ? "grid-cols-2 max-h-[50vh] overflow-scroll"
-      : "grid-cols-1";
+  useLayoutEffect(() => {
+    if (cart.products?.length === 0 || !configIsLoaded || cartIsLoaded) {
+      if (cartIsLoaded) console.log("not fetching cart because cart is loaded");
+      if (!configIsLoaded)
+        console.log("not fetching cart because config is not loaded");
+      if (cart.products?.length === 0)
+        console.log("not fetching cart because cart has no products");
+      return;
+    }
+    const handleGetCart = async () => {
+      const [error, data] = await getCart(cart.products);
+      if (error) {
+        handleToast(false, error);
+        return;
+      }
+      const { cart: newCart } = data || {};
+      console.log("newCart:", newCart);
+      if (newCart) {
+        localStorage.setItem("cart", JSON.stringify(newCart));
+        setCart(newCart);
+        setCartIsLoaded(true);
+      }
+    };
+
+    handleGetCart();
+  }, [configIsLoaded]);
 
   return (
     <div className="h-full w-full flex flex-col items-center justify-center">
@@ -94,10 +172,10 @@ const Cart = () => {
           </ul>
         </div>
         <div className="flex flex-col flex-grow gap-2 mt-4 w-full items-center flex-start overflow-scroll">
-          {cart.products.length === 0 ? (
+          {cart.products?.length === 0 ? (
             <p>{`There's no items in the shopping cart.`}</p>
           ) : (
-            cart.products.map((product, index) => (
+            cart.products?.map((product, index) => (
               <div key={index} className="flex gap-2">
                 <div
                   onClick={() =>
@@ -116,7 +194,13 @@ const Cart = () => {
                 <div className="px-4 pb-4 pt-2">
                   <h5>{product.productName}</h5>
                   <div className="flex items-center justify-between">
-                    <p>Price: {convertPrice(product.priceInCents)}€</p>
+                    <p>
+                      Price:{" "}
+                      {country
+                        ? convertPrice(product.priceInCents, country.taxes)
+                        : "loading..."}
+                      {country && "€"}
+                    </p>
                   </div>
                   <div className="flex gap-2">
                     <p>Quantity:</p>
@@ -158,7 +242,10 @@ const Cart = () => {
               <h5>Subtotal: </h5>
             </div>
             <div className="flex flex-col gap-2">
-              <h4>{total}€</h4>
+              <h4>
+                {total}
+                {country && "€"}
+              </h4>
             </div>
           </div>
           <hr />
@@ -167,7 +254,7 @@ const Cart = () => {
               position="w-full py-2"
               type="button"
               onClick={redirectCheckout}
-              isDisabled={() => !cart.products.length}
+              isDisabled={() => !cart.products?.length}
             >
               checkout
             </CustomButton>

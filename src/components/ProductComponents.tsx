@@ -11,11 +11,12 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { WishList } from "@/types/store/wishList";
 import { ReactNode } from "react";
-import useToast from "@/hooks/useToast";
-import { Toast } from "./Toast";
+import { ToastContext, toastContext } from "@/context/toast";
 import { ActionType, updateCart } from "@/utils/cart";
 import { getCartItemFromProduct } from "@/utils/product/utils";
 import { convertPrice } from "@/utils/convertToCents";
+import { countryContext, CountryContext } from "@/context/country";
+import { userContext, UserContext } from "@/context/user";
 
 const ProductComponents = ({
   children,
@@ -33,11 +34,14 @@ const ProductComponents = ({
   const { cart, setCart } = useContext<CartContext>(
     cartContext as Context<CartContext>,
   );
+  const { user } = useContext(userContext) as UserContext;
   const { wishList, setWishList } = useContext<WishListContext>(
     wishListContext as Context<WishListContext>,
   );
   const [quantity, setQuantity] = useState(1);
-  const { toast, handleToast } = useToast();
+  const { handleToast } = useContext(toastContext as Context<ToastContext>);
+
+  const { country } = useContext(countryContext) as CountryContext;
 
   const add = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -56,12 +60,12 @@ const ProductComponents = ({
           (item) => item.productId !== product.productId,
         ),
       }));
-      handleToast(false, "Product removed from wishlist!", true);
+      handleToast(true, "Product removed from wishlist!");
     } else {
       setWishList((prevWishList: WishList) => ({
         products: [...prevWishList.products, product],
       }));
-      handleToast(true, "Product added to wishlist!", true);
+      handleToast(true, "Product added to wishlist!");
     }
   };
 
@@ -134,7 +138,10 @@ const ProductComponents = ({
               </div>
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold justify-self-center">
-                  {convertPrice(product.priceInCents)}€
+                  {country
+                    ? convertPrice(product.priceInCents, country?.taxes)
+                    : "loading..."}
+                  {country && "€"}
                 </h3>
                 {amountOrdered && (
                   <h3 className="text-gray-400">x{amountOrdered}</h3>
@@ -149,15 +156,21 @@ const ProductComponents = ({
                       position="px-4 py-2"
                       type="button"
                       onClick={async () => {
-                        await updateCart({
+                        const [error] = await updateCart({
                           products: [getCartItemFromProduct(product, quantity)],
                           cart,
-                          cartId: cart.cartId,
                           setCart,
                           setQuantity,
                           action: ActionType.ADD,
+                          loggedIn: user !== null,
                         });
-                        handleToast(true, "Product added to cart!", true);
+
+                        if (error) {
+                          handleToast(false, error);
+                          return;
+                        }
+
+                        handleToast(true, "Product added to cart!");
                       }}
                       isDisabled={() =>
                         quantity +
@@ -175,7 +188,6 @@ const ProductComponents = ({
             </div>
           </div>
         </div>
-        {toast.isLoading && <Toast message={toast.message} type={toast.type} />}
       </>
     );
   } else {
@@ -185,7 +197,12 @@ const ProductComponents = ({
           <h1 className="hidden lg:block">{product.productName}</h1>
           <h2 className="lg:hidden">{product.productName}</h2>
           <div className="flex justify-between">
-            <h2 className="lg:px-2">{convertPrice(product.priceInCents)}€</h2>
+            <h2 className="lg:px-2">
+              {country
+                ? convertPrice(product.priceInCents, country?.taxes)
+                : "loading..."}
+              {country && "€"}
+            </h2>
             <div
               className="hidden lg:block cursor-pointer icon-scale"
               onClick={toggleLike}
@@ -253,15 +270,20 @@ const ProductComponents = ({
             position="py-4 mt-4"
             type="button"
             onClick={async () => {
-              await updateCart({
+              const [error] = await updateCart({
                 products: [getCartItemFromProduct(product, quantity)],
                 cart,
                 setCart,
                 action: ActionType.ADD,
-                cartId: cart.cartId,
                 setQuantity,
+                loggedIn: user !== null,
               });
-              handleToast(true, "Product added to cart!", true);
+
+              if (error) {
+                handleToast(false, error);
+                return;
+              }
+              handleToast(true, "Product added to cart!");
             }}
             isDisabled={() =>
               quantity +
@@ -274,7 +296,6 @@ const ProductComponents = ({
             add to cart
           </CustomButton>
         )}
-        {toast.isLoading && <Toast message={toast.message} type={toast.type} />}
       </>
     );
   }

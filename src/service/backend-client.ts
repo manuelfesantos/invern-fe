@@ -1,9 +1,16 @@
-const host = "https://preview.invern-be.pages.dev";
+import { handleError } from "@/utils/error";
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_API_HOST || "https://preview.invern-be.pages.dev";
 const headers = {
   "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0.access",
   "CF-Access-Client-Secret":
     "a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9",
 };
+
+type BackendClientFunction = (
+  ...args: any[]
+) => Promise<[string | undefined, any | undefined]>;
 
 const get =
   (host: string, commonHeaders: Record<string, string>) =>
@@ -11,19 +18,17 @@ const get =
     endpoint: string,
     params?: Record<string, string>,
     queryParams?: Record<string, string>,
-  ) =>
+  ): BackendClientFunction =>
   async (headers?: Record<string, string>) => {
     const responsePromise = await fetch(
-      `${host}/${endpoint}/${Object.values(params || {}).join("/") || ""}${queryParams ? `?${new URLSearchParams(queryParams)}` : ""}`,
-      {
-        headers: { ...commonHeaders, ...headers },
-      },
+      buildRequestUrl({ host, endpoint, params, queryParams }),
+      buildRequestOptions({
+        method: "GET",
+        commonHeaders,
+        headers,
+      }),
     );
-    const response = await responsePromise.json();
-    if (responsePromise.status === 200) {
-      return response.data;
-    }
-    throw new Error(response.error.message);
+    return await getResponseData(responsePromise, [200], host, endpoint);
   };
 
 const post =
@@ -33,20 +38,15 @@ const post =
     params?: Record<string, string>,
     queryParams?: Record<string, string>,
   ) =>
-  async (body: unknown, headers?: Record<string, string>) => {
+  async (
+    body: unknown,
+    headers?: Record<string, string>,
+  ): Promise<[string | undefined, any | undefined]> => {
     const responsePromise = await fetch(
-      `${host}/${endpoint}/${Object.values(params || {}).join("/") || ""}${queryParams ? `?${new URLSearchParams(queryParams)}` : ""}`,
-      {
-        method: "POST",
-        headers: { ...commonHeaders, ...headers },
-        body: JSON.stringify(body),
-      },
+      buildRequestUrl({ host, endpoint, params, queryParams }),
+      buildRequestOptions({ method: "POST", commonHeaders, headers, body }),
     );
-    const response = await responsePromise.json();
-    if (responsePromise.status === 200 || responsePromise.status === 201) {
-      return response.data;
-    }
-    throw new Error(response.error.message);
+    return await getResponseData(responsePromise, [200, 201], host, endpoint);
   };
 
 const put =
@@ -55,21 +55,13 @@ const put =
     endpoint: string,
     params?: Record<string, string>,
     queryParams?: Record<string, string>,
-  ) =>
+  ): BackendClientFunction =>
   async (body: unknown, headers?: Record<string, string>) => {
     const responsePromise = await fetch(
-      `${host}/${endpoint}/${Object.values(params || {}).join("/") || ""}${queryParams ? `?${new URLSearchParams(queryParams)}` : ""}`,
-      {
-        method: "PUT",
-        headers: { ...commonHeaders, ...headers },
-        body: JSON.stringify(body),
-      },
+      buildRequestUrl({ host, endpoint, params, queryParams }),
+      buildRequestOptions({ method: "PUT", commonHeaders, headers, body }),
     );
-    const response = await responsePromise.json();
-    if (responsePromise.status === 200 || responsePromise.status === 201) {
-      return response.data;
-    }
-    throw new Error(response.error.message);
+    return await getResponseData(responsePromise, [200, 201], host, endpoint);
   };
 
 const delete_ =
@@ -78,25 +70,83 @@ const delete_ =
     endpoint: string,
     params?: Record<string, string>,
     queryParams?: Record<string, string>,
-  ) =>
+  ): BackendClientFunction =>
   async (headers?: Record<string, string>) => {
     const responsePromise = await fetch(
-      `${host}/${endpoint}/${Object.values(params || {}).join("/") || ""}${queryParams ? `?${new URLSearchParams(queryParams)}` : ""}`,
-      {
-        method: "DELETE",
-        headers: { ...commonHeaders, ...headers },
-      },
+      buildRequestUrl({ host, endpoint, params, queryParams }),
+      buildRequestOptions({ method: "DELETE", commonHeaders, headers }),
     );
-    const response = await responsePromise.json();
-    if (responsePromise.status === 200 || responsePromise.status === 201) {
-      return response.data;
-    }
-    throw new Error(response.error.message);
+    return await getResponseData(responsePromise, [200, 201], host, endpoint);
   };
 
 export const backendClient = {
-  get: get(host, headers),
-  post: post(host, headers),
-  put: put(host, headers),
-  delete: delete_(host, headers),
+  get: get(BASE_URL, headers),
+  post: post(BASE_URL, headers),
+  put: put(BASE_URL, headers),
+  delete: delete_(BASE_URL, headers),
 };
+
+const getResponseData = async (
+  responsePromise: Response,
+  validStatusCodes: number[],
+  host: string,
+  endpoint: string,
+): Promise<[string | undefined, any | undefined]> => {
+  const response = await responsePromise.json();
+  if (validStatusCodes.includes(responsePromise.status)) {
+    const data = processSuccessfulResponse(response);
+    return [undefined, data];
+  }
+  const error = response.error?.message ?? response.message;
+  handleError(error, host, endpoint);
+  return [error, undefined];
+};
+
+let accessToken: string | null = null;
+
+const processSuccessfulResponse = (response: any) => {
+  const { data } = response;
+  if ("accessToken" in data) {
+    accessToken = data.accessToken;
+    return { ...data, accessToken: undefined };
+  }
+  return data;
+};
+
+type RequestOptionsPayload = {
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  commonHeaders: Record<string, string>;
+  headers?: Record<string, string>;
+  body?: any;
+};
+
+type RequestUrlPayload = {
+  host: string;
+  endpoint: string;
+  params?: Record<string, string>;
+  queryParams?: Record<string, string>;
+};
+
+const buildRequestUrl = ({
+  host,
+  endpoint,
+  params,
+  queryParams,
+}: RequestUrlPayload) =>
+  `${host}/${endpoint}/${Object.values(params || {}).join("/") || ""}${queryParams ? `?${new URLSearchParams(queryParams)}` : ""}`;
+
+const buildRequestOptions = ({
+  method,
+  commonHeaders,
+  headers,
+  body,
+}: RequestOptionsPayload) => ({
+  method,
+  headers: {
+    ...commonHeaders,
+    ...headers,
+    ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+  },
+  credentials: "include",
+  ...(body && { body: JSON.stringify(body) }),
+});

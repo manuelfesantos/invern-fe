@@ -8,15 +8,9 @@ const checkoutClient = {
     backendClient.post(checkoutEndpoint, undefined, queryParams),
 };
 
-export const checkoutService = (
+export const checkout = (
   products?: ProductIdAndQuantity[],
-  cartId?: string,
-) => {
+): Promise<[string | undefined, { url: string } | undefined]> => {
   const client = checkoutClient.post();
-  const headers = cartId ? { cartId } : undefined;
-  try {
-    return client({ products }, headers);
-  } catch (error) {
-    handleError(error);
-  }
+  return client({ products });
 };

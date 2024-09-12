@@ -3,6 +3,7 @@ import { addToCart } from "@/utils/cart/add-to-cart";
 import { mergeCart } from "@/utils/cart/merge-cart";
 import { removeFromCart } from "@/utils/cart/remove-from-cart";
 import { changeCartFunction } from "@/utils/cart/change-cart-function";
+import { removeCheckoutUrl } from "@/utils/checkout-url";
 
 export enum ActionType {
   ADD = "add",
@@ -15,24 +16,25 @@ export const updateCart = async ({
   cart,
   setCart,
   action,
-  cartId,
   setQuantity,
+  loggedIn,
 }: {
   products: CartItem[];
   cart: Cart;
   setCart: (cart: Cart) => void;
   action: ActionType;
-  cartId: string;
   setQuantity?: (quantity: number) => void;
+  loggedIn?: boolean;
 }) => {
+  removeCheckoutUrl();
   if (setQuantity) setQuantity(1);
   const changeCart = changeCartFunction(setCart);
   switch (action) {
     case ActionType.ADD:
-      return await addToCart(products[0], cart, changeCart);
+      return await addToCart(products[0], cart, changeCart, loggedIn);
     case ActionType.REMOVE:
-      return await removeFromCart(cart, products[0], changeCart);
+      return await removeFromCart(cart, products[0], changeCart, loggedIn);
     case ActionType.MERGE:
-      return await mergeCart(cartId, cart, changeCart);
+      return await mergeCart(cart);
   }
 };

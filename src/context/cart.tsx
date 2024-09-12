@@ -4,11 +4,9 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
-  useEffect,
   useState,
 } from "react";
-import { Cart } from "@/types/store/cart";
-import { loadCart } from "@/utils/syncCart";
+import { Cart, emptyCart } from "@/types/store/cart";
 
 export interface CartContext {
   cart: Cart;
@@ -18,17 +16,7 @@ export interface CartContext {
 export const cartContext = createContext<CartContext | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<Cart>({
-    cartId: "",
-    products: [],
-  });
-  useEffect(() => {
-    try {
-      setCart(loadCart());
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+  const [cart, setCart] = useState<Cart>(emptyCart);
   return (
     <cartContext.Provider value={{ cart, setCart }}>
       {children}

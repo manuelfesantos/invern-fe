@@ -1,0 +1,505 @@
+{
+  "message": "successfully logged in",
+  "data": {
+    "userId": "5b58ab41-84e5-4ec7-baa4-efa51dfe2bdb",
+    "email": "manuelfesantos@gmail.com",
+    "firstName": "Manuel",
+    "lastName": "Santos",
+    "version": 85,
+    "cart": {
+      "cartId": "0fa263a7-cc4e-4a86-b215-0ee12229c478",
+      "version": 1,
+      "products": [
+        {
+          "productId": "1244aafc-9b91-4300-bc1e-99a6e036c6ca",
+          "productName": "Tanka Fired",
+          "priceInCents": 500,
+          "images": [
+            {
+              "url": "https://images.invernspirit.com/products/ceramics-product-6-1.jpeg",
+              "alt": "Tanka Fired"
+            }
+          ],
+          "quantity": 1
+        },
+        {
+          "productId": "1cb9b773-1dd9-4c4b-b72a-392ff619f2f9",
+          "productName": "Strata Vase",
+          "priceInCents": 500,
+          "images": [
+            {
+              "url": "https://images.invernspirit.com/products/ceramics-product-8-1.jpeg",
+              "alt": "Strata Vase"
+            }
+          ],
+          "quantity": 1
+        },
+        {
+          "productId": "43aca962-c9b5-4c27-b74d-a169a23109b8",
+          "productName": "Earth Jar",
+          "priceInCents": 500,
+          "images": [
+            {
+              "url": "https://images.invernspirit.com/products/ceramics-product-1-1.jpeg",
+              "alt": "Earth Jar"
+            }
+          ],
+          "quantity": 1
+        }
+      ]
+    },
+    "orders": [
+      {
+        "clientOrderId": "c8734303-7c74-43c1-a1e0-c6a1a6d6f221",
+        "createdAt": "2024-08-04T23:21:50.761Z",
+        "products": [
+          {
+            "productId": "43aca962-c9b5-4c27-b74d-a169a23109b8",
+            "productName": "Earth Jar",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-1-1.jpeg",
+                "alt": "Earth Jar"
+              }
+            ],
+            "quantity": 2
+          }
+        ],
+        "address": {
+          "addressId": "b6108e6e-a348-4404-9ab6-53ef24dee5b6",
+          "line1": "Avenida das Poções",
+          "line2": "Nr. 3, 18º Trás",
+          "postalCode": "1234-123",
+          "city": "Lisbon",
+          "country": {
+            "name": "Portugal",
+            "code": "PT",
+            "currencies": [
+              {
+                "code": "EUR",
+                "name": "Euro",
+                "symbol": "€"
+              }
+            ],
+            "taxes": [
+              {
+                "name": "VAT",
+                "rate": 0.15,
+                "amount": 0.15
+              }
+            ]
+          }
+        },
+        "payment": {
+          "createdAt": "2024-08-04T23:21:49.778Z",
+          "type": "card",
+          "state": "succeeded",
+          "amount": 1000
+        }
+      },
+      {
+        "clientOrderId": "153abf46-1379-477e-95cf-bb468cc38100",
+        "createdAt": "2024-08-05T01:08:52.159Z",
+        "products": [
+          {
+            "productId": "07bfe4c5-cf96-4d97-987b-258d90d916fe",
+            "productName": "Raku Fire",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-2-1.jpeg",
+                "alt": "Raku Fire"
+              }
+            ],
+            "quantity": 1
+          },
+          {
+            "productId": "43aca962-c9b5-4c27-b74d-a169a23109b8",
+            "productName": "Earth Jar",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-1-1.jpeg",
+                "alt": "Earth Jar"
+              }
+            ],
+            "quantity": 2
+          }
+        ],
+        "address": {
+          "addressId": "698de6aa-fd04-453d-ba81-f19f71ad8c48",
+          "line1": "Rua da Graça",
+          "line2": "Nr. 98, Ovelha",
+          "postalCode": "1234-123",
+          "city": "Lisbon",
+          "country": {
+            "name": "Portugal",
+            "code": "PT",
+            "currencies": [
+              {
+                "code": "EUR",
+                "name": "Euro",
+                "symbol": "€"
+              }
+            ],
+            "taxes": [
+              {
+                "name": "VAT",
+                "rate": 0.15,
+                "amount": 0.15
+              }
+            ]
+          }
+        },
+        "payment": {
+          "createdAt": "2024-08-05T01:08:51.267Z",
+          "type": "card",
+          "state": "succeeded",
+          "amount": 1500
+        }
+      },
+      {
+        "clientOrderId": "966cc43c-afdf-4f6c-9f4c-d623ef9290d0",
+        "createdAt": "2024-08-05T01:54:49.676Z",
+        "products": [
+          {
+            "productId": "07bfe4c5-cf96-4d97-987b-258d90d916fe",
+            "productName": "Raku Fire",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-2-1.jpeg",
+                "alt": "Raku Fire"
+              }
+            ],
+            "quantity": 1
+          },
+          {
+            "productId": "43aca962-c9b5-4c27-b74d-a169a23109b8",
+            "productName": "Earth Jar",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-1-1.jpeg",
+                "alt": "Earth Jar"
+              }
+            ],
+            "quantity": 2
+          }
+        ],
+        "address": {
+          "addressId": "4acf14b0-7152-4fe6-af50-d8328ce14214",
+          "line1": "Rua das Piadas",
+          "line2": "Nr. 3, 18º Trás",
+          "postalCode": "1234-123",
+          "city": "Lisbon",
+          "country": {
+            "name": "Portugal",
+            "code": "PT",
+            "currencies": [
+              {
+                "code": "EUR",
+                "name": "Euro",
+                "symbol": "€"
+              }
+            ],
+            "taxes": [
+              {
+                "name": "VAT",
+                "rate": 0.15,
+                "amount": 0.15
+              }
+            ]
+          }
+        },
+        "payment": {
+          "createdAt": "2024-08-05T00:55:33.711Z",
+          "type": "card",
+          "state": "succeeded",
+          "amount": 1500
+        }
+      },
+      {
+        "clientOrderId": "e1cf2696-0596-4423-8d6f-2406ac58edc3",
+        "createdAt": "2024-08-05T09:45:28.163Z",
+        "products": [
+          {
+            "productId": "f3d3cff6-9557-4606-bbdf-7821c87951e9",
+            "productName": "Strata Flask",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-7-1.jpeg",
+                "alt": "Strata Flask"
+              }
+            ],
+            "quantity": 2
+          }
+        ],
+        "address": {
+          "addressId": "d935ff5c-5691-40b0-ba9f-e2c77c7f5add",
+          "line1": "Avenida das Poções",
+          "line2": "Nr. 3, 18º Trás",
+          "postalCode": "1234-123",
+          "city": "Lisbon",
+          "country": {
+            "name": "Portugal",
+            "code": "PT",
+            "currencies": [
+              {
+                "code": "EUR",
+                "name": "Euro",
+                "symbol": "€"
+              }
+            ],
+            "taxes": [
+              {
+                "name": "VAT",
+                "rate": 0.15,
+                "amount": 0.15
+              }
+            ]
+          }
+        },
+        "payment": {
+          "createdAt": "2024-08-05T09:45:27.243Z",
+          "type": "card",
+          "state": "succeeded",
+          "amount": 1000
+        }
+      },
+      {
+        "clientOrderId": "921e5859-e78b-4543-92d1-ac7d299da7b2",
+        "createdAt": "2024-08-05T10:10:42.675Z",
+        "products": [
+          {
+            "productId": "1244aafc-9b91-4300-bc1e-99a6e036c6ca",
+            "productName": "Tanka Fired",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-6-1.jpeg",
+                "alt": "Tanka Fired"
+              }
+            ],
+            "quantity": 2
+          },
+          {
+            "productId": "f3d3cff6-9557-4606-bbdf-7821c87951e9",
+            "productName": "Strata Flask",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-7-1.jpeg",
+                "alt": "Strata Flask"
+              }
+            ],
+            "quantity": 2
+          }
+        ],
+        "address": {
+          "addressId": "30977a5e-52c9-4866-bd8e-1b87f61d0848",
+          "line1": "Avenida das Poções",
+          "line2": "Nr. 3, 18º Trás",
+          "postalCode": "1234-123",
+          "city": "Lisbon",
+          "country": {
+            "name": "Portugal",
+            "code": "PT",
+            "currencies": [
+              {
+                "code": "EUR",
+                "name": "Euro",
+                "symbol": "€"
+              }
+            ],
+            "taxes": [
+              {
+                "name": "VAT",
+                "rate": 0.15,
+                "amount": 0.15
+              }
+            ]
+          }
+        },
+        "payment": {
+          "createdAt": "2024-08-05T10:10:41.740Z",
+          "type": "card",
+          "state": "succeeded",
+          "amount": 2000
+        }
+      },
+      {
+        "clientOrderId": "1dd05525-edc8-48a8-81f8-a7966d3a475a",
+        "createdAt": "2024-08-06T00:11:44.492Z",
+        "products": [
+          {
+            "productId": "07bfe4c5-cf96-4d97-987b-258d90d916fe",
+            "productName": "Raku Fire",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-2-1.jpeg",
+                "alt": "Raku Fire"
+              }
+            ],
+            "quantity": 2
+          },
+          {
+            "productId": "1cb9b773-1dd9-4c4b-b72a-392ff619f2f9",
+            "productName": "Strata Vase",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-8-1.jpeg",
+                "alt": "Strata Vase"
+              }
+            ],
+            "quantity": 2
+          },
+          {
+            "productId": "4d95db5a-c64b-4656-a5fc-1052de04737a",
+            "productName": "Strata Flask",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-11-1.jpeg",
+                "alt": "Strata Flask"
+              }
+            ],
+            "quantity": 2
+          },
+          {
+            "productId": "c29c263c-0255-423f-8d3a-be2edfb928a6",
+            "productName": "Contour Vase",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-10-1.jpeg",
+                "alt": "Contour Vase"
+              }
+            ],
+            "quantity": 1
+          },
+          {
+            "productId": "e77cfd31-1cb4-4bfd-af09-c6e0678b9734",
+            "productName": "Rolling Erosion",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-9-1.jpeg",
+                "alt": "Rolling Erosion"
+              }
+            ],
+            "quantity": 1
+          },
+          {
+            "productId": "f3d3cff6-9557-4606-bbdf-7821c87951e9",
+            "productName": "Strata Flask",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-7-1.jpeg",
+                "alt": "Strata Flask"
+              }
+            ],
+            "quantity": 2
+          }
+        ],
+        "address": {
+          "addressId": "071e4053-2902-48b3-9c63-a2551837486f",
+          "line1": "Avenida Ruy Luís Gomes",
+          "line2": "Nº 7, 4º Esq.",
+          "postalCode": "2650-130 - Alfornelos",
+          "city": "Lisbon",
+          "country": {
+            "name": "Portugal",
+            "code": "PT",
+            "currencies": [
+              {
+                "code": "EUR",
+                "name": "Euro",
+                "symbol": "€"
+              }
+            ],
+            "taxes": [
+              {
+                "name": "VAT",
+                "rate": 0.15,
+                "amount": 0.15
+              }
+            ]
+          }
+        },
+        "payment": {
+          "createdAt": "2024-08-06T00:11:37.639Z",
+          "type": "paypal",
+          "state": "succeeded",
+          "amount": 5000
+        }
+      },
+      {
+        "clientOrderId": "9b3772b2-d6a2-429b-bd9c-f1342331d9c2",
+        "createdAt": "2024-08-07T01:23:45.907Z",
+        "products": [
+          {
+            "productId": "07bfe4c5-cf96-4d97-987b-258d90d916fe",
+            "productName": "Raku Fire",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-2-1.jpeg",
+                "alt": "Raku Fire"
+              }
+            ],
+            "quantity": 1
+          },
+          {
+            "productId": "aea4cde9-c54b-4e61-83fe-4a4f0a7f4dd9",
+            "productName": "Saggar Bottle",
+            "priceInCents": 500,
+            "images": [
+              {
+                "url": "https://images.invernspirit.com/products/ceramics-product-3-1.jpeg",
+                "alt": "Saggar Bottle"
+              }
+            ],
+            "quantity": 1
+          }
+        ],
+        "address": {
+          "addressId": "bbfcda79-65cc-4871-923e-5ea2a5cf9045",
+          "line1": "Avenida das Poções",
+          "line2": "Nr. 3, 18º Trás",
+          "postalCode": "1234-123",
+          "city": "Luxemburgo",
+          "country": {
+            "name": "Portugal",
+            "code": "PT",
+            "currencies": [
+              {
+                "code": "EUR",
+                "name": "Euro",
+                "symbol": "€"
+              }
+            ],
+            "taxes": [
+              {
+                "name": "VAT",
+                "rate": 0.15,
+                "amount": 0.15
+              }
+            ]
+          }
+        },
+        "payment": {
+          "createdAt": "2024-08-07T01:23:44.964Z",
+          "type": "card",
+          "state": "succeeded",
+          "amount": 1000
+        }
+      }
+    ]
+  }
+}

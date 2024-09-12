@@ -11,6 +11,9 @@ import { UserContext, userContext } from "@/context/user";
 import { syncUser } from "@/utils/syncUser";
 import { cartContext, CartContext } from "@/context/cart";
 import { changeCartFunction } from "@/utils/cart/change-cart-function";
+import { logout } from "@/service/user";
+import { ToastContext, toastContext } from "@/context/toast";
+import { removeCheckoutUrl } from "@/utils/checkout-url";
 
 export default function LoginWindow() {
   const [menu, setMenu] = useState(false);
@@ -21,7 +24,9 @@ export default function LoginWindow() {
     cartContext as Context<CartContext>,
   );
 
-  const logout = () => {
+  const { handleToast } = useContext(toastContext as Context<ToastContext>);
+
+  const handleLogout = async () => {
     setUser(null);
     syncUser(null);
     const changeCart = changeCartFunction(setCart);
@@ -29,8 +34,17 @@ export default function LoginWindow() {
       cartId: "",
       products: [],
     };
-
+    localStorage.removeItem("remember");
     changeCart(emptyCart);
+    const [error] = await logout();
+    if (error) {
+      handleToast(false, error);
+      return;
+    }
+
+    removeCheckoutUrl();
+
+    handleToast(true, "Logged out successfully");
   };
 
   const style =
@@ -96,7 +110,7 @@ export default function LoginWindow() {
               >
                 <ItemAnimation>
                   <h5>{user.email}</h5>
-                  <CustomLink href="#" onClick={logout}>
+                  <CustomLink href="#" onClick={handleLogout}>
                     Sign out
                   </CustomLink>
                 </ItemAnimation>

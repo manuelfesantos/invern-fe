@@ -4,7 +4,6 @@ import { getOrderById } from "@/service/order";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import { convertPrice } from "@/utils/convertToCents";
-import Link from "next/link";
 import { CustomLinkButton } from "@/components/CustomComponents";
 
 const getOrder = async (orderId: string) => {
@@ -26,7 +25,10 @@ function Order() {
     let attempts = 0;
     const loadOrder = async () => {
       if (orderId) {
-        const order = await getOrder(orderId);
+        const [error, order] = await getOrder(orderId);
+        if (error) {
+          setError(error);
+        }
         if (order) {
           console.log("order", order);
           newOrder = order;
@@ -107,7 +109,7 @@ function Order() {
                 </div>
                 <div className="flex items-center justify-between">
                   <h4>{order.address.country.taxes[0].name}</h4>
-                  <p>{order.address.country.taxes[0].rate}%</p>
+                  <p>{order.address.country.taxes[0].rate * 100}%</p>
                 </div>
                 <div className="flex items-center justify-between">
                   <h4>Total Tax Amount</h4>
