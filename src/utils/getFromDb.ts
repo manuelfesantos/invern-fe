@@ -1,7 +1,8 @@
 import { ICollectionDetails, ICollection } from "@/types/store/collection";
 import { IProductDetails, IProduct } from "@/types/store/product";
 
-const BASE_URL = "https://preview.invern-be.pages.dev";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_API_HOST || "https://preview-api.invernspirit.com";
 export async function getCollections(): Promise<ICollection[]> {
   const collectionsPromise = await fetch(`${BASE_URL}/collections`, {
     headers: {

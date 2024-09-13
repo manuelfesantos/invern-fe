@@ -1,7 +1,7 @@
 import { handleError } from "@/utils/error";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_API_HOST || "https://preview.invern-be.pages.dev";
+  process.env.NEXT_PUBLIC_API_HOST || "https://preview-api.invernspirit.com";
 const headers = {
   "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0.access",
   "CF-Access-Client-Secret":
