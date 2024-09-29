@@ -13,6 +13,8 @@ elif [ "$CF_PAGES_BRANCH" == "preview" ]; then
   npm run build-preview
 
 else
+  echo "unknown branch"
+  echo $CF_PAGES_BRANCH
   # Else run the dev script
   npm run build-local
 fi
