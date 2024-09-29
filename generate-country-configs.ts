@@ -12,7 +12,7 @@ const envCredentialsMap = {
   },
   preview: {
     headers: {
-      "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0",
+      "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0.access",
       "CF-Access-Client-Secret":
         "a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9",
     },
@@ -20,7 +20,7 @@ const envCredentialsMap = {
   },
   production: {
     headers: {
-      "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0",
+      "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0.access",
       "CF-Access-Client-Secret":
         "a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9",
     },
