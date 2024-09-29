@@ -1,10 +1,10 @@
 # !/bin/bash
 
-if [ "$CF_PAGES_BRANCH" == "preview" ]; then
+if [ "$CF_PAGES_BRANCH" == "main" ]; then
   # Run the "production" script in `package.json` on the "production" branch
   # "production" should be replaced with the name of your Production branch
 
-  npm run build-production
+  npm run build-preview
 
 elif [ "$CF_PAGES_BRANCH" == "preview" ]; then
   # Run the "staging" script in `package.json` on the "staging" branch
