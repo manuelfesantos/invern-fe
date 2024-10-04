@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import {useRouter} from "next/navigation";
 
 export const CustomButton = ({children,position,type,onClick,isDisabled}:{children:string,position?:string,type:string,onClick?:() => void,isDisabled?:() => boolean}) => {
   return (
@@ -41,7 +42,8 @@ export const CustomButton = ({children,position,type,onClick,isDisabled}:{childr
 }
 
 export const CustomLinkButton = ({children,position,href, type}:{children:any,position?:string,href:string, type: string}) => {
-  return <CustomButton type={type} position={position} onClick={() => location.replace(href)}>{children}</CustomButton>
+  const router = useRouter()
+  return <CustomButton type={type} position={position} onClick={() => router.push(href)}>{children}</CustomButton>
 }
 
 export const CustomLink = ({children,position,onClick,href}:{children:any,position?:string,onClick?:() => void,href:string}) => {

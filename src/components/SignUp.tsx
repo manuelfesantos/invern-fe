@@ -11,6 +11,7 @@ import { ActionType, updateCart } from "@/utils/cart";
 import { signup } from "@/service/user";
 import { ToastContext, toastContext } from "@/context/toast";
 import { removeCheckoutUrl } from "@/utils/checkout-url";
+import {useRouter} from "next/navigation";
 
 const SignUp = ({
   setActiveTab,
@@ -23,6 +24,9 @@ const SignUp = ({
   const { cart, setCart } = useContext<CartContext>(
     cartContext as Context<CartContext>,
   );
+
+  const router = useRouter()
+
   const { handleToast } = useContext(toastContext as Context<ToastContext>);
 
   const formik = useFormik({
@@ -62,7 +66,7 @@ const SignUp = ({
         setUser(user);
         syncUser(user);
         localStorage.setItem("remember", remember.toString());
-        location.replace("/");
+        router.push("/");
       }
       formik.resetForm();
     },

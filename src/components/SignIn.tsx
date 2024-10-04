@@ -19,6 +19,7 @@ import { changeCartFunction } from "@/utils/cart/change-cart-function";
 import { ActionType, updateCart } from "@/utils/cart";
 import { ToastContext, toastContext } from "@/context/toast";
 import { removeCheckoutUrl } from "@/utils/checkout-url";
+import {useRouter} from "next/navigation";
 const SignIn = ({
   setActiveTab,
 }: {
@@ -32,6 +33,8 @@ const SignIn = ({
   );
 
   const { handleToast } = useContext(toastContext as Context<ToastContext>);
+
+  const router = useRouter()
 
   const formik = useFormik({
     initialValues: {
@@ -74,7 +77,7 @@ const SignIn = ({
         setUser(user);
         syncUser(user);
         localStorage.setItem("remember", values.remember.toString());
-        location.replace("/");
+        router.push("/");
       }
       formik.resetForm();
     },

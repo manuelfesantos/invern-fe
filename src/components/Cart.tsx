@@ -23,6 +23,7 @@ import {
   removeCheckoutUrl,
   saveCheckoutUrl,
 } from "@/utils/checkout-url";
+import {useRouter} from "next/navigation";
 
 const Cart = () => {
   const { cart, setCart } = useContext<CartContext>(
@@ -36,6 +37,7 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [cartIsLoaded, setCartIsLoaded] = useState(false);
   const { handleToast } = useContext(toastContext as Context<ToastContext>);
+  const router = useRouter()
 
   const changeQuantity = async (adding: boolean, product: CartItem) => {
     const productToChange = { ...product, quantity: 1 };
@@ -179,7 +181,7 @@ const Cart = () => {
               <div key={index} className="flex gap-2">
                 <div
                   onClick={() =>
-                    location.replace(`/shop/products/${product.productId}`)
+                    router.push(`/shop/products/${product.productId}`)
                   }
                   className="cursor-pointer"
                 >

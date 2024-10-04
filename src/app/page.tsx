@@ -36,7 +36,7 @@ export default function Home() {
             <h3>Uniquely Yours.</h3>
           </div>
           <div>
-            <CustomButton type="button" position="h-10 w-44">Explore Our Collection</CustomButton>
+            <CustomLinkButton type="button" position="h-10 w-44" href={"/shop/products"}>Explore Our Collection</CustomLinkButton>
           </div>
         </div>
       </section>
