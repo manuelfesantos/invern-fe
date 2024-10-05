@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useContext, Context } from "react";
+import React, { useState, useContext, Context, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CartContext, cartContext } from "@/context/cart";
@@ -17,6 +17,8 @@ import { getCartItemFromProduct } from "@/utils/product/utils";
 import { convertPrice } from "@/utils/convertToCents";
 import { countryContext, CountryContext } from "@/context/country";
 import { userContext, UserContext } from "@/context/user";
+import { getStock } from "@/service/stock";
+import { Skeleton, Typography } from "@mui/material";
 
 const ProductComponents = ({
   children,
@@ -40,6 +42,7 @@ const ProductComponents = ({
   );
   const [quantity, setQuantity] = useState(1);
   const { handleToast } = useContext(toastContext as Context<ToastContext>);
+  const [stock, setStock] = useState<number | null>(null);
 
   const { country } = useContext(countryContext) as CountryContext;
 
@@ -68,6 +71,10 @@ const ProductComponents = ({
       handleToast(true, "Product added to wishlist!");
     }
   };
+
+  useEffect(() => {
+    getStock(product.productId).then((stock) => setStock(stock));
+  });
 
   if (component === "productCard") {
     return (
@@ -128,7 +135,7 @@ const ProductComponents = ({
                           (cart.products.find(
                             (item) => item.productId === product.productId,
                           )?.quantity || 0) >=
-                        product.stock
+                        (stock || 0)
                       }
                     >
                       +
@@ -140,14 +147,14 @@ const ProductComponents = ({
                 <h3 className="font-extrabold justify-self-center">
                   {country
                     ? convertPrice(product.priceInCents, country?.taxes)
-                    : "loading..."}
+                    : " "}
                   {country && "€"}
                 </h3>
                 {amountOrdered && (
                   <h3 className="text-gray-400">x{amountOrdered}</h3>
                 )}
                 {!disableButtons &&
-                  (product.stock === 0 ? (
+                  (stock === 0 ? (
                     <div className="px-4 py-2">
                       <h4 className="font-extrabold text-red-400">Sold Out</h4>
                     </div>
@@ -178,7 +185,7 @@ const ProductComponents = ({
                             (cartItem) =>
                               cartItem.productId === product.productId,
                           )?.quantity || 0) >
-                        product.stock
+                        (stock || 0)
                       }
                     >
                       add to cart
@@ -200,7 +207,7 @@ const ProductComponents = ({
             <h2 className="lg:px-2">
               {country
                 ? convertPrice(product.priceInCents, country?.taxes)
-                : "loading..."}
+                : " "}
               {country && "€"}
             </h2>
             <div
@@ -253,15 +260,15 @@ const ProductComponents = ({
                   (cart.products.find(
                     (cartItem) => cartItem.productId === product.productId,
                   )?.quantity || 0) >=
-                product.stock
+                (stock || 0)
               }
             >
               +
             </CustomButton>
           </div>
-          <p className="text-base lg:text-lg">Available: {product.stock}</p>
+          <p className="text-base lg:text-lg">Available: {stock}</p>
         </div>
-        {product.stock === 0 ? (
+        {stock === 0 ? (
           <div className="py-4">
             <h4 className="font-extrabold text-red-400">Sold Out</h4>
           </div>
@@ -290,7 +297,7 @@ const ProductComponents = ({
                 (cart.products.find(
                   (cartItem) => cartItem.productId === product.productId,
                 )?.quantity || 0) >
-              product.stock
+              (stock || 0)
             }
           >
             add to cart

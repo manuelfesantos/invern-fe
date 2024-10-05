@@ -117,6 +117,13 @@ const Cart = () => {
     }
   };
 
+  const isCheckoutDisabled = (): boolean => {
+    return (
+      !cart.products?.length ||
+      !!cart.products.find((product) => product.stock === 0)
+    );
+  };
+
   const redirectCheckout = () => {
     handleCheckout().then((url) => {
       if (url) {
@@ -193,37 +200,48 @@ const Cart = () => {
                     className="h-24 w-24 object-cover aspect-square"
                   />
                 </div>
-                <div className="px-4 pb-4 pt-2">
-                  <h5>{product.productName}</h5>
-                  <div className="flex items-center justify-between">
-                    <p>
-                      Price:{" "}
-                      {country
-                        ? convertPrice(product.priceInCents, country.taxes)
-                        : "loading..."}
-                      {country && "€"}
-                    </p>
+                {product.stock > 0 ? (
+                  <div className="px-4 pb-4 pt-2">
+                    <h5>{product.productName}</h5>
+                    <div className="flex items-center justify-between">
+                      <p>
+                        Price:{" "}
+                        {country
+                          ? convertPrice(product.priceInCents, country.taxes)
+                          : "loading..."}
+                        {country && "€"}
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      <p>Quantity:</p>
+                      <CustomButton
+                        position="h-6 w-6"
+                        type="button"
+                        onClick={async () =>
+                          await changeQuantity(false, product)
+                        }
+                      >
+                        -
+                      </CustomButton>
+                      <p>{product.quantity}</p>
+                      <CustomButton
+                        position="h-6 w-6"
+                        type="button"
+                        onClick={async () =>
+                          await changeQuantity(true, product)
+                        }
+                        isDisabled={() => product.quantity >= product.stock}
+                      >
+                        +
+                      </CustomButton>
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <p>Quantity:</p>
-                    <CustomButton
-                      position="h-6 w-6"
-                      type="button"
-                      onClick={async () => await changeQuantity(false, product)}
-                    >
-                      -
-                    </CustomButton>
-                    <p>{product.quantity}</p>
-                    <CustomButton
-                      position="h-6 w-6"
-                      type="button"
-                      onClick={async () => await changeQuantity(true, product)}
-                      isDisabled={() => product.quantity >= product.stock}
-                    >
-                      +
-                    </CustomButton>
+                ) : (
+                  <div className="px-4 pb-4 pt-2">
+                    <h5>{product.productName}</h5>
+                    <p className="text-red-400">Sold Out</p>
                   </div>
-                </div>
+                )}
                 <div className="flex items-center">
                   <CustomLink
                     position="block py-4 w-full text-right"
@@ -256,7 +274,7 @@ const Cart = () => {
               position="w-full py-2"
               type="button"
               onClick={redirectCheckout}
-              isDisabled={() => !cart.products?.length}
+              isDisabled={isCheckoutDisabled}
             >
               checkout
             </CustomButton>
