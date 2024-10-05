@@ -45,8 +45,6 @@ const getCountryConfigs = () => {
 
   const credentials = getCredentials(env);
 
-  console.log("env: ", env, "credentials: ", credentials);
-
   fetch(`${credentials.host}/country/all`, {
     headers: credentials.headers,
   })
