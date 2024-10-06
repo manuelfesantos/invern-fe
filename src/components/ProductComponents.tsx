@@ -74,7 +74,7 @@ const ProductComponents = ({
 
   useEffect(() => {
     getStock(product.productId).then((stock) => setStock(stock));
-  });
+  }, []);
 
   if (component === "productCard") {
     return (

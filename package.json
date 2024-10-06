@@ -9,7 +9,7 @@
     "build-production": "npx ts-node -O '{\"module\": \"commonjs\"}' generate-country-configs.ts production && next build",
     "start": "next start",
     "lint": "next lint",
-    "serve": "npm run build && npx serve@latest out -l 5000"
+    "serve": "npm run build-local && npx serve@latest out -l 5000"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
