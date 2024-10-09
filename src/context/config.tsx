@@ -25,10 +25,16 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   ) as CountryContext;
 
   const getCountryData = async (): Promise<Country[]> => {
-    const countryResponse = await fetch("/data.json");
+    const countryResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_COUNTRIES_BUCKET}`,
+    );
+    if (countryResponse.status !== 200) {
+      console.log("Failed to fetch countries");
+      return [];
+    }
     const countryData = await countryResponse.json();
     console.log("countryData:", countryData);
-    return countryData;
+    return countryData.data;
   };
 
   const getCountryFromCountryCode = (

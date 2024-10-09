@@ -4,12 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 5000",
-    "build-local": "npx ts-node -O '{\"module\": \"commonjs\"}' generate-country-configs.ts local && next build",
-    "build-preview": "npx ts-node -O '{\"module\": \"commonjs\"}' generate-country-configs.ts preview && next build",
-    "build-production": "npx ts-node -O '{\"module\": \"commonjs\"}' generate-country-configs.ts production && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve": "npm run build-local && npx serve@latest out -l 5000"
+    "serve": "npm run build && npx serve@latest out -l 5000"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
@@ -41,6 +39,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241004.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
