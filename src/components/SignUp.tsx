@@ -10,8 +10,7 @@ import { cartContext, CartContext } from "@/context/cart";
 import { ActionType, updateCart } from "@/utils/cart";
 import { signup } from "@/service/user";
 import { ToastContext, toastContext } from "@/context/toast";
-import { removeCheckoutUrl } from "@/utils/checkout-url";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SignUp = ({
   setActiveTab,
@@ -25,7 +24,7 @@ const SignUp = ({
     cartContext as Context<CartContext>,
   );
 
-  const router = useRouter()
+  const router = useRouter();
 
   const { handleToast } = useContext(toastContext as Context<ToastContext>);
 
@@ -54,7 +53,6 @@ const SignUp = ({
       const { user } = data;
 
       if (user) {
-        removeCheckoutUrl();
         if (cart.products.length > 0) {
           await updateCart({
             products: cart.products,

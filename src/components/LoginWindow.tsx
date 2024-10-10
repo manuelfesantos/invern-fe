@@ -13,7 +13,6 @@ import { cartContext, CartContext } from "@/context/cart";
 import { changeCartFunction } from "@/utils/cart/change-cart-function";
 import { logout } from "@/service/user";
 import { ToastContext, toastContext } from "@/context/toast";
-import { removeCheckoutUrl } from "@/utils/checkout-url";
 
 export default function LoginWindow() {
   const [menu, setMenu] = useState(false);
@@ -41,8 +40,6 @@ export default function LoginWindow() {
       handleToast(false, error);
       return;
     }
-
-    removeCheckoutUrl();
 
     handleToast(true, "Logged out successfully");
   };

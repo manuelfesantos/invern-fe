@@ -3,7 +3,6 @@ import { addToCart } from "@/utils/cart/add-to-cart";
 import { mergeCart } from "@/utils/cart/merge-cart";
 import { removeFromCart } from "@/utils/cart/remove-from-cart";
 import { changeCartFunction } from "@/utils/cart/change-cart-function";
-import { removeCheckoutUrl } from "@/utils/checkout-url";
 
 export enum ActionType {
   ADD = "add",
@@ -26,7 +25,6 @@ export const updateCart = async ({
   setQuantity?: (quantity: number) => void;
   loggedIn?: boolean;
 }) => {
-  removeCheckoutUrl();
   if (setQuantity) setQuantity(1);
   const changeCart = changeCartFunction(setCart);
   switch (action) {

@@ -18,12 +18,7 @@ import { getCart } from "@/service/cart";
 import { ConfigContext, configContext } from "@/context/config";
 import { userContext, UserContext } from "@/context/user";
 import { ToastContext, toastContext } from "@/context/toast";
-import {
-  getCheckoutUrl,
-  removeCheckoutUrl,
-  saveCheckoutUrl,
-} from "@/utils/checkout-url";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Cart = () => {
   const { cart, setCart } = useContext<CartContext>(
@@ -37,7 +32,7 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [cartIsLoaded, setCartIsLoaded] = useState(false);
   const { handleToast } = useContext(toastContext as Context<ToastContext>);
-  const router = useRouter()
+  const router = useRouter();
 
   const changeQuantity = async (adding: boolean, product: CartItem) => {
     const productToChange = { ...product, quantity: 1 };
@@ -91,14 +86,6 @@ const Cart = () => {
   const handleCheckout = async () => {
     setLoading(true);
 
-    const { url, expires } = getCheckoutUrl();
-    if (url && expires && new Date() > expires) {
-      removeCheckoutUrl();
-    } else if (url) {
-      setLoading(false);
-      return url;
-    }
-
     const [error, response] = await checkout(
       cart.products.map(({ productId, quantity }) => ({
         productId,
@@ -111,7 +98,6 @@ const Cart = () => {
       return;
     }
     if (response?.url) {
-      saveCheckoutUrl(response.url);
       setLoading(false);
       return response?.url;
     }
