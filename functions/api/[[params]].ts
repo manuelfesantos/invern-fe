@@ -1,4 +1,4 @@
-import { Env } from "@types";
+import { Env } from "libs/types";
 
 export const onRequest: PagesFunction<Env> = async ({ request, env }) => {
   return await fetch(env.BACKEND_HOST, {
