@@ -12,7 +12,7 @@ const ProductCardGrid = ({ products }: { products: IProduct[] }) => {
       ))}
     </div>
   ) : (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full h-[100dvh] flex justify-center items-center">
       <h2>No Products Found</h2>
     </div>
   );

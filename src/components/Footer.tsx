@@ -15,12 +15,11 @@ const Footer = () => {
     e.preventDefault();
     if (ref.current && ref.current.value) {
       const response = await fetch(
-        `https://preview.invern-be.pages.dev/products?search=${ref.current.value}`,
+        `${process.env.NEXT_PUBLIC_API_HOST}/products?search=${ref.current.value}`,
         {
           headers: {
-            "CF-Access-Client-Id": "9a316892e7496497c4d7ac97e20a05c0.access",
-            "CF-Access-Client-Secret":
-              "a08859efde27988e755b742783ca4160b90bef8d494812a4df4f00b453a0b7c9",
+            [`${process.env.NEXT_PUBLIC_BACKEND_ID_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_ID_VALUE}`,
+            [`${process.env.NEXT_PUBLIC_BACKEND_SECRET_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_SECRET_VALUE}`,
           },
         },
       );
@@ -33,14 +32,14 @@ const Footer = () => {
   return (
     <>
       {show && (
-        <div className="absolute top-0 left-0 z-30 px-12 h-screen w-screen flex flex-col items-center justify-start overflow-scroll bg-black bg-opacity-85">
+        <div className="absolute top-0 left-0 py-12 z-30 h-[99.9dvh] w-screen flex flex-col items-center justify-start overflow-scroll bg-black bg-opacity-85">
           <div
-            className="absolute top-0 left-0 h-screen w-screen"
+            className="absolute top-0 left-0 h-[100dvh] w-screen"
             onClick={() => setShow(false)}
           />
           <ProductCardGrid products={products} />
           <div
-            className="fixed top-5 right-5 z-30 cursor-pointer"
+            className="fixed top-3 right-3 lg:top-5 lg:right-5 z-30 cursor-pointer"
             onClick={() => {
               setShow(false);
               setProducts([]);
@@ -76,7 +75,7 @@ const Footer = () => {
               type="search"
               ref={ref}
               id="search"
-              className="h-full w-screen pl-14 bg-opacity-70 bg-[#4C4B48] focus:outline-none"
+              className={`h-full w-screen pl-14 ${!show && "bg-opacity-70"} bg-[#4C4B48] focus:outline-none`}
               placeholder="search..."
               required
               autoComplete="off"

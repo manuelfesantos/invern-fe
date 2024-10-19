@@ -36,13 +36,10 @@ const About = () => {
               </h4>
             </div>
             <p>
-              {`I've always been drawn to the mysterious and eerie beauty of Nordic landscapes,
-                    and I love incorporating those elements into my work. The dark colors and shadows add an extra layer of depth and intrigue to each piece.`}
+              {`I've always been drawn to the mysterious and eerie beauty of Nordic landscapes,\nand I love incorporating those elements into my work. The dark colors and shadows add an extra layer of depth and intrigue to each piece.`}
             </p>
             <p>
-              {`As a child, I was always fascinated by the textures and shapes of broken objects, and that's something I try to capture in my ceramics. The subtle 
-                    imperfections and worn edges give each piece a unique character, don't you think? And speaking of character, I adore adding old traces and patina to my 
-                    work – it gives it a sense of history and story.`}
+              {`As a child, I was always fascinated by the textures and shapes of broken objects, and that's something I try to capture in my ceramics. The subtle\nimperfections and worn edges give each piece a unique character, don't you think? And speaking of character, I adore adding old traces and patina to my\nwork – it gives it a sense of history and story.`}
             </p>
             <div className="flex flex-col lg:flex-row gap-12">
               <div className="flex-1">
@@ -57,13 +54,11 @@ const About = () => {
                 />
                 <br />
                 <p>
-                  {`I love thinking about the spaces where people will display or use these pieces – how they'll be lit, what colors will surround them, and how they'll interact with the other objects in the room. It's
-                        all about creating a sense of atmosphere and mood.`}
+                  {`I love thinking about the spaces where people will display or use these pieces – how they'll be lit, what colors will surround them, and how they'll interact with the other objects in the room. It's\nall about creating a sense of atmosphere and mood.`}
                 </p>
                 <br />
                 <p>
-                  {`As I venture into the architecture world, I'm excited to bring my visual sensibilities and passion for texture and form to bear on larger-scale 
-                        projects. Who knows – maybe one day I'll design a building that incorporates some of those same broken, worn textures into its walls or furniture!`}
+                  {`As I venture into the architecture world, I'm excited to bring my visual sensibilities and passion for texture and form to bear on larger-scale\nprojects. Who knows – maybe one day I'll design a building that incorporates some of those same broken, worn textures into its walls or furniture!`}
                 </p>
                 <br />
                 <h4>

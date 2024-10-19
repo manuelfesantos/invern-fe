@@ -19,7 +19,7 @@ const MobileMenu = () => {
   const [collections, setCollections] = useState(false);
 
   const style =
-    "absolute top-0 left-0 origin-left flex flex-col items-center justify-center h-screen w-screen bg-[#4C4B48] z-10";
+    "absolute top-0 left-0 origin-left flex flex-col items-center justify-center h-[100dvh] w-screen bg-[#4C4B48] z-100";
 
   const handleMenu = () => {
     setMenu(!menu);
