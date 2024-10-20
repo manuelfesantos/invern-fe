@@ -1,64 +1,56 @@
 import { Env } from "libs/types";
+import { getRequestHeaders, getUrl } from "@utils";
 
 export const onRequest: PagesFunction<Env, string> = async ({
   request,
   env,
 }) => {
-  const url = new URL(request.url);
-  const path = url.pathname.replace("/api/", "");
-  const params = path.split("/");
+  let url: string;
+  const headers = getRequestHeaders(request.headers, env);
+  const shouldHaveBody = ["POST", "PUT"].includes(request.method);
 
-  let validUrls: any = {
-    cart: {},
-    checkout: {},
-    config: {},
-    orders: { dynamic: {} },
-    user: {},
-  };
-
-  let endpoint = env.BACKEND_HOST;
-
-  for (const param of params) {
-    if (
-      validUrls &&
-      Object.keys(validUrls).length &&
-      Object.keys(validUrls).some((key) => key === param || key === "dynamic")
-    ) {
-      console.log("Found valid param:", param);
-      endpoint += `/${param}`;
-      validUrls = Object.entries(validUrls).find(
-        ([key]) => key === param || key === "dynamic",
-      )?.[1];
-    } else {
-      return new Response("Not a valid URL", { status: 404 });
-    }
-  }
-  console.log("full url:", endpoint);
-  if (request.method === "GET" || request.method === "DELETE") {
-    return await fetch(endpoint, {
-      ...request,
-      headers: {
-        ...request.headers,
-        [env.BACKEND_ID_KEY]: env.BACKEND_ID_VALUE,
-        [env.BACKEND_SECRET_KEY]: env.BACKEND_SECRET_VALUE,
-      },
-    });
-  }
   try {
-    const body = await request.json();
-    console.log("body:", body);
-    console.log("request headers:", request.headers);
-    console.log("request:", request);
-    return await fetch(endpoint, {
-      method: request.method,
-      headers: {
-        ...request.headers,
-        [env.BACKEND_ID_KEY]: env.BACKEND_ID_VALUE,
-        [env.BACKEND_SECRET_KEY]: env.BACKEND_SECRET_VALUE,
-      },
-      body: JSON.stringify(body),
-    });
+    url = getUrl(request, env);
   } catch (error: any) {
-    return new Response(error.message, { status: 500 });
+    return new Response(error.message, { status: 404 });
   }
+
+  try {
+    const response = await fetch(url, {
+      method: request.method,
+      headers,
+      ...(shouldHaveBody && { body: JSON.stringify(await request.json()) }),
+    });
+    if (response.status !== 200 && response.status !== 201) {
+      const body = await response.json();
+
+      if (bodyIsError(body)) {
+        const errors = body.error.message.startsWith("[")
+          ? JSON.parse(body.error.message)
+          : [body.error.message];
+        return new Response(JSON.stringify({ errors }), {
+          status: response.status,
+          headers: Object.fromEntries(response.headers.entries()),
+        });
+      }
+    }
+
+    return response;
+  } catch (error: any) {
+    return new Response(JSON.stringify({ proxyError: error.message }), {
+      status: 500,
+    });
+  }
+};
+
+const bodyIsError = (body: unknown): body is { error: { message: string } } => {
+  return Boolean(
+    typeof body === "object" &&
+      body &&
+      "error" in body &&
+      body.error &&
+      typeof body.error === "object" &&
+      "message" in body.error &&
+      typeof body.error.message === "string",
+  );
 };

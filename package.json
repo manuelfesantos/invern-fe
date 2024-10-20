@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve": "npm run build && npx serve@latest out -l 5000"
+    "serve": "npm run build && npx serve@latest out -l 5000",
+    "local": "npx wrangler pages dev functions --local-protocol=https --compatibility-flag=nodejs_compat --show-interactive-dev-session=false --port=9000"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",

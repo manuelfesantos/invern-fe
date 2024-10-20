@@ -14,7 +14,8 @@
     "types": ["@cloudflare/workers-types", "jest"],
     "resolveJsonModule": true,
     "paths": {
-      "@types": ["libs/types"]
+      "@types": ["libs/types"],
+      "@utils": ["libs/utils"],
     }
   }
 }

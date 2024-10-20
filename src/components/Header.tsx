@@ -16,10 +16,7 @@ import CartItemsCounter from "@/components/CartItemsCounter";
 
 export default function Header() {
   return (
-    <nav
-      className="flex flex-col z-1000 relative select-none"
-      data-id={"header"}
-    >
+    <nav className="flex flex-col z-50 relative select-none" data-id={"header"}>
       <div className="flex justify-between pt-12 pb-6 lg:pt-6 lg:pb-2 px-12 relative">
         <div className="hidden lg:flex gap-4 items-center justify-center -ml-8 lg:ml-2">
           <div className="hidden lg:flex lg:gap-4">

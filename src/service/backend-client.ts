@@ -1,9 +1,9 @@
 import { handleError } from "@/utils/error";
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_API_HOST}`;
+const BASE_URL = `/api`;
 const headers = {
-  [`${process.env.NEXT_PUBLIC_BACKEND_ID_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_ID_VALUE}`,
-  [`${process.env.NEXT_PUBLIC_BACKEND_SECRET_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_SECRET_VALUE}`,
+  [`${process.env.NEXT_PUBLIC_BFF_ID_KEY}`]: `${process.env.NEXT_PUBLIC_BFF_ID_VALUE}`,
+  [`${process.env.NEXT_PUBLIC_BFF_SECRET_KEY}`]: `${process.env.NEXT_PUBLIC_BFF_SECRET_VALUE}`,
 };
 
 type BackendClientFunction = (
