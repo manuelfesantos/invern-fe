@@ -4,7 +4,7 @@ import { Headers, Request } from "@cloudflare/workers-types";
 const initalValidUrls = {
   cart: {
     headers: {
-      action: ["add", "remove", "merge"],
+      action: ["add", "remove", "merge", "get"],
       authorization: [],
     },
     methods: ["POST"],
