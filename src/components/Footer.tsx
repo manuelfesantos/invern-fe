@@ -28,7 +28,7 @@ const Footer = () => {
   return (
     <>
       {show && (
-        <div className="absolute top-0 left-0 py-12 z-30 h-[99.9dvh] w-screen flex flex-col items-center justify-start overflow-scroll bg-black bg-opacity-85">
+        <div className="absolute top-0 left-0 py-12 z-40 h-[99.9dvh] w-screen flex flex-col items-center justify-start overflow-scroll bg-black bg-opacity-85">
           <div
             className="absolute top-0 left-0 h-[100dvh] w-screen"
             onClick={() => setShow(false)}
@@ -49,7 +49,7 @@ const Footer = () => {
         <div className="text-right pr-2 pb-2">
           <p className="p2">© 2024 copyright Invern</p>
         </div>
-        <form className="z-40" onSubmit={search}>
+        <form className="z-50" onSubmit={search}>
           <div className="relative h-10">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
