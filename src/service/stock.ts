@@ -4,8 +4,8 @@ export const getStock = async (productId: string) => {
     process.env.NEXT_PUBLIC_ENV === "local"
       ? {
           headers: {
-            [`${process.env.NEXT_PUBLIC_BACKEND_ID_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_ID_VALUE}`,
-            [`${process.env.NEXT_PUBLIC_BACKEND_SECRET_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_SECRET_VALUE}`,
+            [`${process.env.NEXT_PUBLIC_BFF_ID_KEY}`]: `${process.env.NEXT_PUBLIC_BFF_ID_VALUE}`,
+            [`${process.env.NEXT_PUBLIC_BFF_SECRET_KEY}`]: `${process.env.NEXT_PUBLIC_BFF_SECRET_VALUE}`,
           },
         }
       : {},

@@ -44,11 +44,7 @@ const SignIn = ({
     onSubmit: async (values) => {
       const [error, data] = await login(values);
 
-      console.log("user:", data);
-      console.log("error:", error);
-
       if (error) {
-        console.log("error:", error);
         handleToast(false, error, true);
         return;
       }
@@ -56,7 +52,6 @@ const SignIn = ({
       const { user } = data;
 
       if (user) {
-        console.log("user", user);
         const changeCart = changeCartFunction(setCart);
         if (user.cart.products.length > 0) {
           changeCart(user.cart);

@@ -144,7 +144,6 @@ const Cart = () => {
         return;
       }
       const { cart: newCart } = data || {};
-      console.log("newCart:", newCart);
       if (newCart) {
         localStorage.setItem("cart", JSON.stringify(newCart));
         setCart(newCart);

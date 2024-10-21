@@ -30,8 +30,8 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
       {
         ...(process.env.NEXT_PUBLIC_ENV === "local" && {
           headers: {
-            [`${process.env.NEXT_PUBLIC_BACKEND_ID_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_ID_VALUE}`,
-            [`${process.env.NEXT_PUBLIC_BACKEND_SECRET_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_SECRET_VALUE}`,
+            [`${process.env.NEXT_PUBLIC_BFF_ID_KEY}`]: `${process.env.NEXT_PUBLIC_BFF_ID_VALUE}`,
+            [`${process.env.NEXT_PUBLIC_BFF_SECRET_KEY}`]: `${process.env.NEXT_PUBLIC_BFF_SECRET_VALUE}`,
           },
         }),
       },
@@ -41,7 +41,6 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
       return [];
     }
     const countryData = await countryResponse.json();
-    console.log("countryData:", countryData);
     return countryData.data;
   };
 
@@ -76,12 +75,10 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   const getStoredCart = (): Cart | undefined => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart = storedCart ? JSON.parse(storedCart) : null;
-    console.log("parsedCart:", parsedCart);
     if (parsedCart && parsedCart.products) {
       setCart(parsedCart);
       return parsedCart;
     }
-    console.log("setting empty cart in get config");
     setCart(emptyCart);
     localStorage.setItem("cart", JSON.stringify(emptyCart));
   };
@@ -103,19 +100,11 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
 
-    console.log("got config from backend:", config);
-
     const { country: countryCode, user, deleteUser } = config ?? {};
 
     if (countryCode) {
-      console.log(
-        "there is a country code from config response. country:",
-        countryCode,
-      );
-
       if (validCountries.includes(countryCode)) {
         const country = getCountryFromCountryCode(countryCode, countryData);
-        console.log("country from countryData:", country);
         if (country) {
           localStorage.setItem("country", countryCode);
           setCountry(country);

@@ -4,4 +4,5 @@ export interface Env {
   BACKEND_SECRET_KEY: string;
   BACKEND_SECRET_VALUE: string;
   BACKEND_HOST: string;
+  ENV: string;
 }

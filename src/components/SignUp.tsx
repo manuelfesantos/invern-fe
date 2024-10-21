@@ -44,8 +44,6 @@ const SignUp = ({
         return;
       }
       const [error, data] = await signup(values);
-      console.log("user:", data);
-      console.log("error:", error);
       if (error) {
         handleToast(false, error, true);
         return;

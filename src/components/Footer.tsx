@@ -6,6 +6,7 @@ import { IProduct } from "@/types/store/product";
 import ProductCardGrid from "./ProductCardGrid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { getProductsBySearch } from "@/service/products";
 
 const Footer = () => {
   const ref = useRef<HTMLInputElement | null>(null);
@@ -14,17 +15,12 @@ const Footer = () => {
   const search = async (e: FormEvent) => {
     e.preventDefault();
     if (ref.current && ref.current.value) {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_HOST}/products?search=${ref.current.value}`,
-        {
-          headers: {
-            [`${process.env.NEXT_PUBLIC_BACKEND_ID_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_ID_VALUE}`,
-            [`${process.env.NEXT_PUBLIC_BACKEND_SECRET_KEY}`]: `${process.env.NEXT_PUBLIC_BACKEND_SECRET_VALUE}`,
-          },
-        },
-      );
+      const [error, data] = await getProductsBySearch(ref.current.value);
+      if (error) {
+        return;
+      }
       setShow(true);
-      setProducts((await response.json()).data);
+      setProducts(data);
       ref.current.value = "";
     }
   };

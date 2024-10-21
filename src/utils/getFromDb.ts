@@ -1,8 +1,7 @@
 import { ICollectionDetails, ICollection } from "@/types/store/collection";
 import { IProductDetails, IProduct } from "@/types/store/product";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_HOST || "https://preview-api.invernspirit.com";
+const BASE_URL = process.env.BACKEND_HOST;
 
 const headers = {
   [`${process.env.BACKEND_ID_KEY}`]: `${process.env.BACKEND_ID_VALUE}`,
@@ -12,8 +11,6 @@ export async function getCollections(): Promise<ICollection[]> {
   const collectionsPromise = await fetch(`${BASE_URL}/collections`, {
     headers,
   });
-
-  console.log("getting collections from", BASE_URL);
 
   return (await collectionsPromise.json()).data;
 }

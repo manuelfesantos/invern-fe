@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, Context } from "react";
 import { getOrderById } from "@/service/order";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import { convertPrice } from "@/utils/convertToCents";
 import { CustomLinkButton } from "@/components/CustomComponents";
+import { ConfigContext, configContext } from "@/context/config";
 
 const getOrder = async (orderId: string) => {
   return await getOrderById(orderId);
@@ -13,6 +14,9 @@ const getOrder = async (orderId: string) => {
 function Order() {
   const [order, setOrder] = useState<any | null>(null);
   const [error, setError] = useState<string>("");
+  const { configIsLoaded } = useContext(
+    configContext as Context<ConfigContext>,
+  );
   const params = useSearchParams();
   const orderId = params.get("id");
 
@@ -20,7 +24,7 @@ function Order() {
     (order?.payment.amount || 0) * (order?.address.country.taxes[0].rate || 0);
 
   useEffect(() => {
-    console.log("order id: ", orderId);
+    if (!configIsLoaded) return;
     let newOrder: any;
     let attempts = 0;
     const loadOrder = async () => {
@@ -30,7 +34,6 @@ function Order() {
           setError(error);
         }
         if (order) {
-          console.log("order", order);
           newOrder = order;
         }
       }
@@ -49,7 +52,7 @@ function Order() {
       setOrder(newOrder);
     };
     tryLoadOrder();
-  }, [orderId]);
+  }, [orderId, configIsLoaded]);
   return (
     <div className="h-full w-full flex flex-col items-center justify-start overflow-scroll">
       <div className="h-full w-full lg:h-[550px] lg:w-[500px] flex flex-col items-center justify-start px-12 py-8 lg:py-6 lg:px-6 lg:bg-[#4C4B48] bg-opacity-95 lg:card-shadow overflow-scroll">
