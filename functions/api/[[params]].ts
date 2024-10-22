@@ -6,7 +6,7 @@ export const onRequest: PagesFunction<Env, string> = async ({
   env,
 }) => {
   let url: string;
-  const headers = getRequestHeaders(request.headers, env);
+  const headers = getRequestHeaders(request.headers, env, request.cf?.country);
   const shouldHaveBody = ["POST", "PUT"].includes(request.method);
 
   try {
