@@ -19,6 +19,7 @@ import { changeCartFunction } from "@/utils/cart/change-cart-function";
 import { ActionType, updateCart } from "@/utils/cart";
 import { ToastContext, toastContext } from "@/context/toast";
 import { useRouter } from "next/navigation";
+import { passwordRegex } from "@/utils/text-utils";
 const SignIn = ({
   setActiveTab,
 }: {
@@ -78,7 +79,9 @@ const SignIn = ({
       email: Yup.string()
         .email("Please insert a valid email.")
         .required("Required."),
-      password: Yup.string().required("Required."),
+      password: Yup.string()
+        .required("Required.")
+        .matches(passwordRegex, "Please insert a valid password."),
       remember: Yup.boolean(),
     }),
   });
@@ -107,7 +110,7 @@ const SignIn = ({
               <div className="error">{formik.errors.email}</div>
             )}
           </div>
-          <div className="relative">
+          <div className="relative h-[max-content]">
             <input
               type="password"
               name="password"

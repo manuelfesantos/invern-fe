@@ -11,6 +11,7 @@ import { ActionType, updateCart } from "@/utils/cart";
 import { signup } from "@/service/user";
 import { ToastContext, toastContext } from "@/context/toast";
 import { useRouter } from "next/navigation";
+import { passwordRegex } from "@/utils/text-utils";
 
 const SignUp = ({
   setActiveTab,
@@ -72,8 +73,8 @@ const SignUp = ({
       email: Yup.string()
         .email("Please insert a valid email.")
         .required("Required."),
-      password: Yup.string().required("Required."),
-      cpassword: Yup.string().required("Required."),
+      password: Yup.string().required("Required.").matches(passwordRegex),
+      cpassword: Yup.string().required("Required.").matches(passwordRegex),
       remember: Yup.boolean(),
     }),
   });

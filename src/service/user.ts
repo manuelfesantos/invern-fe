@@ -12,23 +12,19 @@ enum Actions {
   UpdateName = "update-name",
 }
 
-const userClient = {
-  get: (queryParams?: Record<string, string>) =>
-    backendClient.get(usersEndpoint, undefined, queryParams),
-  put: (queryParams?: Record<string, string>) =>
-    backendClient.put(usersEndpoint, undefined, queryParams),
-  delete: (queryParams?: Record<string, string>) =>
-    backendClient.delete(usersEndpoint, undefined, queryParams),
-  post: (queryParams?: Record<string, string>) =>
-    backendClient.post(usersEndpoint, undefined, queryParams),
-};
+const userClient = (queryParams?: Record<string, string>) => ({
+  get: backendClient.get(usersEndpoint, undefined, queryParams),
+  put: backendClient.put(usersEndpoint, undefined, queryParams),
+  delete: backendClient.delete(usersEndpoint, undefined, queryParams),
+  post: backendClient.post(usersEndpoint, undefined, queryParams),
+});
 
 export const getUser = async (getVersion?: "true") => {
-  const client = userClient.get();
+  const client = userClient();
   const headers = {
     ...(getVersion && { getVersion }),
   };
-  return await client(headers);
+  return await client.get(headers);
 };
 
 export const getUserVersion = async () => {
@@ -39,9 +35,9 @@ const updateUser = async (
   user: Partial<User & { password: string }>,
   action: string,
 ) => {
-  const client = userClient.put();
+  const client = userClient();
   const headers = { action };
-  return await client(user, headers);
+  return await client.put(user, headers);
 };
 
 export const updateUserEmail = async (email: string) =>
@@ -54,16 +50,16 @@ export const updateUserName = async (firstName?: string, lastName?: string) =>
   await updateUser({ firstName, lastName }, Actions.UpdateName);
 
 export const deleteUser = async () => {
-  const client = userClient.delete();
-  return await client();
+  const client = userClient();
+  return await client.delete();
 };
 
 export const login = async (loginBody: { email: string; password: string }) => {
-  const client = userClient.post();
+  const client = userClient();
   const headers = {
     action: Actions.Login,
   };
-  return await client({ ...loginBody }, headers);
+  return await client.post({ ...loginBody }, headers);
 };
 
 export const signup = async (signupBody: {
@@ -72,20 +68,20 @@ export const signup = async (signupBody: {
   firstName: string;
   lastName: string;
 }) => {
-  const client = userClient.post();
+  const client = userClient();
   const headers = {
     action: Actions.Signup,
   };
-  return await client({ ...signupBody }, headers);
+  return await client.post({ ...signupBody }, headers);
 };
 
 export const logout = async (): Promise<
   [string | undefined, any | undefined]
 > => {
-  const client = userClient.post();
+  const client = userClient();
   const headers = {
     action: Actions.Logout,
   };
   const body = {};
-  return await client(body, headers);
+  return await client.post(body, headers);
 };

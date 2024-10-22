@@ -4,9 +4,9 @@ import { Cart } from "@/types/store/cart";
 
 const cartsEndpoint = "cart";
 
-const cartsClient = {
-  post: () => backendClient.post(cartsEndpoint),
-};
+const cartsClient = () => ({
+  post: backendClient.post(cartsEndpoint),
+});
 
 type CartClientFunction<T, K> = (
   data: T,
@@ -15,33 +15,33 @@ type CartClientFunction<T, K> = (
 export const mergeCart: CartClientFunction<ProductIdAndQuantity[], {}> = async (
   data,
 ) => {
-  const client = cartsClient.post();
+  const client = cartsClient();
   const headers = { action: "merge" };
-  return await client({ products: data }, headers);
+  return await client.post({ products: data }, headers);
 };
 
 export const addToCart: CartClientFunction<ProductIdAndQuantity, {}> = async (
   data,
 ) => {
-  const client = cartsClient.post();
+  const client = cartsClient();
   const headers = { action: "add" };
-  return await client(data, headers);
+  return await client.post(data, headers);
 };
 
 export const removeFromCart: CartClientFunction<
   ProductIdAndQuantity,
   {}
 > = async (data) => {
-  const client = cartsClient.post();
+  const client = cartsClient();
   const headers = { action: "remove" };
-  return await client(data, headers);
+  return await client.post(data, headers);
 };
 
 export const getCart: CartClientFunction<
   ProductIdAndQuantity[],
   { cart: Cart }
 > = async (data) => {
-  const client = cartsClient.post();
+  const client = cartsClient();
   const headers = { action: "get" };
-  return await client(data, headers);
+  return await client.post(data, headers);
 };

@@ -1,16 +1,15 @@
 import { backendClient } from "@/service/backend-client";
 import { ProductIdAndQuantity } from "@/types/store/product";
-import { handleError } from "@/utils/error";
 const checkoutEndpoint = "checkout";
 
-const checkoutClient = {
-  post: (queryParams?: Record<string, string>) =>
-    backendClient.post(checkoutEndpoint, undefined, queryParams),
-};
+const checkoutClient = (params?: Record<string, string>) => ({
+  post: backendClient.post(checkoutEndpoint, undefined, params),
+});
 
 export const checkout = (
   products?: ProductIdAndQuantity[],
+  countryCode?: string,
 ): Promise<[string | undefined, { url: string } | undefined]> => {
-  const client = checkoutClient.post();
-  return client({ products });
+  const client = checkoutClient();
+  return client.post({ products, countryCode });
 };

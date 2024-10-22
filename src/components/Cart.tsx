@@ -91,6 +91,7 @@ const Cart = () => {
         productId,
         quantity,
       })),
+      country?.code,
     );
     if (error) {
       handleToast(false, error);

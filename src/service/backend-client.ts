@@ -95,9 +95,11 @@ const getResponseData = async (
     const data = processSuccessfulResponse(response);
     return [undefined, data];
   }
-  const error = response.error?.message ?? response.message;
-  handleError(error, host, endpoint);
-  return [error, undefined];
+  const errors: string[] = response.errors || [response.proxyError];
+
+  errors.forEach((error) => handleError(error, host, endpoint));
+
+  return [errors[0], undefined];
 };
 
 let accessToken: string | null = null;
