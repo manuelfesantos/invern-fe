@@ -1,5 +1,5 @@
-import {CustomButton, CustomLinkButton} from "@/components/CustomComponents";
-import Layout from "@/components/Layout";
+import { CustomButton, CustomLinkButton } from "@/components/custom/CustomLink";
+import Layout from "@/components/global/Layout";
 
 export default function Home() {
   return (
@@ -18,7 +18,13 @@ export default function Home() {
             <h3>Each Piece, Uniquely Yours.</h3>
           </div>
           <div>
-            <CustomLinkButton type="button" position="h-10 w-60" href={"/shop/products"}>Explore Our Collection</CustomLinkButton>
+            <CustomLinkButton
+              type="button"
+              position="h-10 w-60"
+              href={"/shop/products"}
+            >
+              Explore Our Collection
+            </CustomLinkButton>
           </div>
         </div>
         <div className="flex lg:hidden flex-col mt-12 gap-2 w-full px-12">
@@ -36,7 +42,13 @@ export default function Home() {
             <h3>Uniquely Yours.</h3>
           </div>
           <div>
-            <CustomLinkButton type="button" position="h-10 w-44" href={"/shop/products"}>Explore Our Collection</CustomLinkButton>
+            <CustomLinkButton
+              type="button"
+              position="h-10 w-44"
+              href={"/shop/products"}
+            >
+              Explore Our Collection
+            </CustomLinkButton>
           </div>
         </div>
       </section>

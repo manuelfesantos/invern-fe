@@ -1,10 +1,10 @@
 import React from "react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/global/Layout";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowTurnUp } from "@fortawesome/free-solid-svg-icons";
 import { getCollectionById, getCollections } from "@/utils/getFromDb";
-import ProductCardGrid from "@/components/ProductCardGrid";
+import ProductCardGrid from "@/components/product/ProductCardGrid";
 
 export default async function CollectionPage({
   params,

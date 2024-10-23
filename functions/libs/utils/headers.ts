@@ -13,7 +13,7 @@ export const getRequestHeaders = (
 
   return {
     ...newHeaders,
-    country,
+    ...(country && { country }),
     [env.BACKEND_ID_KEY]: env.BACKEND_ID_VALUE,
     [env.BACKEND_SECRET_KEY]: env.BACKEND_SECRET_VALUE,
   };

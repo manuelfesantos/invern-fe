@@ -1,9 +1,9 @@
 "use client";
 import React, { FormEvent, useState } from "react";
-import { CustomButton } from "./CustomComponents";
+import { CustomButton } from "../custom/CustomButton";
 import { useRef } from "react";
 import { IProduct } from "@/types/store/product";
-import ProductCardGrid from "./ProductCardGrid";
+import ProductCardGrid from "../product/ProductCardGrid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { getProductsBySearch } from "@/service/products";

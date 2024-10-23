@@ -3,24 +3,28 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { userContext, UserContext } from "@/context/user";
 import { cartContext, CartContext } from "@/context/cart";
 import { CountryContext, countryContext } from "@/context/country";
-import { Country, validCountries } from "@/types/store/country";
+import { Country } from "@/types/store/country";
 import { getConfig } from "@/service/config";
 import { User } from "@/types/store/user";
 import { Cart, emptyCart } from "@/types/store/cart";
+import { getCountryName } from "@/utils/country";
 
 export type ConfigContext = {
   configIsLoaded: boolean;
+  availableCountries: Country[];
 };
 
 export const configContext = createContext<ConfigContext>({
   configIsLoaded: false,
+  availableCountries: [],
 });
 
 export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   const [configIsLoaded, setConfigIsLoaded] = useState(false);
+  const [availableCountries, setAvailableCountries] = useState<Country[]>([]);
   const { setUser } = useContext(userContext) as UserContext;
   const { setCart } = useContext(cartContext) as CartContext;
-  const { setCountry, setCountryIsValid } = useContext(
+  const { setCountry, setCountryIsValid, setInvalidCountryName } = useContext(
     countryContext,
   ) as CountryContext;
 
@@ -50,17 +54,19 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   ): Country | undefined =>
     countryData.find((country) => country.code === countryCode);
 
-  const getStoredCountryCode = (countryData: Country[]): string | undefined => {
+  const getStoredCountryCode = (
+    countryData: Country[],
+  ): Country | undefined => {
     const storedCountryCode = localStorage.getItem("country");
-    if (storedCountryCode && validCountries.includes(storedCountryCode)) {
+    if (storedCountryCode) {
       const country = getCountryFromCountryCode(storedCountryCode, countryData);
       if (country) {
         setCountry(country);
-        return storedCountryCode;
+        return country;
+      } else {
+        localStorage.removeItem("country");
       }
     }
-    setCountryIsValid(false);
-    localStorage.removeItem("country");
   };
 
   const getStoredUser = (): User | undefined => {
@@ -85,12 +91,12 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getConfigData = async (
     countryData: Country[],
-    storedCountryCode?: string,
+    storedCountry?: Country,
     storedUser?: User,
   ) => {
     const remember = localStorage.getItem("remember");
     const [error, config] = await getConfig(
-      storedCountryCode,
+      storedCountry?.code,
       storedUser?.version ?? undefined,
       remember === "true",
     );
@@ -103,13 +109,12 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
     const { country: countryCode, user, deleteUser } = config ?? {};
 
     if (countryCode) {
-      if (validCountries.includes(countryCode)) {
-        const country = getCountryFromCountryCode(countryCode, countryData);
-        if (country) {
-          localStorage.setItem("country", countryCode);
-          setCountry(country);
-        }
+      const country = getCountryFromCountryCode(countryCode, countryData);
+      if (country) {
+        localStorage.setItem("country", countryCode);
+        setCountry(country);
       } else {
+        setInvalidCountryName(getCountryName(countryCode));
         setCountryIsValid(false);
       }
     }
@@ -133,6 +138,7 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const initConfig = async () => {
       const countryData = await getCountryData();
+      setAvailableCountries(countryData);
       const storedCountryCode = getStoredCountryCode(countryData);
       const storedUser = getStoredUser();
       getStoredCart();
@@ -143,7 +149,7 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <configContext.Provider value={{ configIsLoaded }}>
+    <configContext.Provider value={{ configIsLoaded, availableCountries }}>
       {children}
     </configContext.Provider>
   );

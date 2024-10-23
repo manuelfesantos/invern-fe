@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import MenuAnimation from "./MenuAnimation";
-import ItemAnimation from "./ItemAnimation";
+import ItemAnimation from "../ItemAnimation";
 
 export default function ShopMenu() {
   const [menu, setMenu] = useState(false);

@@ -12,7 +12,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import MenuAnimation from "./MenuAnimation";
-import ItemAnimation from "./ItemAnimation";
+import ItemAnimation from "../ItemAnimation";
 
 const MobileMenu = () => {
   const [menu, setMenu] = useState(false);

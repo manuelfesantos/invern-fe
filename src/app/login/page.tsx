@@ -1,15 +1,15 @@
-import React, {Suspense} from 'react'
-import Layout from '@/components/Layout'
-import Login from '@/components/Login';
+import React, { Suspense } from "react";
+import Layout from "@/components/global/Layout";
+import Login from "@/components/login-page/Login";
 
 const LoginPage = () => {
   return (
     <Layout>
-        <Suspense>
-      <Login />
-        </Suspense>
+      <Suspense>
+        <Login />
+      </Suspense>
     </Layout>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

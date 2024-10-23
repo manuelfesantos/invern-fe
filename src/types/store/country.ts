@@ -7,5 +7,3 @@ export interface Country {
   currencies: Currency[];
   taxes: Tax[];
 }
-
-export const validCountries = ["PT", "ES"];

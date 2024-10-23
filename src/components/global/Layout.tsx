@@ -1,10 +1,11 @@
-import Header from "@/components/Header";
+import Header from "@/components/global/Header";
 import Footer from "./Footer";
 import React, { ReactNode } from "react";
-import Carousel from "./Carousel";
+import Carousel from "../carousel/Carousel";
 import Background from "./Background";
-import MobileMenu from "./MobileMenu";
+import MobileMenu from "../menu/MobileMenu";
 import { getCollectionById, getCollections } from "@/utils/getFromDb";
+import ValidateCountry from "@/components/global/ValidateCountry";
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,6 +25,7 @@ const Layout: React.FC<LayoutProps> = async ({ children, showCarousel }) => {
       <main className="flex flex-col flex-grow overflow-scroll">
         {children}
       </main>
+      <ValidateCountry />
       <Footer />
     </div>
   );

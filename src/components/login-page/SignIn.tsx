@@ -1,6 +1,7 @@
 import React, { Context, useContext } from "react";
 import Link from "next/link";
-import { CustomButton, CustomLink } from "./CustomComponents";
+import { CustomLink } from "../custom/CustomLink";
+import { CustomButton } from "@/components/custom/CustomButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -1,5 +1,6 @@
 import React, { Context, useContext } from "react";
-import { CustomButton, CustomLink } from "./CustomComponents";
+import { CustomLink } from "../custom/CustomLink";
+import { CustomButton } from "@/components/custom/CustomButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Dispatch } from "react";

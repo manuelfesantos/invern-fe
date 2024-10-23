@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState } from "react";
-import { Toast } from "@/components/Toast";
+import { Toast } from "@/components/global/Toast";
 
 export interface ToastContext {
   toast: {

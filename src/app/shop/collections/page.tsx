@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/global/Layout";
 import Link from "next/link";
 import Image from "next/image";
 import { getCollections } from "@/utils/getFromDb";

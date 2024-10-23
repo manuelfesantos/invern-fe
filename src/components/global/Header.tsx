@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../assets/logo.png";
+import Logo from "../../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
@@ -8,11 +8,12 @@ import {
   faPinterestP,
 } from "@fortawesome/free-brands-svg-icons";
 import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
-import ShopMenu from "./ShopMenu";
+import ShopMenu from "../menu/ShopMenu";
 import Newsletter from "./Newsletter";
-import MobileMenu from "./MobileMenu";
-import LoginWindow from "./LoginWindow";
-import CartItemsCounter from "@/components/CartItemsCounter";
+import MobileMenu from "../menu/MobileMenu";
+import LoginWindow from "../login-page/LoginWindow";
+import CartItemsCounter from "@/components/cart/CartItemsCounter";
+import CountrySelect from "@/components/global/CountrySelect";
 
 export default function Header() {
   return (
@@ -45,7 +46,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/" className="">
+            <Link href="/public" className="">
               <Image src={Logo} alt="logo" className="w-10 icon-scale" />
             </Link>
           </li>
@@ -61,18 +62,12 @@ export default function Header() {
           </li>
         </ul>
         <div className="lg:hidden absolute left-0 top-0 w-full h-full pt-4 flex items-center justify-center pointer-events-none z-10">
-          <Link href="/" className="pointer-events-auto">
+          <Link href="/public" className="pointer-events-auto">
             <Image src={Logo} alt="logo" className="w-14 icon-scale" />
           </Link>
         </div>
         <div className="flex items-center justify-center gap-4 lg:mr-4">
-          <select
-            id="select"
-            className="hidden lg:block bg-[#4C4B48] text-white px-2"
-          >
-            <option>pt</option>
-            <option>es</option>
-          </select>
+          <CountrySelect />
           <LoginWindow />
           <Link href="/cart" className="icon-scale relative">
             <CartItemsCounter />

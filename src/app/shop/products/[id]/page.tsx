@@ -1,11 +1,11 @@
 import React from "react";
-import Layout from "@/components/Layout";
-import ProductDetails from "@/components/ProductDetails";
+import Layout from "@/components/global/Layout";
+import ProductDetails from "@/components/product/ProductDetails";
 import { getProductById, getProducts } from "@/utils/getFromDb";
 import dynamic from "next/dynamic";
 
 const ProductCarousel2 = dynamic(
-  () => import("@/components/ProductCarousel2"),
+  () => import("@/components/carousel/ProductCarousel2"),
   { ssr: false },
 );
 

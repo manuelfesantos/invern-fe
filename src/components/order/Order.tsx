@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useContext, Context } from "react";
 import { getOrderById } from "@/service/order";
 import { useSearchParams } from "next/navigation";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/product/ProductCard";
 import { convertPrice } from "@/utils/convertToCents";
-import { CustomLinkButton } from "@/components/CustomComponents";
+import { CustomLinkButton } from "../custom/CustomButton";
 import { ConfigContext, configContext } from "@/context/config";
 
 const getOrder = async (orderId: string) => {

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CartContext, cartContext } from "@/context/cart";
 import { WishListContext, wishListContext } from "@/context/wishList";
 import { IProduct } from "@/types/store/product";
-import { CustomButton } from "./CustomComponents";
+import { CustomButton } from "../custom/CustomButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";

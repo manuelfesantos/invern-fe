@@ -1,7 +1,5 @@
-'use client'
-import React from 'react'
-import Link from 'next/link'
-import {useRouter} from "next/navigation";
+import React from "react";
+import { useRouter } from "next/navigation";
 
 export const CustomButton = ({
   children,
@@ -61,7 +59,7 @@ export const CustomLinkButton = ({
   href: string;
   type: string;
 }) => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <CustomButton
       type={type}
@@ -70,27 +68,5 @@ export const CustomLinkButton = ({
     >
       {children}
     </CustomButton>
-  );
-};
-
-export const CustomLink = ({
-  children,
-  position,
-  onClick,
-  href,
-}: {
-  children: any;
-  position?: string;
-  onClick?: () => void;
-  href: string;
-}) => {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className={`${position} text-[#E88A1A] hover:text-[#ECB365]`}
-    >
-      {children}
-    </Link>
   );
 };

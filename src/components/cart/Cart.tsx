@@ -1,12 +1,13 @@
 "use client";
 import React, { useLayoutEffect } from "react";
 import { Context } from "react";
-import { CustomButton, CustomLink } from "./CustomComponents";
+import { CustomLink } from "../custom/CustomLink";
+import { CustomButton } from "../custom/CustomButton";
 import { useState, useContext } from "react";
 import { CartContext } from "@/context/cart";
 import { cartContext } from "@/context/cart";
 import Image from "next/image";
-import Loading from "./Loading";
+import Loading from "../global/Loading";
 import { CartItem } from "@/types/store/cart";
 import { checkout } from "@/service/checkout";
 import { ActionType, updateCart } from "@/utils/cart";
