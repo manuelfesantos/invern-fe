@@ -30,10 +30,10 @@ const Collections = async () => {
                 className="h-full w-full relative flex items-center justify-center"
               >
                 <Image
-                  src={item.images.url}
+                  src={item.image.url}
                   height={100}
                   width={100}
-                  alt={item.images.alt}
+                  alt={item.image.alt}
                   className="h-full w-full object-cover mix-blend-overlay grayscale opacity-75 brightness-100 hover:mix-blend-exclusion hover:opacity-50 hover:brightness-150"
                 />
                 <div className="absolute pointer-events-none">

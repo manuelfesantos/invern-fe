@@ -1,4 +1,7 @@
-import { CustomButton, CustomLinkButton } from "@/components/custom/CustomLink";
+import {
+  CustomButton,
+  CustomLinkButton,
+} from "@/components/custom/CustomButton";
 import Layout from "@/components/global/Layout";
 
 export default function Home() {

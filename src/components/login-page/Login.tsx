@@ -18,8 +18,8 @@ const Login = () => {
   const [activeTab, setActiveTab] = useState(isSignup() ? "signup" : "signin");
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-start overflow-scroll">
-      <div className="h-full w-full lg:h-[550px] lg:w-[500px] flex flex-col items-center justify-center px-12 lg:px-6 lg:bg-[#4C4B48] bg-opacity-95 lg:card-shadow">
+    <div className="h-full w-full flex flex-col items-center justify-start">
+      <div className="h-full w-full lg:h-[550px] lg:w-[500px] flex flex-col items-center justify-start px-12 lg:px-6 lg:bg-[#4C4B48] bg-opacity-95 lg:card-shadow overflow-scroll">
         <div className="my-2">
           <ul className="flex">
             <li>

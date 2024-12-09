@@ -4,7 +4,7 @@ import { Image } from "./image";
 export interface ICollection {
   collectionId: string;
   collectionName: string;
-  images: Image
+  image: Image;
 }
 
 export interface ICollectionDetails {
