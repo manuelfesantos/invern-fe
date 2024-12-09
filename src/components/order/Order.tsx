@@ -113,7 +113,7 @@ function Order() {
                 </div>
                 <div className="flex items-center justify-between">
                   <h4>{order.address.country.taxes[0].name}</h4>
-                  <p>{order.address.country.taxes[0].rate * 100}%</p>
+                  <p>{order.address.country.taxes[0].amount * 100}%</p>
                 </div>
                 <div className="flex items-center justify-between">
                   <h4>Total Tax Amount</h4>
