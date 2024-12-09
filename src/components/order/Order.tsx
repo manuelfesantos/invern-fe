@@ -21,7 +21,8 @@ function Order() {
   const orderId = params.get("id");
 
   const taxedAmount =
-    (order?.payment.amount || 0) * (order?.address.country.taxes[0].rate || 0);
+    (order?.payment.amount || 0) *
+    (order?.address.country.taxes[0].amount || 0);
 
   useEffect(() => {
     if (!configIsLoaded) return;
