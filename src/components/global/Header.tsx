@@ -46,7 +46,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link href="/public" className="">
+            <Link href="/" className="">
               <Image src={Logo} alt="logo" className="w-10 icon-scale" />
             </Link>
           </li>
@@ -62,7 +62,7 @@ export default function Header() {
           </li>
         </ul>
         <div className="lg:hidden absolute left-0 top-0 w-full h-full pt-4 flex items-center justify-center pointer-events-none z-10">
-          <Link href="/public" className="pointer-events-auto">
+          <Link href="/" className="pointer-events-auto">
             <Image src={Logo} alt="logo" className="w-14 icon-scale" />
           </Link>
         </div>

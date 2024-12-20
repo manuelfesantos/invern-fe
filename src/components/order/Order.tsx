@@ -3,16 +3,17 @@ import React, { useState, useEffect, useContext, Context } from "react";
 import { getOrderById } from "@/service/order";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/product/ProductCard";
-import { convertPrice } from "@/utils/convertToCents";
+import { convertPrice, convertToEuro } from "@/utils/convertToCents";
 import { CustomLinkButton } from "../custom/CustomButton";
 import { ConfigContext, configContext } from "@/context/config";
+import { type Order } from "@/types/store/order";
 
 const getOrder = async (orderId: string) => {
   return await getOrderById(orderId);
 };
 
 function Order() {
-  const [order, setOrder] = useState<any | null>(null);
+  const [order, setOrder] = useState<Order | null>(null);
   const [error, setError] = useState<string>("");
   const { configIsLoaded } = useContext(
     configContext as Context<ConfigContext>,
@@ -20,9 +21,16 @@ function Order() {
   const params = useSearchParams();
   const orderId = params.get("id");
 
-  const taxedAmount =
-    (order?.payment.amount || 0) *
-    (order?.address.country.taxes[0].amount || 0);
+  const getTaxedAmount = () => {
+    if (!order) {
+      return 0;
+    }
+    const totalTaxRate = order.address.country.taxes.reduce(
+      (totalRate, { rate }) => totalRate + rate,
+      0,
+    );
+    return order.payment.netAmount * totalTaxRate;
+  };
 
   useEffect(() => {
     if (!configIsLoaded) return;
@@ -109,19 +117,26 @@ function Order() {
               <div className={"my-4"}>
                 <div className="flex items-center justify-between">
                   <h4>Sub Total</h4>
-                  <p>{convertPrice(order.payment.amount)}€</p>
+                  <p>{convertToEuro(order.payment.netAmount)}€</p>
                 </div>
-                <div className="flex items-center justify-between">
-                  <h4>{order.address.country.taxes[0].name}</h4>
-                  <p>{order.address.country.taxes[0].amount * 100}%</p>
-                </div>
+                {order.address.country.taxes.map(({ name, rate }, index) => {
+                  return (
+                    <div
+                      className="flex items-center justify-between"
+                      key={index}
+                    >
+                      <h4>{name}</h4>
+                      <p>{rate * 100}%</p>
+                    </div>
+                  );
+                })}
                 <div className="flex items-center justify-between">
                   <h4>Total Tax Amount</h4>
-                  <p>{convertPrice(taxedAmount)}€</p>
+                  <p>{convertToEuro(getTaxedAmount())}€</p>
                 </div>
                 <div className="flex items-center justify-between pb-4 border-b-2 mb-4">
                   <h4>Total Inc. VAT</h4>
-                  <p>{convertPrice(order.payment.amount + taxedAmount)}€</p>
+                  <p>{convertToEuro(order.payment.grossAmount)}€</p>
                 </div>
                 <div className="flex items-center justify-between">
                   <h4>Payment Method</h4>

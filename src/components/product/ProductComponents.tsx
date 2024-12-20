@@ -146,7 +146,7 @@ const ProductComponents = ({
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold justify-self-center">
                   {country
-                    ? convertPrice(product.priceInCents, country?.taxes)
+                    ? convertPrice(product.priceInCents, country.taxes)
                     : " "}
                   {country && "€"}
                 </h3>
