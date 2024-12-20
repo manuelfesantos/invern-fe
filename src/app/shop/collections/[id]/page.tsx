@@ -30,13 +30,13 @@ export default async function CollectionPage({
                       className="icon-scale mt-3 -rotate-90"
                     />
                   </Link>
-                  <h2>{collection?.collectionName}</h2>
+                  <h2>{collection?.name}</h2>
                 </div>
                 <div className="lg:hidden px-12 mt-4">
                   <hr />
                 </div>
                 <div className="hidden flex-1 lg:pl-36 lg:-mr-12 lg:block">
-                  <h2>{collection?.collectionName}</h2>
+                  <h2>{collection?.name}</h2>
                   <Link href="/shop/collections">
                     <FontAwesomeIcon
                       icon={faArrowTurnUp}
@@ -65,6 +65,6 @@ export async function generateStaticParams() {
   const posts = await getCollections();
 
   return posts.map((post: any) => ({
-    id: post.collectionId,
+    id: post.id,
   }));
 }

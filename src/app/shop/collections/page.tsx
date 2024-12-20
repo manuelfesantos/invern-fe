@@ -26,7 +26,7 @@ const Collections = async () => {
               className="bg-[#201F1D] h-24 lg:h-full w-full lg:w-48 my-2 image-scale card-shadow"
             >
               <Link
-                href={`/shop/collections/${item.collectionId}`}
+                href={`/shop/collections/${item.id}`}
                 className="h-full w-full relative flex items-center justify-center"
               >
                 <Image
@@ -37,7 +37,7 @@ const Collections = async () => {
                   className="h-full w-full object-cover mix-blend-overlay grayscale opacity-75 brightness-100 hover:mix-blend-exclusion hover:opacity-50 hover:brightness-150"
                 />
                 <div className="absolute pointer-events-none">
-                  <h3>{item.collectionName}</h3>
+                  <h3>{item.name}</h3>
                 </div>
               </Link>
             </div>

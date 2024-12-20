@@ -1,24 +1,24 @@
 import { Cart, CartItem } from "@/types/store/cart";
 
-export const cartContainsProduct = (cart: Cart, id: string) =>
-  cart.products.some(({ productId }) => productId === id);
+export const cartContainsProduct = (cart: Cart, productId: string) =>
+  cart.products.some(({ id }) => productId === id);
 
-export const getProductFromCart = (cart: Cart, id: string) =>
-  cart.products.find(({ productId }) => productId === id);
+export const getProductFromCart = (cart: Cart, productId: string) =>
+  cart.products.find(({ id }) => productId === id);
 
-export const removeProductFromCart = (cart: Cart, id: string) => ({
+export const removeProductFromCart = (cart: Cart, productId: string) => ({
   ...cart,
-  products: cart.products.filter(({ productId }) => productId !== id),
+  products: cart.products.filter(({ id }) => productId !== id),
 });
 
 export const decreaseProductQuantity = (
   cart: Cart,
-  id: string,
+  productId: string,
   quantity: number,
 ) => ({
   ...cart,
   products: cart.products.map((product) => {
-    if (product.productId === id) {
+    if (product.id === productId) {
       return {
         ...product,
         quantity: product.quantity - quantity,
@@ -30,12 +30,12 @@ export const decreaseProductQuantity = (
 
 export const increaseProductQuantity = (
   cart: Cart,
-  id: string,
+  productId: string,
   quantity: number,
 ) => ({
   ...cart,
   products: cart.products.map((product) => {
-    if (product.productId === id) {
+    if (product.id === productId) {
       return {
         ...product,
         quantity: product.quantity + quantity,

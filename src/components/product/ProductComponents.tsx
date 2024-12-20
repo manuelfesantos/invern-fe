@@ -55,12 +55,10 @@ const ProductComponents = ({
   };
 
   const toggleLike = () => {
-    if (
-      wishList.products.find((item) => item.productId === product.productId)
-    ) {
+    if (wishList.products.find((item) => item.id === product.id)) {
       setWishList((prevWishList: WishList) => ({
         products: prevWishList.products.filter(
-          (item) => item.productId !== product.productId,
+          (item) => item.id !== product.id,
         ),
       }));
       handleToast(true, "Product removed from wishlist!");
@@ -73,7 +71,7 @@ const ProductComponents = ({
   };
 
   useEffect(() => {
-    getStock(product.productId).then((stock) => setStock(stock));
+    getStock(product.id).then((stock) => setStock(stock));
   }, []);
 
   if (component === "productCard") {
@@ -82,7 +80,7 @@ const ProductComponents = ({
         <div className="w-full bg-[#4C4B48] card-shadow hover:scale-105 transition-all duration-300">
           <div className="relative">
             <div>
-              <Link href={`/shop/products/${product.productId}`}>
+              <Link href={`/shop/products/${product.id}`}>
                 <Image
                   src={product.images[0].url}
                   height={100}
@@ -97,9 +95,7 @@ const ProductComponents = ({
                 className="absolute top-2 right-4 cursor-pointer icon-scale"
                 onClick={toggleLike}
               >
-                {wishList.products.find(
-                  (item) => item.productId === product.productId,
-                ) ? (
+                {wishList.products.find((item) => item.id === product.id) ? (
                   <FontAwesomeIcon icon={solidHeart} size="xl" />
                 ) : (
                   <FontAwesomeIcon icon={regularHeart} size="xl" />
@@ -111,9 +107,9 @@ const ProductComponents = ({
                 className={`flex items-center ${disableButtons ? "justify-center" : "justify-between"} mb-2`}
               >
                 {disableButtons ? (
-                  <h3>{product.productName}</h3>
+                  <h3>{product.name}</h3>
                 ) : (
-                  <h5>{product.productName}</h5>
+                  <h5>{product.name}</h5>
                 )}
                 {!disableButtons && (
                   <div className="flex gap-2">
@@ -132,9 +128,8 @@ const ProductComponents = ({
                       onClick={add}
                       isDisabled={() =>
                         quantity +
-                          (cart.products.find(
-                            (item) => item.productId === product.productId,
-                          )?.quantity || 0) >=
+                          (cart.products.find((item) => item.id === product.id)
+                            ?.quantity || 0) >=
                         (stock || 0)
                       }
                     >
@@ -182,8 +177,7 @@ const ProductComponents = ({
                       isDisabled={() =>
                         quantity +
                           (cart.products.find(
-                            (cartItem) =>
-                              cartItem.productId === product.productId,
+                            (cartItem) => cartItem.id === product.id,
                           )?.quantity || 0) >
                         (stock || 0)
                       }
@@ -201,8 +195,8 @@ const ProductComponents = ({
     return (
       <>
         <div className="flex flex-col">
-          <h1 className="hidden lg:block">{product.productName}</h1>
-          <h2 className="lg:hidden">{product.productName}</h2>
+          <h1 className="hidden lg:block">{product.name}</h1>
+          <h2 className="lg:hidden">{product.name}</h2>
           <div className="flex justify-between">
             <h2 className="lg:px-2">
               {country
@@ -214,9 +208,7 @@ const ProductComponents = ({
               className="hidden lg:block cursor-pointer icon-scale"
               onClick={toggleLike}
             >
-              {wishList.products.find(
-                (item) => item.productId === product.productId,
-              ) ? (
+              {wishList.products.find((item) => item.id === product.id) ? (
                 <FontAwesomeIcon icon={solidHeart} size="3x" />
               ) : (
                 <FontAwesomeIcon icon={regularHeart} size="3x" />
@@ -226,9 +218,7 @@ const ProductComponents = ({
               className="lg:hidden cursor-pointer icon-scale"
               onClick={toggleLike}
             >
-              {wishList.products.find(
-                (item) => item.productId === product.productId,
-              ) ? (
+              {wishList.products.find((item) => item.id === product.id) ? (
                 <FontAwesomeIcon icon={solidHeart} size="2x" />
               ) : (
                 <FontAwesomeIcon icon={regularHeart} size="2x" />
@@ -257,9 +247,8 @@ const ProductComponents = ({
               onClick={add}
               isDisabled={() =>
                 quantity +
-                  (cart.products.find(
-                    (cartItem) => cartItem.productId === product.productId,
-                  )?.quantity || 0) >=
+                  (cart.products.find((cartItem) => cartItem.id === product.id)
+                    ?.quantity || 0) >=
                 (stock || 0)
               }
             >
@@ -294,9 +283,8 @@ const ProductComponents = ({
             }}
             isDisabled={() =>
               quantity +
-                (cart.products.find(
-                  (cartItem) => cartItem.productId === product.productId,
-                )?.quantity || 0) >
+                (cart.products.find((cartItem) => cartItem.id === product.id)
+                  ?.quantity || 0) >
               (stock || 0)
             }
           >

@@ -1,16 +1,16 @@
 import { Image } from "./image";
 
 export interface IProduct {
-  productId: string;
-  productName: string;
+  id: string;
+  name: string;
   priceInCents: number;
   stock: number;
   images: Image[];
 }
 
 export interface IProductDetails {
-  productId: string;
-  productName: string;
+  id: string;
+  name: string;
   priceInCents: number;
   stock: number;
   description: string;
@@ -19,6 +19,6 @@ export interface IProductDetails {
 }
 
 export interface ProductIdAndQuantity {
-  productId: string;
+  id: string;
   quantity: number;
 }

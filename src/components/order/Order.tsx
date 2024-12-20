@@ -75,7 +75,7 @@ function Order() {
             <h2 className="border-t-2 pt-8">Order Details</h2>
             <div className="my-4 text-center">
               <h3>Order id</h3>
-              <p>{order.clientOrderId}</p>
+              <p>{order.clientId}</p>
             </div>
             <div className="my-4 text-center">
               <h3 className="mb-2">Products</h3>

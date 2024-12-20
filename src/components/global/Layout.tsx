@@ -14,9 +14,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = async ({ children, showCarousel }) => {
   const collections = await getCollections();
-  const collection = await getCollectionById(
-    collections[0].collectionId.toString(),
-  );
+  const collection = await getCollectionById(collections[0].id.toString());
 
   return (
     <div className="flex flex-col h-[100dvh]">

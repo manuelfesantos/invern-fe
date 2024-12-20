@@ -17,7 +17,7 @@ export const addToCart = async (
 
   if (loggedIn) {
     return await addToCartService({
-      productId: product.productId,
+      id: product.id,
       quantity: product.quantity,
     });
   }
@@ -29,8 +29,8 @@ const addToCartContext = (
   product: CartItem,
   changeCart: (cart: Cart) => void,
 ) => {
-  const newCart = cartContainsProduct(cart, product.productId)
-    ? increaseProductQuantity(cart, product.productId, product.quantity)
+  const newCart = cartContainsProduct(cart, product.id)
+    ? increaseProductQuantity(cart, product.id, product.quantity)
     : addProductToCart(cart, product);
 
   changeCart(newCart);

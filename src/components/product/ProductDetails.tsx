@@ -16,7 +16,7 @@ import Link from "next/link";
 const ProductDetails = async ({ product }: { product: IProductDetails }) => {
   const collections = await getCollections();
   const collection = collections.find(
-    (item) => item.collectionId === product.collectionId,
+    (item) => item.id === product.collectionId,
   );
 
   return (
@@ -33,11 +33,8 @@ const ProductDetails = async ({ product }: { product: IProductDetails }) => {
         </div>
         <h4>
           This product belongs to the{" "}
-          <CustomLink
-            position=""
-            href={`/shop/collections/${collection?.collectionId}`}
-          >
-            {collection?.collectionName}
+          <CustomLink position="" href={`/shop/collections/${collection?.id}`}>
+            {collection?.name}
           </CustomLink>{" "}
           collection.
         </h4>

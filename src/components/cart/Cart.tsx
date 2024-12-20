@@ -88,8 +88,8 @@ const Cart = () => {
     setLoading(true);
 
     const [error, response] = await checkout(
-      cart.products.map(({ productId, quantity }) => ({
-        productId,
+      cart.products.map(({ id, quantity }) => ({
+        id,
         quantity,
       })),
       country?.code,
@@ -174,9 +174,7 @@ const Cart = () => {
             cart.products?.map((product, index) => (
               <div key={index} className="flex gap-2">
                 <div
-                  onClick={() =>
-                    router.push(`/shop/products/${product.productId}`)
-                  }
+                  onClick={() => router.push(`/shop/products/${product.id}`)}
                   className="cursor-pointer"
                 >
                   <Image
@@ -189,7 +187,7 @@ const Cart = () => {
                 </div>
                 {product.stock > 0 ? (
                   <div className="px-4 pb-4 pt-2">
-                    <h5>{product.productName}</h5>
+                    <h5>{product.name}</h5>
                     <div className="flex items-center justify-between">
                       <p>
                         Price:{" "}
@@ -225,7 +223,7 @@ const Cart = () => {
                   </div>
                 ) : (
                   <div className="px-4 pb-4 pt-2">
-                    <h5>{product.productName}</h5>
+                    <h5>{product.name}</h5>
                     <p className="text-red-400">Sold Out</p>
                   </div>
                 )}

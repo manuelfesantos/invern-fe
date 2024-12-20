@@ -13,11 +13,11 @@ export const removeFromCart = async (
   changeCart: (cart: Cart) => void,
   loggedIn?: boolean,
 ) => {
-  const { productId, quantity } = product;
-  removeFromCartContext(cart, productId, quantity, changeCart);
+  const { id, quantity } = product;
+  removeFromCartContext(cart, id, quantity, changeCart);
   if (loggedIn) {
     return await removeFromCartService({
-      productId,
+      id,
       quantity,
     });
   }

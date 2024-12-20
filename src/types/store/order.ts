@@ -3,8 +3,8 @@ import { Payment } from "@/types/store/payment";
 import { Address } from "@/types/store/address";
 
 export interface Order {
-  orderId?: string;
-  clientOrderId: string;
+  id?: string;
+  clientId: string;
   createdAt: string;
   snapshot: string;
   products: IProduct[];
