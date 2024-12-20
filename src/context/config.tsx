@@ -81,7 +81,7 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   const getStoredCart = (): Cart | undefined => {
     const storedCart = localStorage.getItem("cart");
     const parsedCart = storedCart ? JSON.parse(storedCart) : null;
-    if (parsedCart && parsedCart.products) {
+    if (parsedCart && parsedCart.products && parsedCart.products[0].id) {
       setCart(parsedCart);
       return parsedCart;
     }
