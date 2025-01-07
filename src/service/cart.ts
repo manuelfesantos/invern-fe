@@ -1,6 +1,6 @@
 import { backendClient } from "@/service/backend-client";
-import { ProductIdAndQuantity } from "@/types/store/product";
-import { Cart } from "@/types/store/cart";
+import { IProduct, ProductIdAndQuantity } from "@/types/store/product";
+import { Cart, CartItem } from "@/types/store/cart";
 
 const cartsEndpoint = "cart";
 
@@ -39,7 +39,7 @@ export const removeFromCart: CartClientFunction<
 
 export const getCart: CartClientFunction<
   ProductIdAndQuantity[],
-  { cart: Cart }
+  { products: CartItem[] }
 > = async (data) => {
   const client = cartsClient();
   const headers = { action: "get" };

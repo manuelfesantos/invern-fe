@@ -145,10 +145,10 @@ const Cart = () => {
         handleToast(false, error);
         return;
       }
-      const { cart: newCart } = data || {};
-      if (newCart) {
-        localStorage.setItem("cart", JSON.stringify(newCart));
-        setCart(newCart);
+      const { products } = data || {};
+      if (products) {
+        localStorage.setItem("cart", JSON.stringify({ products }));
+        setCart({ products });
         setCartIsLoaded(true);
       }
     };
