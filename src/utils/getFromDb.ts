@@ -8,7 +8,6 @@ const headers = {
   [`${process.env.BACKEND_SECRET_KEY}`]: `${process.env.BACKEND_SECRET_VALUE}`,
 };
 export async function getCollections(): Promise<ICollection[]> {
-  console.log("BASE_URL:", BASE_URL);
   const collectionsPromise = await fetch(`${BASE_URL}/collections`, {
     headers,
   });

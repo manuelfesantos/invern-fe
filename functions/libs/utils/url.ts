@@ -43,7 +43,7 @@ export const getUrl = (request: Request, env: Env) => {
   let validUrls: any = initalValidUrls;
   const url = new URL(request.url);
   const { method, headers } = request;
-  const path = url.pathname.replace("/api/", "");
+  const path = url.pathname.replace("/api/v1/", "");
 
   if (
     env.ENV === "local" &&
