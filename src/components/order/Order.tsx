@@ -75,7 +75,7 @@ function Order() {
             <h2 className="border-t-2 pt-8">Order Details</h2>
             <div className="my-4 text-center">
               <h3>Order id</h3>
-              <p>{order.clientId}</p>
+              <p>{order.id}</p>
             </div>
             <div className="my-4 text-center">
               <h3 className="mb-2">Products</h3>
@@ -117,7 +117,10 @@ function Order() {
               <div className={"my-4"}>
                 <div className="flex items-center justify-between">
                   <h4>Sub Total</h4>
-                  <p>{convertToEuro(order.payment.netAmount)}€</p>
+                  <p>
+                    {convertToEuro(order.payment.netAmount)}
+                    {order.address.country.currency.symbol}
+                  </p>
                 </div>
                 {order.address.country.taxes.map(({ name, rate }, index) => {
                   return (
@@ -132,11 +135,17 @@ function Order() {
                 })}
                 <div className="flex items-center justify-between">
                   <h4>Total Tax Amount</h4>
-                  <p>{convertToEuro(getTaxedAmount())}€</p>
+                  <p>
+                    {convertToEuro(getTaxedAmount())}
+                    {order.address.country.currency.symbol}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between pb-4 border-b-2 mb-4">
                   <h4>Total Inc. VAT</h4>
-                  <p>{convertToEuro(order.payment.grossAmount)}€</p>
+                  <p>
+                    {convertToEuro(order.payment.grossAmount)}
+                    {order.address.country.currency.symbol}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between">
                   <h4>Payment Method</h4>

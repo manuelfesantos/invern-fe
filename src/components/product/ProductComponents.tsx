@@ -143,7 +143,7 @@ const ProductComponents = ({
                   {country
                     ? convertPrice(product.priceInCents, country.taxes)
                     : " "}
-                  {country && "€"}
+                  {country && country.currency.symbol}
                 </h3>
                 {amountOrdered && (
                   <h3 className="text-gray-400">x{amountOrdered}</h3>

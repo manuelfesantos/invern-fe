@@ -4,6 +4,6 @@ import { Tax } from "@/types/store/tax";
 export interface Country {
   name: string;
   code: string;
-  currencies: Currency[];
+  currency: Currency;
   taxes: Tax[];
 }
